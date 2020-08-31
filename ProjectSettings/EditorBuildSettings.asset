@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Renegadeware/Scenes/_InitWebGL.unity
+    guid: 620212779d957e64b85981559e886a9c
+  - enabled: 1
+    path: Assets/Renegadeware/Scenes/start.unity
+    guid: c93a5bfbc135d9a409ea6feab7afa82e
   m_configObjects: {}
