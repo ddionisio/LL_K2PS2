@@ -25,6 +25,8 @@ namespace Renegadeware.K2PS2 {
 
         [Header("AI Data")]
         public LayerMask solidCheckMask;
+        [M8.TagSelector]
+        public string[] solidIgnoreTags;
 
         [M8.TagSelector]
         public string[] harmCheckTags;
@@ -32,6 +34,8 @@ namespace Renegadeware.K2PS2 {
         public float groundCheckForwardDist = 0.2f; //add radius
         public float groundCheckLastJumpDelay = 2f;
         public float groundCheckDownDist = 3.1f; //add radius
+
+        private RaycastHit2D[] mHitCache = new RaycastHit2D[4];
 
         public State state {
             get { return mState; }
@@ -255,6 +259,46 @@ namespace Renegadeware.K2PS2 {
             lastJumpTime = 0f;
         }
 
+        private bool CheckCast(Vector2 dir, out RaycastHit2D hit, float dist) {
+            var hitCount = moveCtrl.CheckAllCasts(Vector2.zero, radiusCheckOfs, dir, mHitCache, dist, solidCheckMask);
+            for(int i = 0; i < hitCount; i++) {
+                var _hit = mHitCache[i];
+
+                //ignore player
+                if(_hit.collider == moveCtrl.coll)
+                    continue;
+
+                //ignore certain tags
+                if(CheckTags(_hit.transform, solidIgnoreTags))
+                    continue;
+
+                hit = _hit;
+                return true;
+            }
+
+            hit = new RaycastHit2D();
+            return false;
+        }
+
+        private RaycastHit2D Raycast(Vector2 pos, Vector2 dir, float dist) {
+            var hitCount = Physics2D.RaycastNonAlloc(pos, dir, mHitCache, dist, solidCheckMask);
+            for(int i = 0; i < hitCount; i++) {
+                var _hit = mHitCache[i];
+
+                //ignore player
+                if(_hit.collider == moveCtrl.coll)
+                    continue;
+
+                //ignore certain tags
+                if(CheckTags(_hit.transform, solidIgnoreTags))
+                    continue;
+
+                return _hit;
+            }
+
+            return new RaycastHit2D();
+        }
+
         private void GroundUpdate() {
             if(moveState == MoveState.Stop)
                 return;
@@ -270,7 +314,7 @@ namespace Renegadeware.K2PS2 {
             float forwardDist = moveCtrl.radius + groundCheckForwardDist;
 
             RaycastHit2D hit;
-            if(moveCtrl.CheckCast(radiusCheckOfs, dir, out hit, forwardDist, solidCheckMask)) {
+            if(CheckCast(dir, out hit, forwardDist)) {
                 //check if it's harm's way
                 if(CheckTags(hit.transform, harmCheckTags)) {
                     //move the opposite direction
@@ -313,7 +357,7 @@ namespace Renegadeware.K2PS2 {
                 Vector2 down = -up;
                 pos += dir * forwardDist;
 
-                var hitDown = Physics2D.Raycast(pos, down, moveCtrl.radius + groundCheckDownDist, solidCheckMask);
+                var hitDown = Raycast(pos, down, moveCtrl.radius + groundCheckDownDist);
                 if(hitDown.collider) {
                     //check if it's harm's way
                     if(CheckTags(hitDown.transform, harmCheckTags)) {
@@ -328,7 +372,7 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
-        private bool CheckTags(Transform trans, string[] tags) {
+        private static bool CheckTags(Transform trans, string[] tags) {
             for(int i = 0; i < tags.Length; i++) {
                 if(trans.CompareTag(tags[i]))
                     return true;

@@ -280,6 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1026865301}
+  - component: {fileID: 1026865302}
   - component: {fileID: 1026865300}
   - component: {fileID: 1026865299}
   - component: {fileID: 1026865298}
@@ -398,6 +399,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1026865302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026865296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753825d50dc7f0d41baa421e34e8c13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalListenSpawn: {fileID: 11400000, guid: 34d4d38c62a3a90469f75bf1f97d34e9, type: 2}
+  signalListenDespawn: {fileID: 11400000, guid: 70fda79ad60b64c4a9fe148d80c6039a,
+    type: 2}
+  signalListenPlay: {fileID: 11400000, guid: bccbc2d3fb14a6c4ca0e81be8292c1a8, type: 2}
+  signalListenVictory: {fileID: 11400000, guid: 279c2ef0f67a2bb45bc9159d33aa0f5b,
+    type: 2}
 --- !u!1 &1153594003
 GameObject:
   m_ObjectHideFlags: 0

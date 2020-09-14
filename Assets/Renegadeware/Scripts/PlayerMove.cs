@@ -233,19 +233,19 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
-        public RaycastHit2D[] CheckAllCasts(Vector2 posOfs, float reduceOfs, Vector2 dir, float dist, int mask) {
+        public int CheckAllCasts(Vector2 posOfs, float reduceOfs, Vector2 dir, RaycastHit2D[] hits, float dist, int mask) {
             if(mCapsuleColl) {
                 Transform collT = transform;
                 Vector2 collPos = collT.position + collT.localToWorldMatrix.MultiplyPoint3x4(mCapsuleColl.offset + posOfs);
                 Vector2 collSize = mCapsuleColl.size; collSize.y -= reduceOfs;
 
-                return Physics2D.CapsuleCastAll(collPos, collSize, mCapsuleColl.direction, collT.eulerAngles.z, dir, dist, mask);
+                return Physics2D.CapsuleCastNonAlloc(collPos, collSize, mCapsuleColl.direction, collT.eulerAngles.z, dir, hits, dist, mask);
             }
             else {
                 Transform collT = transform;
-                Vector2 collPos = collT.position + collT.localToWorldMatrix.MultiplyPoint3x4(posOfs);
+                Vector2 collPos = collT.localToWorldMatrix.MultiplyPoint3x4(posOfs);
 
-                return Physics2D.CircleCastAll(collPos, mRadius - reduceOfs, dir, dist, mask);
+                return Physics2D.CircleCastNonAlloc(collPos, mRadius - reduceOfs, dir, hits, dist, mask);
             }
         }
 
