@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 2005431016}
   - component: {fileID: 2005431015}
   m_Layer: 0
-  m_Name: start
+  m_Name: startController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -761,6 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703ff3a2d87637e41b864131613199e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: {fileID: 0}
+  signalModeChanged: {fileID: 0}
   loadingGO: {fileID: 728025942}
   readyGO: {fileID: 1389064362}
   titleRef: title

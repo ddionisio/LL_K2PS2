@@ -4,8 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using LoLExt;
+
 namespace Renegadeware.K2PS2 {
-    public class GameStart : MonoBehaviour {
+    public class GameModeStart : GameModeController<GameModeStart> {
         [Header("Screen")]
         public GameObject loadingGO;
         public GameObject readyGO;
@@ -18,22 +20,21 @@ namespace Renegadeware.K2PS2 {
         [Header("Play")]
         public Button playButton;
 
-        void Awake() {
-            if(loadingGO) loadingGO.SetActive(false);
+        protected override void OnInstanceInit() {
+            base.OnInstanceInit();
+
+            if(loadingGO) loadingGO.SetActive(true);
             if(readyGO) readyGO.SetActive(false);
                         
             //Setup Play
             if(playButton) playButton.onClick.AddListener(OnPlayClick);
         }
 
-        IEnumerator Start() {
-            while(M8.SceneManager.instance.isLoading)
-                yield return null;
-
+        protected override IEnumerator Start() {
             //Loading
-            if(loadingGO) loadingGO.SetActive(true);
+            yield return base.Start();
 
-            while(!LoLExt.LoLManager.instance.isReady)
+            while(!LoLManager.instance.isReady)
                 yield return null;
 
             if(loadingGO) loadingGO.SetActive(false);

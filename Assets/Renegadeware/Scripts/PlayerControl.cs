@@ -8,7 +8,7 @@ namespace Renegadeware.K2PS2 {
 
         [Header("Signals")]
         public M8.Signal signalListenSpawn;
-        public M8.Signal signalListenDespawn;
+        public M8.Signal signalListenDeath;
         public M8.Signal signalListenPlay;
         public M8.Signal signalListenVictory;
 
@@ -16,14 +16,14 @@ namespace Renegadeware.K2PS2 {
 
         void OnEnable() {
             if(signalListenSpawn) signalListenSpawn.callback += OnSpawn;
-            if(signalListenDespawn) signalListenDespawn.callback += OnDespawn;
+            if(signalListenDeath) signalListenDeath.callback += OnDeath;
             if(signalListenPlay) signalListenPlay.callback += OnPlay;
             if(signalListenVictory) signalListenVictory.callback += OnVictory;
         }
 
         void OnDisable() {
             if(signalListenSpawn) signalListenSpawn.callback -= OnSpawn;
-            if(signalListenDespawn) signalListenDespawn.callback -= OnDespawn;
+            if(signalListenDeath) signalListenDeath.callback -= OnDeath;
             if(signalListenPlay) signalListenPlay.callback -= OnPlay;
             if(signalListenVictory) signalListenVictory.callback -= OnVictory;
 
@@ -39,9 +39,9 @@ namespace Renegadeware.K2PS2 {
             mRout = StartCoroutine(DoSpawn());
         }
 
-        void OnDespawn() {
+        void OnDeath() {
             ClearRoutine();
-            mRout = StartCoroutine(DoDespawn());
+            mRout = StartCoroutine(DoDeath());
         }
 
         void OnPlay() {
@@ -71,15 +71,12 @@ namespace Renegadeware.K2PS2 {
             mRout = null;
         }
 
-        IEnumerator DoDespawn() {
+        IEnumerator DoDeath() {
             yield return null;
 
             player.state = PlayerEntity.State.None;
 
             //play despawn
-
-            //respawn
-            mRout = StartCoroutine(DoSpawn());
         }
 
         IEnumerator DoVictory() {
