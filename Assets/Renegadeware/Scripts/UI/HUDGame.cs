@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Renegadeware.K2PS2 {
     public class HUDGame : MonoBehaviour {
         [Header("Display")]
-        public GameObject displayRoot;
+        public GameObject displayRootGO;
 
         [Header("Drag")]
-        public GameObject dragRoot;
+        public GameObject dragRootGO;
 
         private GamePlayData mData;
 
@@ -16,19 +16,27 @@ namespace Renegadeware.K2PS2 {
             mData = data;
 
             //initialize widgets
+            if(displayRootGO) displayRootGO.SetActive(true);
+            if(dragRootGO) dragRootGO.SetActive(false);
+
+            //setup signals
         }
 
         public void Deinit() {
+            //clear signals
+
             //clear out widgets
+
+            if(displayRootGO) displayRootGO.SetActive(false);
+            if(dragRootGO) dragRootGO.SetActive(false);
 
             mData = null;
         }
 
         void Awake() {
             //initial setup
-            if(displayRoot) displayRoot.SetActive(false);
-
-            if(dragRoot) dragRoot.SetActive(false);
+            if(displayRootGO) displayRootGO.SetActive(false);
+            if(dragRootGO) dragRootGO.SetActive(false);
         }
     }
 }

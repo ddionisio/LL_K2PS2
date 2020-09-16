@@ -11,6 +11,7 @@ namespace Renegadeware.K2PS2 {
             public int count;
         }
 
+        public MaterialTagData[] tags;
         public ItemData[] items;
 
         public void InitItemPools() {

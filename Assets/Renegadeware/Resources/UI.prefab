@@ -681,8 +681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4613c85eb1a0373469ada3629147eb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayRoot: {fileID: 2697292837411072283}
-  dragRoot: {fileID: 8757888352264924369}
+  displayRootGO: {fileID: 2697292837411072283}
+  dragRootGO: {fileID: 8757888352264924369}
 --- !u!1 &8757888352264924369
 GameObject:
   m_ObjectHideFlags: 0
