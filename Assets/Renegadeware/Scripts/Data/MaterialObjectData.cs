@@ -30,11 +30,22 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
+        public int maxCount { get; private set; }
+
         private string mLabelText;
 
         private M8.PoolController mPool;
 
         private M8.CacheList<MaterialObjectEntity> mSpawnedEntities;
+
+        public bool CompareTag(MaterialTagData tagData) {
+            for(int i = 0; i < tags.Length; i++) {
+                if(tags[i] == tagData)
+                    return true;
+            }
+
+            return false;
+        }
 
         public void InitPool(int count) {
             mPool = M8.PoolController.CreatePool("materialObjectPool");
@@ -46,6 +57,8 @@ namespace Renegadeware.K2PS2 {
             }
             else
                 mSpawnedEntities = new M8.CacheList<MaterialObjectEntity>(count);
+
+            maxCount = count;
         }
 
         public void DeinitPool() {
@@ -54,6 +67,7 @@ namespace Renegadeware.K2PS2 {
 
             if(mPool) {
                 mPool.RemoveType(template.name);
+                mPool = null;
             }
         }
 

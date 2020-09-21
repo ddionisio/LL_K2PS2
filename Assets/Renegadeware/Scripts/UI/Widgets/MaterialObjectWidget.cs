@@ -17,7 +17,6 @@ namespace Renegadeware.K2PS2 {
         public M8.Signal signalInvokeDragEnd;
 
         public MaterialObjectData data { get; private set; }
-        public int maxCount { get; private set; }
 
         public bool isDragging { get; private set; }
 
@@ -25,22 +24,20 @@ namespace Renegadeware.K2PS2 {
 
         private MaterialObjectEntity mEntGhost;
 
-        public void Init(MaterialObjectData aData, int aMaxCount, MaterialObjectDragWidget dragWidget) {
+        public void Setup(MaterialObjectData aData, MaterialObjectDragWidget dragWidget) {
             data = aData;
-            maxCount = aMaxCount;
 
             mDragWidget = dragWidget;
 
             icon.sprite = data.icon;
             titleText.text = data.label;
-            RefreshCountDisplay();
         }
 
         public void RefreshCountDisplay() {
             if(!countText)
                 return;
 
-            int curCount = maxCount - data.spawnedCount;
+            int curCount = data.maxCount - data.spawnedCount;
             if(curCount > 0) {
                 countText.gameObject.SetActive(true);
                 countText.text = curCount.ToString();
