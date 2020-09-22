@@ -38,6 +38,8 @@ namespace Renegadeware.K2PS2 {
 
         private M8.CacheList<MaterialObjectEntity> mSpawnedEntities;
 
+        private M8.GenericParams mSpawnParms = new M8.GenericParams();
+
         public bool CompareTag(MaterialTagData tagData) {
             for(int i = 0; i < tags.Length; i++) {
                 if(tags[i] == tagData)
@@ -71,12 +73,16 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
-        public MaterialObjectEntity Spawn(M8.GenericParams parms) {
+        public MaterialObjectEntity Spawn(Vector2 pos, MaterialObjectDragWidget dragWidget) {
             if(!mPool)
                 return null;
 
-            var ent = mPool.Spawn<MaterialObjectEntity>(template.name, template.name, null, parms);
+            mSpawnParms[MaterialObjectEntity.parmData] = this;
+            mSpawnParms[MaterialObjectEntity.parmDragWidget] = dragWidget;
+
+            var ent = mPool.Spawn<MaterialObjectEntity>(template.name, template.name, null, mSpawnParms);
             ent.poolDataCtrl.despawnCallback += OnDespawn;
+            ent.transform.position = pos;
             
             mSpawnedEntities.Add(ent);
 

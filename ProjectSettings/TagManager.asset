@@ -7,6 +7,7 @@ TagManager:
   - Death
   - Placement
   - HUDGame
+  - Victory
   layers:
   - Default
   - TransparentFX

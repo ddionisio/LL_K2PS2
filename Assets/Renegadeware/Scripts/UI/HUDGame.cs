@@ -100,6 +100,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoDragBegin() {
+            //show drag
+            if(dragRootGO) dragRootGO.SetActive(true);
+
             //wait for other animations to end
 
             yield return null;
@@ -114,6 +117,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoDragEnd() {
+            //hide drag
+            if(dragRootGO) dragRootGO.SetActive(false);
+
             //wait for other animations to end
 
             yield return null;

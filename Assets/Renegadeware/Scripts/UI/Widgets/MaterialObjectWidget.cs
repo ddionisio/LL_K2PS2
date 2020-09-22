@@ -52,25 +52,52 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
+        void OnDisable() {
+            EndDrag();
+        }
+
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
             isDragging = true;
 
+            var pos = eventData.position;
+
             //setup drag widget display
             mDragWidget.Setup(data);
+            mDragWidget.transform.position = pos;
 
             //spawn entity ghost
+            var cam = Camera.main;
+            var entPos = cam.ScreenToWorldPoint(pos);
+            mEntGhost = data.Spawn(entPos, mDragWidget);
 
             signalInvokeDragBegin?.Invoke();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData) {
-            //update drag widget position
+            if(!isDragging)
+                return;
 
-            //update entity ghost
+            var pos = eventData.position;
+
+            //update drag widget position
+            mDragWidget.transform.position = pos;
+
+            //update entity ghost position
+            var cam = Camera.main;
+            var entPos = cam.ScreenToWorldPoint(pos);
+
+            mEntGhost.UpdateGhostPosition(entPos);
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
+            if(!isDragging)
+                return;
+
             //check placement
+            if(mEntGhost.isPlaceable) {
+                mEntGhost.state = MaterialObjectEntity.State.Spawning;
+                mEntGhost = null;
+            }
 
             EndDrag();
         }
@@ -83,9 +110,7 @@ namespace Renegadeware.K2PS2 {
 
             //release entity ghost if it wasn't placed
             if(mEntGhost) {
-                if(mEntGhost.state == MaterialObjectEntity.State.Ghost || mEntGhost.state == MaterialObjectEntity.State.None)
-                    mEntGhost.Release();
-
+                mEntGhost.Release();
                 mEntGhost = null;
             }
 

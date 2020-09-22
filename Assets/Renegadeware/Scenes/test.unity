@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: {fileID: 0}
   signalModeChanged: {fileID: 0}
+  data: {fileID: 0}
   HUDTag: HUDGame
   signalListenVictory: {fileID: 11400000, guid: 279c2ef0f67a2bb45bc9159d33aa0f5b,
     type: 2}
@@ -550,6 +551,7 @@ MonoBehaviour:
   solidIgnoreTags:
   - Placement
   - Death
+  - Victory
   harmCheckTags:
   - Death
   groundCheckForwardDist: 0.2

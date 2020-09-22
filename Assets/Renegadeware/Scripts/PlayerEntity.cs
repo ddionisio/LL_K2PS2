@@ -269,7 +269,7 @@ namespace Renegadeware.K2PS2 {
                     continue;
 
                 //ignore certain tags
-                if(CheckTags(_hit.transform, solidIgnoreTags))
+                if(GameUtils.CheckTags(_hit.collider, solidIgnoreTags))
                     continue;
 
                 hit = _hit;
@@ -290,7 +290,7 @@ namespace Renegadeware.K2PS2 {
                     continue;
 
                 //ignore certain tags
-                if(CheckTags(_hit.transform, solidIgnoreTags))
+                if(GameUtils.CheckTags(_hit.collider, solidIgnoreTags))
                     continue;
 
                 return _hit;
@@ -316,7 +316,7 @@ namespace Renegadeware.K2PS2 {
             RaycastHit2D hit;
             if(CheckCast(dir, out hit, forwardDist)) {
                 //check if it's harm's way
-                if(CheckTags(hit.transform, harmCheckTags)) {
+                if(GameUtils.CheckTags(hit.collider, harmCheckTags)) {
                     //move the opposite direction
                     moveOpposite = true;
                 }
@@ -360,7 +360,7 @@ namespace Renegadeware.K2PS2 {
                 var hitDown = Raycast(pos, down, moveCtrl.radius + groundCheckDownDist);
                 if(hitDown.collider) {
                     //check if it's harm's way
-                    if(CheckTags(hitDown.transform, harmCheckTags)) {
+                    if(GameUtils.CheckTags(hitDown.collider, harmCheckTags)) {
                         //try jumping, that's a good trick
                         Jump();
                     }
@@ -370,15 +370,6 @@ namespace Renegadeware.K2PS2 {
                     Jump();
                 }
             }
-        }
-
-        private static bool CheckTags(Transform trans, string[] tags) {
-            for(int i = 0; i < tags.Length; i++) {
-                if(trans.CompareTag(tags[i]))
-                    return true;
-            }
-
-            return false;
         }
     }
 }
