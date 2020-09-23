@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844b506874ed03848866e0867658f99a, type: 3}
   m_Name: gameData
   m_EditorClassIdentifier: 
+  placementLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
   placementTag: Placement
   placementIgnoreTags:
   - Death
   - Victory
+  objectGhostValidColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
+  objectGhostInvalidColor: {r: 0.65882355, g: 0, b: 0, a: 0.5019608}

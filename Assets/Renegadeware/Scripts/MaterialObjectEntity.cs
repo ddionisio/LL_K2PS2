@@ -24,6 +24,7 @@ namespace Renegadeware.K2PS2 {
 
         [Header("Display")]
         public GameObject displayRootGO;
+        public M8.SpriteColorGroup ghostSpriteGroup;
 
         [Header("Signals")]
         public M8.Signal signalInvokeDragBegin;
@@ -115,9 +116,10 @@ namespace Renegadeware.K2PS2 {
             position = pos;
 
             //change ghost display if placeable or not
-            if(isPlaceable) {
-
-            }
+            if(isPlaceable)
+                ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostValidColor);
+            else
+                ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostInvalidColor);
         }
 
         public void Release() {
@@ -147,6 +149,8 @@ namespace Renegadeware.K2PS2 {
         void Awake() {
             body = GetComponent<Rigidbody2D>();
             coll = GetComponent<Collider2D>();
+
+            ghostSpriteGroup.Init();
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
@@ -245,6 +249,8 @@ namespace Renegadeware.K2PS2 {
 
             var enableDisplay = true;
             var toPhysicsMode = PhysicsMode.None;
+
+            ghostSpriteGroup.Revert();
 
             switch(mState) {
                 case State.None:
