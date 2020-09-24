@@ -6,26 +6,24 @@ namespace Renegadeware.K2PS2 {
     public class PlayerControl : MonoBehaviour {
         public PlayerEntity player { get; private set; }
 
-        [Header("Signals")]
-        public M8.Signal signalListenSpawn;
-        public M8.Signal signalListenDeath;
-        public M8.Signal signalListenPlay;
-        public M8.Signal signalListenVictory;
-
         private Coroutine mRout;
 
         void OnEnable() {
-            if(signalListenSpawn) signalListenSpawn.callback += OnSpawn;
-            if(signalListenDeath) signalListenDeath.callback += OnDeath;
-            if(signalListenPlay) signalListenPlay.callback += OnPlay;
-            if(signalListenVictory) signalListenVictory.callback += OnVictory;
+            var gameDat = GameData.instance;
+            gameDat.signalPlayerSpawn.callback += OnSpawn;
+            gameDat.signalPlayerDeath.callback += OnDeath;
+            gameDat.signalGamePlay.callback += OnPlay;
+            gameDat.signalGameStop.callback += OnRespawn;
+            gameDat.signalVictory.callback += OnVictory;
         }
 
         void OnDisable() {
-            if(signalListenSpawn) signalListenSpawn.callback -= OnSpawn;
-            if(signalListenDeath) signalListenDeath.callback -= OnDeath;
-            if(signalListenPlay) signalListenPlay.callback -= OnPlay;
-            if(signalListenVictory) signalListenVictory.callback -= OnVictory;
+            var gameDat = GameData.instance;
+            gameDat.signalPlayerSpawn.callback -= OnSpawn;
+            gameDat.signalPlayerDeath.callback -= OnDeath;
+            gameDat.signalGamePlay.callback -= OnPlay;
+            gameDat.signalGameStop.callback -= OnRespawn;
+            gameDat.signalVictory.callback -= OnVictory;
 
             ClearRoutine();
         }
@@ -37,6 +35,11 @@ namespace Renegadeware.K2PS2 {
         void OnSpawn() {
             ClearRoutine();
             mRout = StartCoroutine(DoSpawn());
+        }
+
+        void OnRespawn() {
+            ClearRoutine();
+            mRout = StartCoroutine(DoRespawn());
         }
 
         void OnDeath() {
@@ -71,12 +74,22 @@ namespace Renegadeware.K2PS2 {
             mRout = null;
         }
 
+        IEnumerator DoRespawn() {
+            player.state = PlayerEntity.State.None;
+
+            //play despawn
+            yield return null;
+
+            //respawn
+            mRout = StartCoroutine(DoSpawn());
+        }
+
         IEnumerator DoDeath() {
             yield return null;
 
             player.state = PlayerEntity.State.None;
 
-            //play despawn
+            //play death
         }
 
         IEnumerator DoVictory() {

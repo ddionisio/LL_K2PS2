@@ -26,12 +26,6 @@ namespace Renegadeware.K2PS2 {
         public GameObject displayRootGO;
         public M8.SpriteColorGroup ghostSpriteGroup;
 
-        [Header("Signals")]
-        public M8.Signal signalInvokeDragBegin;
-        public M8.Signal signalInvokeDragEnd;
-        public M8.Signal signalListenGamePlay;
-        public M8.Signal signalListenGameStop;
-
         public State state {
             get { return mState; }
             set {
@@ -135,13 +129,17 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnEnable() {
-            if(signalListenGamePlay) signalListenGamePlay.callback += OnGamePlay;
-            if(signalListenGameStop) signalListenGameStop.callback += OnGameStop;
+            var gameDat = GameData.instance;
+
+            gameDat.signalGamePlay.callback += OnGamePlay;
+            gameDat.signalGameStop.callback += OnGameStop;
         }
 
         void OnDisable() {
-            if(signalListenGamePlay) signalListenGamePlay.callback -= OnGamePlay;
-            if(signalListenGameStop) signalListenGameStop.callback -= OnGameStop;
+            var gameDat = GameData.instance;
+
+            gameDat.signalGamePlay.callback -= OnGamePlay;
+            gameDat.signalGameStop.callback -= OnGameStop;
 
             EndDrag();
         }
@@ -165,7 +163,7 @@ namespace Renegadeware.K2PS2 {
 
             mLastPos = position;
 
-            signalInvokeDragBegin?.Invoke();
+            GameData.instance.signalDragBegin.Invoke();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData) {
@@ -328,7 +326,7 @@ namespace Renegadeware.K2PS2 {
 
             mIsDragging = false;
 
-            signalInvokeDragEnd?.Invoke();
+            GameData.instance.signalDragEnd.Invoke();
         }
     }
 }

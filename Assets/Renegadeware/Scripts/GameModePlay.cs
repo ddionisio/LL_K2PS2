@@ -13,9 +13,6 @@ namespace Renegadeware.K2PS2 {
         [M8.TagSelector]
         public string HUDTag;
 
-        [Header("Signals")]
-        public M8.Signal signalListenVictory;
-
         private HUDGame mHUD;
 
         protected override void OnInstanceInit() {
@@ -44,10 +41,15 @@ namespace Renegadeware.K2PS2 {
             yield return base.Start();
 
             //show HUD
+            if(mHUD)
+                mHUD.Show();
+
+            //spawn player
+            GameData.instance.signalPlayerSpawn.Invoke();
 
             //wait for victory
 
-            //victory
+                //victory
         }
     }
 }

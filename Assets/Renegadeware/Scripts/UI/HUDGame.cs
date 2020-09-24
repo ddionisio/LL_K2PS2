@@ -6,7 +6,9 @@ namespace Renegadeware.K2PS2 {
     public class HUDGame : MonoBehaviour {
         [Header("Display")]
         public GameObject displayRootGO;
-        public GameObject paletteRootGO;
+
+        [Header("Palette")]
+        public GameObject paletteRootGO; //also includes Play button
         public MaterialObjectPaletteWidget[] paletteWidgets;
 
         [Header("Drag")]
@@ -16,9 +18,8 @@ namespace Renegadeware.K2PS2 {
         [Header("Trash")]
         public GameObject trashGO;
 
-        [Header("Signals")]
-        public M8.Signal signalListenDragBegin;
-        public M8.Signal signalListenDragEnd;
+        [Header("Stop")]
+        public GameObject stopGO;
 
         private GamePlayData mData;
         private int mCurPaletteInd;
@@ -55,16 +56,22 @@ namespace Renegadeware.K2PS2 {
             mCurPaletteInd = 0;
 
             //setup signals
-            if(signalListenDragBegin) signalListenDragBegin.callback += OnDragBegin;
-            if(signalListenDragEnd) signalListenDragEnd.callback += OnDragEnd;
+            var gameDat = GameData.instance;
+            gameDat.signalDragBegin.callback += OnDragBegin;
+            gameDat.signalDragEnd.callback += OnDragEnd;
+            gameDat.signalGamePlay.callback += OnGamePlay;
+            gameDat.signalGameStop.callback += OnGameStop;
         }
 
         public void Deinit() {
             ClearRout();
 
             //clear signals
-            if(signalListenDragBegin) signalListenDragBegin.callback -= OnDragBegin;
-            if(signalListenDragEnd) signalListenDragEnd.callback -= OnDragEnd;
+            var gameDat = GameData.instance;
+            gameDat.signalDragBegin.callback -= OnDragBegin;
+            gameDat.signalDragEnd.callback -= OnDragEnd;
+            gameDat.signalGamePlay.callback -= OnGamePlay;
+            gameDat.signalGameStop.callback -= OnGameStop;
 
             //clear out widgets
             for(int i = 0; i < paletteWidgets.Length; i++)
@@ -87,6 +94,18 @@ namespace Renegadeware.K2PS2 {
             HideAll();
         }
 
+        void OnGamePlay() {
+            ClearRout();
+
+            mRout = StartCoroutine(DoGamePlay());
+        }
+
+        void OnGameStop() {
+            ClearRout();
+
+            mRout = StartCoroutine(DoGameStop());
+        }
+
         void OnDragBegin() {
             ClearRout();
 
@@ -97,6 +116,36 @@ namespace Renegadeware.K2PS2 {
             ClearRout();
 
             mRout = StartCoroutine(DoDragEnd());
+        }
+
+        IEnumerator DoGamePlay() {
+            yield return null;
+
+            //hide palette animation
+
+            //hide palettes
+            if(paletteRootGO) paletteRootGO.SetActive(false);
+                        
+            //show stop
+            if(stopGO) stopGO.SetActive(true);
+
+            mRout = null;
+        }
+
+        IEnumerator DoGameStop() {
+            yield return null;
+
+            //hide stop animation
+
+            //hide stop
+            if(stopGO) stopGO.SetActive(false);
+
+            //show palettes
+            if(paletteRootGO) paletteRootGO.SetActive(true);
+
+            //show palettes animation
+
+            mRout = null;
         }
 
         IEnumerator DoDragBegin() {
@@ -139,6 +188,7 @@ namespace Renegadeware.K2PS2 {
             if(displayRootGO) displayRootGO.SetActive(false);
             if(dragRootGO) dragRootGO.SetActive(false);
             if(trashGO) trashGO.SetActive(false);
+            if(stopGO) stopGO.SetActive(false);
         }
 
         private void ClearRout() {

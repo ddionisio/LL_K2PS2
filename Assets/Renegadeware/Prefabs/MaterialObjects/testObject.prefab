@@ -128,16 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33795dce81862f4e90a2c899b775937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayRootGO: {fileID: 0}
+  displayRootGO: {fileID: 5352689583982125796}
   ghostSpriteGroup: {fileID: 4679136682929626335}
-  signalInvokeDragBegin: {fileID: 11400000, guid: 9457b1fe92e556e4b9fd19f98290a9b4,
-    type: 2}
-  signalInvokeDragEnd: {fileID: 11400000, guid: 9ebe59a8671255044a497df930d926cc,
-    type: 2}
-  signalListenGamePlay: {fileID: 11400000, guid: bccbc2d3fb14a6c4ca0e81be8292c1a8,
-    type: 2}
-  signalListenGameStop: {fileID: 11400000, guid: 52c6f35e0b42470438ae0f509243f781,
-    type: 2}
 --- !u!114 &4679136682929626335
 MonoBehaviour:
   m_ObjectHideFlags: 0

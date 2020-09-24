@@ -11,10 +11,19 @@ namespace Renegadeware.K2PS2 {
         public string placementTag;
         [M8.TagSelector]
         public string[] placementIgnoreTags;
-
+                
         [Header("Material Object Settings")]
         public Color objectGhostValidColor = Color.gray;
         public Color objectGhostInvalidColor = Color.red;
+
+        [Header("Signals")]
+        public M8.Signal signalDragBegin;
+        public M8.Signal signalDragEnd;
+        public M8.Signal signalGamePlay;
+        public M8.Signal signalGameStop;
+        public M8.Signal signalPlayerSpawn;
+        public M8.Signal signalPlayerDeath;
+        public M8.Signal signalVictory;
 
         protected override void OnInstanceInit() {
 

@@ -12,10 +12,6 @@ namespace Renegadeware.K2PS2 {
         public TMP_Text titleText;
         public TMP_Text countText;
 
-        [Header("Signals")]
-        public M8.Signal signalInvokeDragBegin;
-        public M8.Signal signalInvokeDragEnd;
-
         public MaterialObjectData data { get; private set; }
 
         public bool isDragging { get; private set; }
@@ -70,7 +66,7 @@ namespace Renegadeware.K2PS2 {
             var entPos = cam.ScreenToWorldPoint(pos);
             mEntGhost = data.Spawn(entPos, mDragWidget);
 
-            signalInvokeDragBegin?.Invoke();
+            GameData.instance.signalDragBegin.Invoke();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData) {
@@ -114,7 +110,7 @@ namespace Renegadeware.K2PS2 {
                 mEntGhost = null;
             }
 
-            signalInvokeDragEnd?.Invoke();
+            GameData.instance.signalDragEnd.Invoke();
         }
     }
 }

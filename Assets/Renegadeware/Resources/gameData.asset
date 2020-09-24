@@ -21,3 +21,10 @@ MonoBehaviour:
   - Victory
   objectGhostValidColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
   objectGhostInvalidColor: {r: 0.65882355, g: 0, b: 0, a: 0.5019608}
+  signalDragBegin: {fileID: 11400000, guid: 9457b1fe92e556e4b9fd19f98290a9b4, type: 2}
+  signalDragEnd: {fileID: 11400000, guid: 9ebe59a8671255044a497df930d926cc, type: 2}
+  signalGamePlay: {fileID: 11400000, guid: bccbc2d3fb14a6c4ca0e81be8292c1a8, type: 2}
+  signalGameStop: {fileID: 11400000, guid: 52c6f35e0b42470438ae0f509243f781, type: 2}
+  signalPlayerSpawn: {fileID: 11400000, guid: 34d4d38c62a3a90469f75bf1f97d34e9, type: 2}
+  signalPlayerDeath: {fileID: 11400000, guid: 70fda79ad60b64c4a9fe148d80c6039a, type: 2}
+  signalVictory: {fileID: 11400000, guid: 279c2ef0f67a2bb45bc9159d33aa0f5b, type: 2}
