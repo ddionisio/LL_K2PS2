@@ -18,6 +18,9 @@ namespace Renegadeware.K2PS2 {
         [Header("Trash")]
         public GameObject trashGO;
 
+        [Header("Play")]
+        public GameObject playGO;
+
         [Header("Stop")]
         public GameObject stopGO;
 
@@ -32,7 +35,7 @@ namespace Renegadeware.K2PS2 {
 
                 //TODO: animation
 
-                paletteWidgets[mCurPaletteInd].transform.SetAsFirstSibling();
+                paletteWidgets[mCurPaletteInd].transform.SetAsLastSibling();
             }
         }
 
@@ -46,7 +49,7 @@ namespace Renegadeware.K2PS2 {
             for(int i = 0; i < paletteCount; i++) {
                 paletteWidgets[i].gameObject.SetActive(true);
                 paletteWidgets[i].Setup(mData, mData.tags[i], dragWidget);
-                paletteWidgets[i].transform.SetSiblingIndex(i);
+                paletteWidgets[i].transform.SetAsFirstSibling();
             }
 
             //hide other palette widgets
@@ -119,31 +122,39 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoGamePlay() {
+            //wait for other animations to end
+
             yield return null;
 
-            //hide palette animation
+            //palette exit animation
 
-            //hide palettes
+            //hide edit display
             if(paletteRootGO) paletteRootGO.SetActive(false);
-                        
+            if(playGO) playGO.SetActive(false);
+
             //show stop
             if(stopGO) stopGO.SetActive(true);
+
+            //stop enter animation
 
             mRout = null;
         }
 
         IEnumerator DoGameStop() {
+            //wait for other animations to end
+
             yield return null;
 
-            //hide stop animation
+            //stop exit animation
 
             //hide stop
             if(stopGO) stopGO.SetActive(false);
 
-            //show palettes
+            //show edit display
             if(paletteRootGO) paletteRootGO.SetActive(true);
+            if(playGO) playGO.SetActive(true);
 
-            //show palettes animation
+            //palette enter animation
 
             mRout = null;
         }
@@ -156,11 +167,17 @@ namespace Renegadeware.K2PS2 {
 
             yield return null;
 
-            //hide palettes
+            //hide edit display
+
+            //palette exit animation
+
             if(paletteRootGO) paletteRootGO.SetActive(false);
+            if(playGO) playGO.SetActive(false);
 
             //show trash
             if(trashGO) trashGO.SetActive(true);
+
+            //trash enter animation
 
             mRout = null;
         }
@@ -174,18 +191,26 @@ namespace Renegadeware.K2PS2 {
             yield return null;
 
             //hide trash
+
+            //trash exit animation
+
             if(trashGO) trashGO.SetActive(false);
 
-            //show palettes
+            //show edit display
             paletteWidgets[mCurPaletteInd].Refresh();
 
             if(paletteRootGO) paletteRootGO.SetActive(true);
+            if(playGO) playGO.SetActive(true);
+
+            //palette enter animation
 
             mRout = null;
         }
 
         private void HideAll() {
             if(displayRootGO) displayRootGO.SetActive(false);
+            if(paletteRootGO) paletteRootGO.SetActive(false);
+            if(playGO) playGO.SetActive(false);
             if(dragRootGO) dragRootGO.SetActive(false);
             if(trashGO) trashGO.SetActive(false);
             if(stopGO) stopGO.SetActive(false);

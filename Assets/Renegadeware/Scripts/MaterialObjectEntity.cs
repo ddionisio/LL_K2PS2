@@ -181,6 +181,22 @@ namespace Renegadeware.K2PS2 {
         }
         
         void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
+            if(!mIsDragging)
+                return;
+
+            //check if we are dropping on delete area
+            var deleteTag = GameData.instance.deleteTag;
+
+            var isDelete = false;
+
+            if(eventData.pointerDrag && eventData.pointerDrag.CompareTag(deleteTag))
+                isDelete = true;
+            else if(eventData.pointerCurrentRaycast.gameObject && eventData.pointerCurrentRaycast.gameObject.CompareTag(deleteTag))
+                isDelete = true;
+
+            if(isDelete)
+                Release();
+
             EndDrag();
         }
 
@@ -209,6 +225,8 @@ namespace Renegadeware.K2PS2 {
 
         void M8.IPoolDespawn.OnDespawned() {
             state = State.None;
+
+            EndDrag();
         }
 
         IEnumerator DoSpawn() {

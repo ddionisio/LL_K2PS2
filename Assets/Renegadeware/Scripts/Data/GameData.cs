@@ -11,6 +11,8 @@ namespace Renegadeware.K2PS2 {
         public string placementTag;
         [M8.TagSelector]
         public string[] placementIgnoreTags;
+        [M8.TagSelector]
+        public string deleteTag;
                 
         [Header("Material Object Settings")]
         public Color objectGhostValidColor = Color.gray;
