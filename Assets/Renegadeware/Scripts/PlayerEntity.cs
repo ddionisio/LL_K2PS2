@@ -72,7 +72,7 @@ namespace Renegadeware.K2PS2 {
         /// </summary>
         public float lastJumpTime { get; private set; }
 
-        public Vector2 startPosition { get; private set; }
+        public Vector2 startPosition { get; set; }
 
         //callbacks
         public event System.Action stateChangedCallback;
@@ -251,7 +251,11 @@ namespace Renegadeware.K2PS2 {
 
         private void DisablePhysics() {
             moveCtrl.ResetCollision();
+
             moveCtrl.coll.enabled = false;
+
+            moveCtrl.body.velocity = Vector2.zero;
+            moveCtrl.body.angularVelocity = 0f;
             moveCtrl.body.simulated = false;
 
             mGroundLastWallChecked = null;

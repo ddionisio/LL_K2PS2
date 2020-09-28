@@ -14,7 +14,8 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalPlayerDeath.callback += OnDeath;
             gameDat.signalGamePlay.callback += OnPlay;
             gameDat.signalGameStop.callback += OnRespawn;
-            gameDat.signalVictory.callback += OnVictory;
+            gameDat.signalGoal.callback += OnGoal;
+            gameDat.signalPlayerMoveTo.callback += OnMoveTo;
         }
 
         void OnDisable() {
@@ -23,7 +24,8 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalPlayerDeath.callback -= OnDeath;
             gameDat.signalGamePlay.callback -= OnPlay;
             gameDat.signalGameStop.callback -= OnRespawn;
-            gameDat.signalVictory.callback -= OnVictory;
+            gameDat.signalGoal.callback -= OnGoal;
+            gameDat.signalPlayerMoveTo.callback -= OnMoveTo;
 
             ClearRoutine();
         }
@@ -52,9 +54,17 @@ namespace Renegadeware.K2PS2 {
             player.state = PlayerEntity.State.Move;
         }
 
-        void OnVictory() {
+        void OnGoal() {
             ClearRoutine();
-            mRout = StartCoroutine(DoVictory());
+            mRout = StartCoroutine(DoGoal());
+        }
+
+        void OnMoveTo(Vector2 pos) {
+            //set new start position
+            player.startPosition = pos;
+
+            ClearRoutine();
+            mRout = StartCoroutine(DoMoveTo(pos));
         }
 
         IEnumerator DoSpawn() {
@@ -90,14 +100,40 @@ namespace Renegadeware.K2PS2 {
             player.state = PlayerEntity.State.None;
 
             //play death
+
+            mRout = null;
         }
 
-        IEnumerator DoVictory() {
+        IEnumerator DoGoal() {
             yield return null;
 
-            player.moveState = PlayerEntity.MoveState.Stop;
+            player.state = PlayerEntity.State.Standby;
 
             //play victory
+
+            mRout = null;
+        }
+
+        IEnumerator DoMoveTo(Vector2 pos) {
+            player.state = PlayerEntity.State.Standby;
+
+            var body = player.moveCtrl.body;
+            var toX = pos.x;
+
+            if(body.position.x < toX) {
+                player.moveState = PlayerEntity.MoveState.Right;
+
+                while(body.position.x < toX)
+                    yield return null;
+            }
+            else if(body.position.x > toX) {
+                player.moveState = PlayerEntity.MoveState.Left;
+
+                while(body.position.x > toX)
+                    yield return null;
+            }
+
+            player.moveState = PlayerEntity.MoveState.Stop;
 
             mRout = null;
         }

@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModalVictory : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+namespace Renegadeware.K2PS2 {
+    public class ModalVictory : M8.ModalController, M8.IModalPush, M8.IModalPop {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void M8.IModalPop.Pop() {
+
+        }
+
+        void M8.IModalPush.Push(M8.GenericParams parms) {
+
+        }
     }
 }

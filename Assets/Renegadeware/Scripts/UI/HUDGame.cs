@@ -29,9 +29,15 @@ namespace Renegadeware.K2PS2 {
 
         private Coroutine mRout;
 
+        public void RefreshCurrentPalette() {
+            paletteWidgets[mCurPaletteInd].Refresh();
+        }
+
         public void ActivatePalette(int paletteIndex) {
             if(mCurPaletteInd != paletteIndex) {
                 mCurPaletteInd = paletteIndex;
+
+                RefreshCurrentPalette();
 
                 //TODO: animation
 
@@ -86,10 +92,19 @@ namespace Renegadeware.K2PS2 {
         }
 
         public void Show() {
+            HideAll();
+
             if(displayRootGO) displayRootGO.SetActive(true);
             if(paletteRootGO) paletteRootGO.SetActive(true);
+            if(playGO) playGO.SetActive(true);
 
             //TODO: play animation
+        }
+
+        public void Hide() {
+            //TODO: play animation
+
+            HideAll();
         }
 
         void Awake() {
@@ -171,7 +186,7 @@ namespace Renegadeware.K2PS2 {
 
             //palette exit animation
 
-            if(paletteRootGO) paletteRootGO.SetActive(false);
+            //if(paletteRootGO) paletteRootGO.SetActive(false);
             if(playGO) playGO.SetActive(false);
 
             //show trash
@@ -197,7 +212,7 @@ namespace Renegadeware.K2PS2 {
             if(trashGO) trashGO.SetActive(false);
 
             //show edit display
-            paletteWidgets[mCurPaletteInd].Refresh();
+            RefreshCurrentPalette();
 
             if(paletteRootGO) paletteRootGO.SetActive(true);
             if(playGO) playGO.SetActive(true);

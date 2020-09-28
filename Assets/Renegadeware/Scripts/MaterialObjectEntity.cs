@@ -118,7 +118,7 @@ namespace Renegadeware.K2PS2 {
 
         public void Release() {
             if(poolDataCtrl)
-                poolDataCtrl.Despawn();
+                poolDataCtrl.Release();
             else //fail-safe
                 gameObject.SetActive(false);
         }

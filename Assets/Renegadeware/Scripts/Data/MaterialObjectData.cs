@@ -53,6 +53,8 @@ namespace Renegadeware.K2PS2 {
             mPool = M8.PoolController.CreatePool("materialObjectPool");
             mPool.AddType(template, count, count);
 
+            mPool.despawnCallback += OnDespawn;
+
             if(mSpawnedEntities != null) {
                 if(mSpawnedEntities.Capacity < count)
                     mSpawnedEntities.Resize(count);
@@ -68,6 +70,8 @@ namespace Renegadeware.K2PS2 {
                 mSpawnedEntities.Clear();
 
             if(mPool) {
+                mPool.despawnCallback -= OnDespawn;
+
                 mPool.RemoveType(template.name);
                 mPool = null;
             }
@@ -81,9 +85,11 @@ namespace Renegadeware.K2PS2 {
             mSpawnParms[MaterialObjectEntity.parmDragWidget] = dragWidget;
 
             var ent = mPool.Spawn<MaterialObjectEntity>(template.name, template.name, null, mSpawnParms);
-            ent.poolDataCtrl.despawnCallback += OnDespawn;
             ent.transform.position = pos;
-            
+
+            if(mSpawnedEntities.IsFull) //fail-safe
+                mSpawnedEntities.Expand(maxCount * 2);
+
             mSpawnedEntities.Add(ent);
 
             return ent;
@@ -100,8 +106,6 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnDespawn(M8.PoolDataController poolDataCtrl) {
-            poolDataCtrl.despawnCallback -= OnDespawn;
-
             for(int i = 0; i < mSpawnedEntities.Count; i++) {
                 var ent = mSpawnedEntities[i];
                 if(ent && ent.poolDataCtrl == poolDataCtrl) {
