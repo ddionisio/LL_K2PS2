@@ -24,7 +24,7 @@ namespace Renegadeware.K2PS2 {
         [Header("Stop")]
         public GameObject stopGO;
 
-        private GamePlayData mData;
+        private LevelData mData;
         private int mCurPaletteInd;
 
         private Coroutine mRout;
@@ -45,7 +45,7 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
-        public void Init(GamePlayData data) {
+        public void Init(LevelData data) {
             mData = data;
 
             HideAll();

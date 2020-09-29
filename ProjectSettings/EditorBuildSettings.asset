@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Renegadeware/Scenes/start.unity
     guid: c93a5bfbc135d9a409ea6feab7afa82e
+  - enabled: 1
+    path: Assets/Renegadeware/Scenes/level01classify.unity
+    guid: e45f11d12c8d8d94fab729c09b2e21c6
+  - enabled: 1
+    path: Assets/Renegadeware/Scenes/level01play.unity
+    guid: 9dc97f45a2b6a804f9991492d80d88a1
+  - enabled: 1
+    path: Assets/Renegadeware/Scenes/end.unity
+    guid: 0e083ea96b774d340ba7ccdc377f6210
   m_configObjects: {}

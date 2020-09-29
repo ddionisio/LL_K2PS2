@@ -48,7 +48,7 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnPlayClick() {
-
+            GameData.instance.Begin();
         }
     }
 }

@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844b506874ed03848866e0867658f99a, type: 3}
   m_Name: gameData
   m_EditorClassIdentifier: 
+  levels:
+  - classifyScene:
+      name: level01classify
+      path: Assets/Renegadeware/Scenes/level01classify.unity
+    playScene:
+      name: level01play
+      path: Assets/Renegadeware/Scenes/level01play.unity
+  HUDClassifyTag: HUDClassify
+  HUDGameTag: HUDGame
   playerTag: Player
   goalTag: Victory
   placementLayerMask:
@@ -27,6 +36,10 @@ MonoBehaviour:
   goalDelay: 1
   objectGhostValidColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
   objectGhostInvalidColor: {r: 0.65882355, g: 0, b: 0, a: 0.5019608}
+  endScene:
+    name: 
+    path: 
+  modalClassifySummary: classifySummary
   modalVictory: victory
   signalDragBegin: {fileID: 11400000, guid: 9457b1fe92e556e4b9fd19f98290a9b4, type: 2}
   signalDragEnd: {fileID: 11400000, guid: 9ebe59a8671255044a497df930d926cc, type: 2}

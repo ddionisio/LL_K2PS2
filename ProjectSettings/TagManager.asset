@@ -9,6 +9,7 @@ TagManager:
   - HUDGame
   - Victory
   - Delete
+  - HUDClassify
   layers:
   - Default
   - TransparentFX

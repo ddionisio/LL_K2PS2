@@ -6,57 +6,57 @@ using LoLExt;
 
 namespace Renegadeware.K2PS2 {
     public class GameModePlay : GameModeController<GameModePlay> {
-        [System.Serializable]
-        public struct Section {
-            public Transform playerGoto;
-            public Transform cameraGoto;
-        }
-
         [Header("Data")]
-        public GamePlayData data;
-
-        [Header("HUD")]
-        [M8.TagSelector]
-        public string HUDTag;
+        public LevelData data;
 
         [Header("Game")]
-        public Section[] nextSections;
+        public Transform sectionRoot;
 
         private HUDGame mHUD;
 
-        private int mGoalCount;
-        private int mGoalMaxCount;
-
+        private GamePlaySection[] mSections;
+        private int mCurSectionInd;
         private int mNextSectionInd;
-
+        
         private Transform mGameCamTrans;
 
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
 
+            var gameDat = GameData.instance;
+
             //initialize Data
             data.InitItemPools();
 
             //initialize HUD
-            var hudGO = GameObject.FindGameObjectWithTag(HUDTag);
+            var hudGO = GameObject.FindGameObjectWithTag(gameDat.HUDGameTag);
             if(hudGO)
                 mHUD = hudGO.GetComponent<HUDGame>();
 
             mHUD.Init(data);
 
             //initialize game
-            mGoalCount = 0;
+            mSections = new GamePlaySection[sectionRoot.childCount];
+            for(int i = 0; i < mSections.Length; i++)
+                mSections[i] = sectionRoot.GetChild(i).GetComponent<GamePlaySection>();
 
-            var goalGOs = GameObject.FindGameObjectsWithTag(GameData.instance.goalTag);
-            mGoalMaxCount = goalGOs.Length;
+            mCurSectionInd = mNextSectionInd = 0;
 
-            mNextSectionInd = 0;
+            var startSection = mSections[mCurSectionInd];
 
             var cam = Camera.main;
             mGameCamTrans = cam.transform.parent ? cam.transform.parent : cam.transform;
 
+            mGameCamTrans.position = startSection.cameraPoint.position;
+
+            var playerGO = GameObject.FindGameObjectWithTag(gameDat.playerTag);
+            var playerEnt = playerGO.GetComponent<PlayerEntity>();
+
+            playerEnt.transform.position = startSection.playerStart.position;
+            playerEnt.startPosition = startSection.playerStart.position;
+
             //setup signals
-            GameData.instance.signalGoal.callback += OnGoal;
+            gameDat.signalGoal.callback += OnGoal;
         }
 
         protected override void OnInstanceDeinit() {
@@ -79,7 +79,7 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnGoal() {
-            mGoalCount++;
+            mNextSectionInd++;
         }
 
         IEnumerator DoGamePlay() {
@@ -92,8 +92,7 @@ namespace Renegadeware.K2PS2 {
                 mHUD.Show();
 
             //wait for goal
-            var curGoalCount = mGoalCount;
-            while(curGoalCount == mGoalCount)
+            while(mCurSectionInd == mNextSectionInd)
                 yield return null;
 
             if(mHUD)
@@ -102,57 +101,57 @@ namespace Renegadeware.K2PS2 {
             yield return new WaitForSeconds(gameDat.goalDelay);
 
             //victory?
-            if(mGoalCount >= mGoalMaxCount) {
-                M8.ModalManager.main.Open(GameData.instance.modalVictory);
+            if(mNextSectionInd >= mSections.Length) {
+                M8.ModalManager.main.Open(gameDat.modalVictory);
             }
             else {
                 //move to next section
-                if(mNextSectionInd < nextSections.Length) {
-                    var items = data.items;
+                mCurSectionInd = mNextSectionInd;
 
-                    //despawn all objects
-                    for(int i = 0; i < items.Length; i++)
-                        items[i].materialObject.DespawnAll();
+                var curSection = mSections[mCurSectionInd];
 
-                    var nextSection = nextSections[mNextSectionInd];
+                var items = data.items;
 
-                    //move player
-                    gameDat.signalPlayerMoveTo.Invoke(nextSection.playerGoto.position);
+                //despawn all objects
+                for(int i = 0; i < items.Length; i++)
+                    items[i].materialObject.DespawnAll();
 
-                    //move camera
-                    var camEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(gameDat.cameraMoveTween);
-                    Vector2 camStartPos = mGameCamTrans.position;
-                    Vector2 camEndPos = nextSection.cameraGoto.position;
+                //move player
+                gameDat.signalPlayerMoveTo.Invoke(curSection.playerStart.position);
 
-                    var delay = gameDat.cameraMoveDelay;
-                    var curTime = 0f;
+                //move camera
+                var camEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(gameDat.cameraMoveTween);
+                Vector2 camStartPos = mGameCamTrans.position;
+                Vector2 camEndPos = curSection.cameraPoint.position;
 
-                    while(curTime < delay) {
-                        yield return null;
+                var delay = gameDat.cameraMoveDelay;
+                var curTime = 0f;
 
-                        curTime += Time.deltaTime;
+                while(curTime < delay) {
+                    yield return null;
 
-                        var t = camEaseFunc(curTime, delay, 0f, 0f);
+                    curTime += Time.deltaTime;
 
-                        mGameCamTrans.position = Vector2.Lerp(camStartPos, camEndPos, t);
-                    }
+                    var t = camEaseFunc(curTime, delay, 0f, 0f);
 
-                    //wait for all objects to fully despawn (fail-safe)
-                    while(true) {
-                        int curObjectCount = 0;
-                        for(int i = 0; i < items.Length; i++)
-                            curObjectCount += items[i].materialObject.spawnedCount;
-
-                        if(curObjectCount == 0)
-                            break;
-
-                        yield return null;
-                    }
-
-                    mHUD.RefreshCurrentPalette();
-
-                    mNextSectionInd++;
+                    mGameCamTrans.position = Vector2.Lerp(camStartPos, camEndPos, t);
                 }
+
+                //wait for all objects to fully despawn (fail-safe)
+                while(true) {
+                    int curObjectCount = 0;
+                    for(int i = 0; i < items.Length; i++)
+                        curObjectCount += items[i].materialObject.spawnedCount;
+
+                    if(curObjectCount == 0)
+                        break;
+
+                    yield return null;
+                }
+
+                mHUD.RefreshCurrentPalette();
+
+                mNextSectionInd++;
 
                 StartCoroutine(DoGamePlay());
             }

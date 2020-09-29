@@ -12,7 +12,7 @@ namespace Renegadeware.K2PS2 {
 
         private int mItemCount;
 
-        public void Setup(GamePlayData data, MaterialTagData tag, MaterialObjectDragWidget dragWidget) {
+        public void Setup(LevelData data, MaterialTagData tag, MaterialObjectDragWidget dragWidget) {
             //initialize display
             tagWidget.Setup(tag);
 

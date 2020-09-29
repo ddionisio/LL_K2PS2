@@ -108,8 +108,6 @@ namespace Renegadeware.K2PS2 {
         }
 
         void Awake() {
-            startPosition = transform.position;
-
             //setup move controller
             moveCtrl = GetComponent<PlayerMove>();
 

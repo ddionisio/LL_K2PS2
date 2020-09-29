@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Renegadeware.K2PS2 {
-    public class ModalVictory : M8.ModalController, M8.IModalPush, M8.IModalPop {
+    public class ModalClassifySummary : M8.ModalController, M8.IModalPush, M8.IModalPop {
 
         public void End() {
             Close();

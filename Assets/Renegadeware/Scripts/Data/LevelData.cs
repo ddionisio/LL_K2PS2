@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Renegadeware.K2PS2 {
-    [CreateAssetMenu(fileName = "gamePlayData", menuName = "Game/Play Data")]
-    public class GamePlayData : ScriptableObject {
+    [CreateAssetMenu(fileName = "levelData", menuName = "Game/Level Data")]
+    public class LevelData : ScriptableObject {
         [System.Serializable]
         public struct ItemData {
             public MaterialObjectData materialObject;
