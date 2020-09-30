@@ -83,9 +83,11 @@ namespace Renegadeware.K2PS2 {
 
             mSpawnParms[MaterialObjectEntity.parmData] = this;
             mSpawnParms[MaterialObjectEntity.parmDragWidget] = dragWidget;
+            mSpawnParms[MaterialObjectEntity.parmState] = MaterialObjectEntity.State.Ghost;
 
             var ent = mPool.Spawn<MaterialObjectEntity>(template.name, template.name, null, mSpawnParms);
             ent.transform.position = pos;
+            ent.transform.rotation = Quaternion.identity;
 
             if(mSpawnedEntities.IsFull) //fail-safe
                 mSpawnedEntities.Expand(maxCount * 2);

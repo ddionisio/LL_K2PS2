@@ -35,6 +35,9 @@ namespace Renegadeware.K2PS2 {
         [M8.TagSelector]
         public string deleteTag;
 
+        [M8.TagSelector]
+        public string materialObjectTag;
+
         public float cameraMoveDelay = 0.5f;
         public DG.Tweening.Ease cameraMoveTween = DG.Tweening.Ease.InOutQuad;
 

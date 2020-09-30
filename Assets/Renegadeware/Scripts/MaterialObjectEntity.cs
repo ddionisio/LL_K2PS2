@@ -7,6 +7,7 @@ namespace Renegadeware.K2PS2 {
     public class MaterialObjectEntity : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, IBeginDragHandler, IDragHandler, IEndDragHandler {
         public const string parmData = "d";
         public const string parmDragWidget = "dw";
+        public const string parmState = "s";
 
         public enum State {
             None,
@@ -202,6 +203,7 @@ namespace Renegadeware.K2PS2 {
 
         void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
             //setup data
+            var toState = State.None;
             data = null;
             mDragWidget = null;
 
@@ -211,16 +213,16 @@ namespace Renegadeware.K2PS2 {
 
                 if(parms.ContainsKey(parmDragWidget))
                     mDragWidget = parms.GetValue<MaterialObjectDragWidget>(parmDragWidget);
+
+                if(parms.ContainsKey(parmState))
+                    toState = parms.GetValue<State>(parmState);
             }
 
             mOverlapFilter.SetLayerMask(GameData.instance.placementLayerMask);
             mOverlapFilter.useTriggers = true;
 
-            //start state as ghost
-            mState = State.Ghost;
+            mState = toState;
             ApplyCurrentState();
-
-            mIsDraggable = true; //assume we are spawned in edit mode
         }
 
         void M8.IPoolDespawn.OnDespawned() {
@@ -275,6 +277,7 @@ namespace Renegadeware.K2PS2 {
                     break;
                 case State.Ghost:
                     toPhysicsMode = PhysicsMode.Ghost;
+                    mIsDraggable = true;
                     break;
                 case State.Spawning:
                     mRout = StartCoroutine(DoSpawn());
