@@ -8,6 +8,7 @@ namespace Renegadeware.K2PS2 {
         public const string parmData = "d";
         public const string parmDragWidget = "dw";
         public const string parmState = "s";
+        public const string parmIsNonPool = "np";
 
         public enum State {
             None,
@@ -39,8 +40,12 @@ namespace Renegadeware.K2PS2 {
 
         public M8.PoolDataController poolDataCtrl {
             get {
-                if(!mPoolDataCtrl)
+                if(!mPoolDataCtrl) {
                     mPoolDataCtrl = GetComponent<M8.PoolDataController>();
+                    if(!mPoolDataCtrl)
+                        mPoolDataCtrl = gameObject.AddComponent<M8.PoolDataController>();
+                }
+
                 return mPoolDataCtrl; 
             }
         }
@@ -89,6 +94,8 @@ namespace Renegadeware.K2PS2 {
 
         public Collider2D coll { get; private set; }
 
+        public bool isDraggable { get { return mDragWidget != null; } }
+
         private State mState;
 
         private M8.PoolDataController mPoolDataCtrl;
@@ -101,8 +108,11 @@ namespace Renegadeware.K2PS2 {
         private Collider2D[] mOverlapColls = new Collider2D[8];
 
         private bool mIsDragging;
-        private bool mIsDraggable;
         private Vector2 mLastPos;
+
+        private bool mIsNonPool;
+
+        private bool mIsGamePlay;
 
         /// <summary>
         /// Only call this in ghost mode
@@ -118,10 +128,10 @@ namespace Renegadeware.K2PS2 {
         }
 
         public void Release() {
-            if(poolDataCtrl)
-                poolDataCtrl.Release();
-            else //fail-safe
+            if(mIsNonPool)
                 gameObject.SetActive(false);
+            else
+                poolDataCtrl.Release();
         }
 
         void OnApplicationFocus(bool focus) {
@@ -153,7 +163,7 @@ namespace Renegadeware.K2PS2 {
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
-            if(!mIsDraggable)
+            if(!isDraggable || mIsGamePlay || state != State.Normal)
                 return;
 
             mDragWidget.Setup(data);
@@ -206,6 +216,9 @@ namespace Renegadeware.K2PS2 {
             var toState = State.None;
             data = null;
             mDragWidget = null;
+            mIsNonPool = false;
+
+            mIsGamePlay = false;
 
             if(parms != null) {
                 if(parms.ContainsKey(parmData))
@@ -216,6 +229,9 @@ namespace Renegadeware.K2PS2 {
 
                 if(parms.ContainsKey(parmState))
                     toState = parms.GetValue<State>(parmState);
+
+                if(parms.ContainsKey(parmIsNonPool))
+                    mIsNonPool = parms.GetValue<bool>(parmIsNonPool);
             }
 
             mOverlapFilter.SetLayerMask(GameData.instance.placementLayerMask);
@@ -227,6 +243,9 @@ namespace Renegadeware.K2PS2 {
 
         void M8.IPoolDespawn.OnDespawned() {
             state = State.None;
+
+            data = null;
+            mDragWidget = null;
 
             EndDrag();
         }
@@ -251,12 +270,11 @@ namespace Renegadeware.K2PS2 {
 
         void OnGamePlay() {
             EndDrag();
-            mIsDraggable = false;
+            mIsGamePlay = true;
         }
 
         void OnGameStop() {
-            if(mState == State.Spawning || mState == State.Normal)
-                mIsDraggable = true;
+            mIsGamePlay = false;
         }
 
         private void ApplyCurrentState() {
@@ -273,11 +291,9 @@ namespace Renegadeware.K2PS2 {
             switch(mState) {
                 case State.None:
                     enableDisplay = false;
-                    mIsDraggable = false;
                     break;
                 case State.Ghost:
                     toPhysicsMode = PhysicsMode.Ghost;
-                    mIsDraggable = true;
                     break;
                 case State.Spawning:
                     mRout = StartCoroutine(DoSpawn());
@@ -287,7 +303,6 @@ namespace Renegadeware.K2PS2 {
                     break;
                 case State.Despawning:
                     mRout = StartCoroutine(DoDespawn());
-                    mIsDraggable = false;
                     break;
             }
 

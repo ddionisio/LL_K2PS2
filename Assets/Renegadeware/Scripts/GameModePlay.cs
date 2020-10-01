@@ -67,6 +67,8 @@ namespace Renegadeware.K2PS2 {
 
             //clean up Data
             data.DeinitItemPools();
+
+            base.OnInstanceDeinit();
         }
 
         protected override IEnumerator Start() {

@@ -27,6 +27,8 @@ namespace Renegadeware.K2PS2 {
 
         public bool isAttached { get { return mAttachTo; } }
 
+        public MaterialTagData data { get; private set; }
+
         private MaterialTagWidget mTagWidget;
         private Graphic mGraphic;
 
@@ -40,7 +42,9 @@ namespace Renegadeware.K2PS2 {
 
         private bool mIsDragging;
 
-        public void Setup(MaterialTagData data, Transform dragAreaRoot, Transform placementRoot) {
+        public void Setup(MaterialTagData aData, Transform dragAreaRoot, Transform placementRoot) {
+            data = aData;
+
             tagWidget.Setup(data);
 
             mDragAreaRoot = dragAreaRoot;
@@ -67,7 +71,6 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnDisable() {
-            Detach();
             EndDrag();
         }
 
