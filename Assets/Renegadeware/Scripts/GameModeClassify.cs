@@ -139,7 +139,10 @@ namespace Renegadeware.K2PS2 {
 
             mHUD.Hide();
 
+            //dialog, etc.
+
             //show summary
+            M8.ModalManager.main.Open(GameData.instance.modalClassifySummary);
         }
 
         void OnClassify() {
