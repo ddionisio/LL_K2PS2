@@ -12,6 +12,9 @@ namespace Renegadeware.K2PS2 {
         [Header("Game")]
         public Transform sectionRoot;
 
+        [Header("Debug")]
+        public int debugStartSectionInd;
+
         private HUDGame mHUD;
 
         private GamePlaySection[] mSections;
@@ -40,7 +43,13 @@ namespace Renegadeware.K2PS2 {
             for(int i = 0; i < mSections.Length; i++)
                 mSections[i] = sectionRoot.GetChild(i).GetComponent<GamePlaySection>();
 
-            mCurSectionInd = mNextSectionInd = 0;
+            int startSectionInd = 0;
+
+#if UNITY_EDITOR
+            startSectionInd = Mathf.Clamp(debugStartSectionInd, 0, mSections.Length - 1);
+#endif
+
+            mCurSectionInd = mNextSectionInd = startSectionInd;
 
             var startSection = mSections[mCurSectionInd];
 
@@ -152,8 +161,6 @@ namespace Renegadeware.K2PS2 {
                 }
 
                 mHUD.RefreshCurrentPalette();
-
-                mNextSectionInd++;
 
                 StartCoroutine(DoGamePlay());
             }

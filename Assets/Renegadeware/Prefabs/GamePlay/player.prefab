@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveStart: 2
-  jumpImpulse: 4.75
+  jumpImpulse: 4.65
   jumpCancelImpulse: 1.5
   solidCheckMask:
     serializedVersion: 2
@@ -91,7 +91,7 @@ MonoBehaviour:
   speedCap: 0
   moveForce: 30
   moveAirForce: 30
-  moveMaxSpeed: 3
+  moveMaxSpeed: 2.5
   slopSlideForce: 20
   airMaxSpeed: 2
   airDrag: 0.015

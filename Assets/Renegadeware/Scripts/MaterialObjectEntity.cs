@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
+using UnityEngine.UI.Extensions;
 
 namespace Renegadeware.K2PS2 {
     public class MaterialObjectEntity : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, IBeginDragHandler, IDragHandler, IEndDragHandler {
@@ -27,6 +29,10 @@ namespace Renegadeware.K2PS2 {
         [Header("Display")]
         public GameObject displayRootGO;
         public M8.SpriteColorGroup ghostSpriteGroup;
+        public SpriteShapeRenderer ghostSpriteShape;
+
+        [Header("Data")]
+        public float density = 0f; //set to 0 to not apply
 
         public State state {
             get { return mState; }
@@ -107,6 +113,8 @@ namespace Renegadeware.K2PS2 {
         private ContactFilter2D mOverlapFilter = new ContactFilter2D();
         private Collider2D[] mOverlapColls = new Collider2D[8];
 
+        private Color mGhostSpriteShapeDefaultColor;
+
         private bool mIsDragging;
         private Vector2 mLastPos;
 
@@ -121,10 +129,19 @@ namespace Renegadeware.K2PS2 {
             position = pos;
 
             //change ghost display if placeable or not
-            if(isPlaceable)
-                ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostValidColor);
-            else
-                ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostInvalidColor);
+            if(ghostSpriteGroup) {
+                if(isPlaceable)
+                    ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostValidColor);
+                else
+                    ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostInvalidColor);
+            }
+
+            if(ghostSpriteShape) {
+                if(isPlaceable)
+                    ghostSpriteShape.color = GameData.instance.objectGhostValidColor;
+                else
+                    ghostSpriteShape.color = GameData.instance.objectGhostInvalidColor;
+            }
         }
 
         public void Release() {
@@ -159,7 +176,16 @@ namespace Renegadeware.K2PS2 {
             body = GetComponent<Rigidbody2D>();
             coll = GetComponent<Collider2D>();
 
-            ghostSpriteGroup.Init();
+            if(density > 0f) {
+                body.useAutoMass = true;
+                coll.density = density;
+            }
+
+            if(ghostSpriteGroup)
+                ghostSpriteGroup.Init();
+
+            if(ghostSpriteShape)
+                mGhostSpriteShapeDefaultColor = ghostSpriteShape.color;
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
@@ -286,7 +312,11 @@ namespace Renegadeware.K2PS2 {
             var enableDisplay = true;
             var toPhysicsMode = PhysicsMode.None;
 
-            ghostSpriteGroup.Revert();
+            if(ghostSpriteGroup)
+                ghostSpriteGroup.Revert();
+
+            if(ghostSpriteShape)
+                ghostSpriteShape.color = mGhostSpriteShapeDefaultColor;
 
             switch(mState) {
                 case State.None:
