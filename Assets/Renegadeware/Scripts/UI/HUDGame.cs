@@ -24,6 +24,8 @@ namespace Renegadeware.K2PS2 {
         [Header("Stop")]
         public GameObject stopGO;
 
+        public bool isPaletteActive { get; private set; }
+
         private LevelData mData;
         private int mCurPaletteInd;
 
@@ -36,8 +38,6 @@ namespace Renegadeware.K2PS2 {
         public void ActivatePalette(int paletteIndex) {
             if(mCurPaletteInd != paletteIndex) {
                 mCurPaletteInd = paletteIndex;
-
-                RefreshCurrentPalette();
 
                 //TODO: animation
 
@@ -70,6 +70,7 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalDragEnd.callback += OnDragEnd;
             gameDat.signalGamePlay.callback += OnGamePlay;
             gameDat.signalGameStop.callback += OnGameStop;
+            gameDat.signalObjectReleased.callback += OnObjectReleased;
         }
 
         public void Deinit() {
@@ -81,6 +82,7 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalDragEnd.callback -= OnDragEnd;
             gameDat.signalGamePlay.callback -= OnGamePlay;
             gameDat.signalGameStop.callback -= OnGameStop;
+            gameDat.signalObjectReleased.callback -= OnObjectReleased;
 
             //clear out widgets
             for(int i = 0; i < paletteWidgets.Length; i++)
@@ -93,6 +95,9 @@ namespace Renegadeware.K2PS2 {
 
         public void Show() {
             HideAll();
+
+            isPaletteActive = true;
+            RefreshCurrentPalette();            
 
             if(displayRootGO) displayRootGO.SetActive(true);
             if(paletteRootGO) paletteRootGO.SetActive(true);
@@ -125,18 +130,30 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnDragBegin() {
+            isPaletteActive = false;
+
             ClearRout();
 
             mRout = StartCoroutine(DoDragBegin());
         }
 
         void OnDragEnd() {
+            isPaletteActive = true;
+            RefreshCurrentPalette();
+
             ClearRout();
 
             mRout = StartCoroutine(DoDragEnd());
         }
 
+        void OnObjectReleased() {
+            if(isPaletteActive)
+                RefreshCurrentPalette();
+        }
+
         IEnumerator DoGamePlay() {
+            isPaletteActive = false;
+
             //wait for other animations to end
 
             yield return null;
@@ -156,6 +173,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoGameStop() {
+            isPaletteActive = true;
+            RefreshCurrentPalette();
+
             //wait for other animations to end
 
             yield return null;
@@ -212,7 +232,6 @@ namespace Renegadeware.K2PS2 {
             if(trashGO) trashGO.SetActive(false);
 
             //show edit display
-            RefreshCurrentPalette();
 
             if(paletteRootGO) paletteRootGO.SetActive(true);
             if(playGO) playGO.SetActive(true);
@@ -229,6 +248,8 @@ namespace Renegadeware.K2PS2 {
             if(dragRootGO) dragRootGO.SetActive(false);
             if(trashGO) trashGO.SetActive(false);
             if(stopGO) stopGO.SetActive(false);
+
+            isPaletteActive = false;
         }
 
         private void ClearRout() {

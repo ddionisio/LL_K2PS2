@@ -112,6 +112,9 @@ namespace Renegadeware.K2PS2 {
                 var ent = mSpawnedEntities[i];
                 if(ent && ent.poolDataCtrl == poolDataCtrl) {
                     mSpawnedEntities.RemoveAt(i);
+
+                    GameData.instance.signalObjectReleased.Invoke();
+
                     return;
                 }
             }

@@ -17,13 +17,21 @@ namespace Renegadeware.K2PS2 {
             tagWidget.Setup(tag);
 
             //filter objects based on tag
-            mItemCount = Mathf.Min(itemWidgets.Length, data.items.Length);
+            mItemCount = 0;
 
-            for(int i = 0; i < mItemCount; i++) {
+            for(int i = 0; i < data.items.Length; i++) {
+                if(mItemCount >= itemWidgets.Length)
+                    break;
+
                 var objData = data.items[i].materialObject;
-                var objWidget = itemWidgets[i];
 
-                objWidget.Setup(objData, dragWidget);
+                if(objData.CompareTag(tag)) {
+                    var itmWidget = itemWidgets[mItemCount];
+                    itmWidget.gameObject.SetActive(true);
+                    itmWidget.Setup(objData, dragWidget);
+
+                    mItemCount++;
+                }
             }
 
             //hide excess items

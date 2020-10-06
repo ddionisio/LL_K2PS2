@@ -6,8 +6,18 @@
   },
   "en": {
     "welcome": "Welcome!",
-    "title": "TITLE",
+    "title": "Mighty Chin Chin: What's the Matter",
     "test": "Test",
-    "test2": "Test 2"
+    "test2": "Test 2",
+    "tag_wide": "Wide",
+    "tag_tall": "Tall",
+    "tag_heavy": "Heavy",
+    "tag_light": "Light",
+    "material_clay": "Clay",
+    "material_clay_1x2": "Clay 1x2",
+    "material_clay_1x3": "Clay 1x3",
+    "material_clay_3x1": "Clay 3x1",
+    "material_clay_6x1": "Clay 6x1",
+    "material_iron_block": "Iron Block"
   }
 }

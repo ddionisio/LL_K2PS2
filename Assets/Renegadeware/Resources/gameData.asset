@@ -19,6 +19,12 @@ MonoBehaviour:
     playScene:
       name: level01play
       path: Assets/Renegadeware/Scenes/level01play.unity
+  - classifyScene:
+      name: level01classify
+      path: Assets/Renegadeware/Scenes/level01classify.unity
+    playScene:
+      name: level02play
+      path: Assets/Renegadeware/Scenes/level02play.unity
   HUDClassifyTag: HUDClassify
   HUDGameTag: HUDGame
   playerTag: Player
@@ -51,3 +57,7 @@ MonoBehaviour:
   signalPlayerMoveTo: {fileID: 11400000, guid: 7451fd6b47feede4ebc49a140e0f4148, type: 2}
   signalGoal: {fileID: 11400000, guid: 279c2ef0f67a2bb45bc9159d33aa0f5b, type: 2}
   signalClassify: {fileID: 11400000, guid: 4bfb3f6ee9b30824da735e007eba4baa, type: 2}
+  signalObjectDespawn: {fileID: 11400000, guid: 84f81509bf8edbd4691431b097b69d46,
+    type: 2}
+  signalObjectReleased: {fileID: 11400000, guid: 502499f2a5e24824188d1caef793ef21,
+    type: 2}

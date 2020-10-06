@@ -31,9 +31,6 @@ namespace Renegadeware.K2PS2 {
         public M8.SpriteColorGroup ghostSpriteGroup;
         public SpriteShapeRenderer ghostSpriteShape;
 
-        [Header("Data")]
-        public float density = 0f; //set to 0 to not apply
-
         public State state {
             get { return mState; }
             set {
@@ -74,23 +71,30 @@ namespace Renegadeware.K2PS2 {
                 var placementTag = GameData.instance.placementTag;
                 var ignoreTags = GameData.instance.placementIgnoreTags;
 
-                bool isPlacementOverlap = false;
+                Collider2D overlapColl = null;
 
                 int overlapCount = coll.OverlapCollider(mOverlapFilter, mOverlapColls);
                 for(int i = 0; i < overlapCount; i++) {
-                    var overlapColl = mOverlapColls[i];
+                    var _overlapColl = mOverlapColls[i];
 
-                    if(overlapColl == coll)
+                    if(_overlapColl == coll)
                         continue;
-                    else if(overlapColl.CompareTag(placementTag))
-                        isPlacementOverlap = true;
-                    else if(GameUtils.CheckTags(overlapColl, ignoreTags))
+                    else if(_overlapColl.CompareTag(placementTag))
+                        overlapColl = _overlapColl;
+                    else if(GameUtils.CheckTags(_overlapColl, ignoreTags))
                         continue;
                     else
                         return false;
                 }
 
-                return isPlacementOverlap;
+                if(overlapColl) {
+                    var bounds = coll.bounds;
+                    var overlapBounds = overlapColl.bounds;
+
+                    return overlapBounds.min.x < bounds.min.x && overlapBounds.min.y < bounds.min.y && overlapBounds.max.x > bounds.max.x && overlapBounds.max.y > bounds.max.y;
+                }
+
+                return false;
             }
         }
 
@@ -161,6 +165,7 @@ namespace Renegadeware.K2PS2 {
 
             gameDat.signalGamePlay.callback += OnGamePlay;
             gameDat.signalGameStop.callback += OnGameStop;
+            gameDat.signalObjectDespawn.callback += OnDespawn;
         }
 
         void OnDisable() {
@@ -168,6 +173,7 @@ namespace Renegadeware.K2PS2 {
 
             gameDat.signalGamePlay.callback -= OnGamePlay;
             gameDat.signalGameStop.callback -= OnGameStop;
+            gameDat.signalObjectDespawn.callback -= OnDespawn;
 
             EndDrag();
         }
@@ -175,11 +181,6 @@ namespace Renegadeware.K2PS2 {
         void Awake() {
             body = GetComponent<Rigidbody2D>();
             coll = GetComponent<Collider2D>();
-
-            if(density > 0f) {
-                body.useAutoMass = true;
-                coll.density = density;
-            }
 
             if(ghostSpriteGroup)
                 ghostSpriteGroup.Init();
@@ -303,6 +304,10 @@ namespace Renegadeware.K2PS2 {
             mIsGamePlay = false;
         }
 
+        void OnDespawn() {
+            state = State.Despawning;
+        }
+
         private void ApplyCurrentState() {
             if(mRout != null) {
                 StopCoroutine(mRout);
@@ -360,6 +365,8 @@ namespace Renegadeware.K2PS2 {
                     }
 
                     if(body) {
+                        body.velocity = Vector2.zero;
+                        body.angularVelocity = 0f;
                         body.isKinematic = true;
                         body.simulated = true;
                     }
@@ -384,10 +391,10 @@ namespace Renegadeware.K2PS2 {
                 return;
 
             if(state == State.Ghost) {
+                state = State.Normal;
+
                 if(!isPlaceable)
                     position = mLastPos;
-
-                state = State.Normal;
             }
 
             mIsDragging = false;

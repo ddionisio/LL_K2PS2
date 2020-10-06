@@ -131,7 +131,6 @@ MonoBehaviour:
   displayRootGO: {fileID: 7453179513737229370}
   ghostSpriteGroup: {fileID: 7910629455355415041}
   ghostSpriteShape: {fileID: 0}
-  density: 2
 --- !u!114 &7910629455355415041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +175,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8357719163409429971}
   m_Enabled: 1
-  m_Density: 1
+  m_Density: 2
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
