@@ -8,10 +8,15 @@ namespace Renegadeware.K2PS2 {
 
         private Coroutine mRout;
 
+        public void Kill() {
+            ClearRoutine();
+            mRout = StartCoroutine(DoDeath());
+        }
+
         void OnEnable() {
             var gameDat = GameData.instance;
             gameDat.signalPlayerSpawn.callback += OnSpawn;
-            gameDat.signalPlayerDeath.callback += OnDeath;
+            gameDat.signalPlayerDeath.callback += Kill;
             gameDat.signalGamePlay.callback += OnPlay;
             gameDat.signalGameStop.callback += OnRespawn;
             gameDat.signalGoal.callback += OnGoal;
@@ -21,7 +26,7 @@ namespace Renegadeware.K2PS2 {
         void OnDisable() {
             var gameDat = GameData.instance;
             gameDat.signalPlayerSpawn.callback -= OnSpawn;
-            gameDat.signalPlayerDeath.callback -= OnDeath;
+            gameDat.signalPlayerDeath.callback -= Kill;
             gameDat.signalGamePlay.callback -= OnPlay;
             gameDat.signalGameStop.callback -= OnRespawn;
             gameDat.signalGoal.callback -= OnGoal;
@@ -42,11 +47,6 @@ namespace Renegadeware.K2PS2 {
         void OnRespawn() {
             ClearRoutine();
             mRout = StartCoroutine(DoRespawn());
-        }
-
-        void OnDeath() {
-            ClearRoutine();
-            mRout = StartCoroutine(DoDeath());
         }
 
         void OnPlay() {

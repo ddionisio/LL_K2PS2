@@ -36,6 +36,7 @@ MonoBehaviour:
   placementIgnoreTags:
   - Death
   - Victory
+  - Trigger
   deleteTag: Delete
   materialObjectTag: MaterialObject
   cameraMoveDelay: 0.5

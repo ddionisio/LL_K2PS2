@@ -71,10 +71,16 @@ namespace Renegadeware.K2PS2 {
 
             //setup signals
             gameDat.signalGoal.callback += OnGoal;
+            gameDat.signalDragBegin.callback += OnDragBegin;
+            gameDat.signalDragEnd.callback += OnDragEnd;
         }
 
         protected override void OnInstanceDeinit() {
-            GameData.instance.signalGoal.callback -= OnGoal;
+            var gameDat = GameData.instance;
+
+            gameDat.signalGoal.callback -= OnGoal;
+            gameDat.signalDragBegin.callback -= OnDragBegin;
+            gameDat.signalDragEnd.callback -= OnDragEnd;
 
             if(mHUD)
                 mHUD.Deinit();
@@ -96,6 +102,14 @@ namespace Renegadeware.K2PS2 {
 
         void OnGoal() {
             mNextSectionInd++;
+        }
+
+        void OnDragBegin() {
+            M8.SceneManager.instance.Pause();
+        }
+
+        void OnDragEnd() {
+            M8.SceneManager.instance.Resume();
         }
 
         IEnumerator DoGamePlay() {

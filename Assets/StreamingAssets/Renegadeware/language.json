@@ -13,6 +13,8 @@
     "tag_tall": "Tall",
     "tag_heavy": "Heavy",
     "tag_light": "Light",
+    "tag_float": "Float",
+    "tag_sink": "Sink",
     "material_clay": "Clay",
     "material_clay_1x2": "Clay 1x2",
     "material_clay_1x3": "Clay 1x3",
@@ -22,6 +24,8 @@
     "material_granite_boulder": "Granite Boulder",
     "material_cotton_pillow": "Cotton Pillow",
     "material_rubber_duck": "Rubber Duck",
-    "material_oak_branch": "Oak Branch"
+    "material_oak_branch": "Oak Branch",
+    "material_steel_anvil": "Steel Anvil",
+    "material_rubber_ball": "Rubber Ball"
   }
 }

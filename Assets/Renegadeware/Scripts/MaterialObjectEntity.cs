@@ -56,10 +56,28 @@ namespace Renegadeware.K2PS2 {
         public Vector2 position {
             get { return body.simulated ? body.position : (Vector2)transform.position; }
             set {
-                if(body.simulated)
+                if(M8.SceneManager.instance.isPaused)
+                    transform.position = value;
+                else if(body.simulated)
                     body.position = value;
                 else
                     transform.position = value;
+            }
+        }
+
+        public float rotation {
+            get { return body.simulated ? body.rotation : transform.eulerAngles.z; }
+            set {
+                if(M8.SceneManager.instance.isPaused) {
+                    var r = transform.eulerAngles; r.z = value;
+                    transform.eulerAngles = r;
+                }
+                else if(body.simulated)
+                    body.rotation = value;
+                else {
+                    var r = transform.eulerAngles; r.z = value;
+                    transform.eulerAngles = r;
+                }
             }
         }
 
@@ -121,6 +139,7 @@ namespace Renegadeware.K2PS2 {
 
         private bool mIsDragging;
         private Vector2 mLastPos;
+        private float mLastRot;
 
         private bool mIsNonPool;
 
@@ -199,9 +218,12 @@ namespace Renegadeware.K2PS2 {
             state = State.Ghost;
             mIsDragging = true;
 
-            mLastPos = position;
-
             GameData.instance.signalDragBegin.Invoke();
+
+            mLastPos = position;
+            mLastRot = rotation;
+
+            rotation = 0f;
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData) {
@@ -393,8 +415,10 @@ namespace Renegadeware.K2PS2 {
             if(state == State.Ghost) {
                 state = State.Normal;
 
-                if(!isPlaceable)
+                if(!isPlaceable) {
                     position = mLastPos;
+                    rotation = mLastRot;
+                }
             }
 
             mIsDragging = false;
