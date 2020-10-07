@@ -18,6 +18,10 @@
     "material_clay_1x3": "Clay 1x3",
     "material_clay_3x1": "Clay 3x1",
     "material_clay_6x1": "Clay 6x1",
-    "material_iron_block": "Iron Block"
+    "material_iron_block": "Iron Block",
+    "material_granite_boulder": "Granite Boulder",
+    "material_cotton_pillow": "Cotton Pillow",
+    "material_rubber_duck": "Rubber Duck",
+    "material_oak_branch": "Oak Branch"
   }
 }

@@ -8,8 +8,12 @@ namespace Renegadeware.K2PS2 {
         public string tagFilter;
 
         void OnTriggerEnter2D(Collider2D collision) {
-            if(collision.CompareTag(tagFilter)) {
-                var objEnt = collision.GetComponent<MaterialObjectEntity>();
+            MaterialObjectEntity objEnt = null;
+
+            if(collision.CompareTag(tagFilter))
+                objEnt = collision.GetComponentInParent<MaterialObjectEntity>();
+
+            if(objEnt) {
                 if(objEnt && objEnt.state == MaterialObjectEntity.State.Normal)
                     objEnt.state = MaterialObjectEntity.State.Despawning;
             }

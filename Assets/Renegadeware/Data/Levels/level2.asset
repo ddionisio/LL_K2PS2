@@ -18,3 +18,11 @@ MonoBehaviour:
   items:
   - materialObject: {fileID: 11400000, guid: f398780824d518344bf3abd2b45e65a1, type: 2}
     count: 1
+  - materialObject: {fileID: 11400000, guid: 5485165bc4c639f46aa7b8493e0a206d, type: 2}
+    count: 1
+  - materialObject: {fileID: 11400000, guid: 10b53f80b5845944a9f965737f48992a, type: 2}
+    count: 1
+  - materialObject: {fileID: 11400000, guid: cdd4d552444c364408d9ed3aab3ffdf9, type: 2}
+    count: 1
+  - materialObject: {fileID: 11400000, guid: e0bf77dddc21b7d408ce42fa825b41cc, type: 2}
+    count: 1

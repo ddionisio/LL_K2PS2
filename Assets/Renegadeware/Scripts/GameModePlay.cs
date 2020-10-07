@@ -47,6 +47,11 @@ namespace Renegadeware.K2PS2 {
 
 #if UNITY_EDITOR
             startSectionInd = Mathf.Clamp(debugStartSectionInd, 0, mSections.Length - 1);
+
+            for(int i = 0; i < startSectionInd; i++) {
+                if(mSections[i])
+                    mSections[i].gameObject.SetActive(false);
+            }
 #endif
 
             mCurSectionInd = mNextSectionInd = startSectionInd;

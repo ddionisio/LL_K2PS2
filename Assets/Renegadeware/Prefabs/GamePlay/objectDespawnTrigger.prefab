@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5191699299387608041}
   m_Layer: 0
   m_Name: objectDespawnTrigger
-  m_TagString: Death
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

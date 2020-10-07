@@ -179,8 +179,8 @@ namespace Renegadeware.K2PS2 {
         }
 
         void Awake() {
-            body = GetComponent<Rigidbody2D>();
-            coll = GetComponent<Collider2D>();
+            body = GetComponentInChildren<Rigidbody2D>();
+            coll = GetComponentInChildren<Collider2D>();
 
             if(ghostSpriteGroup)
                 ghostSpriteGroup.Init();
