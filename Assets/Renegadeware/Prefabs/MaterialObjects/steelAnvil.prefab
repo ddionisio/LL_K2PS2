@@ -282,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4261472579247351080}
   - component: {fileID: 6616983605548767103}
+  - component: {fileID: 830219134312321543}
   - component: {fileID: 328351504014251323}
   m_Layer: 0
   m_Name: steelAnvil
@@ -320,6 +321,21 @@ MonoBehaviour:
   displayRootGO: {fileID: 37819707659997290}
   ghostSpriteGroup: {fileID: 0}
   ghostSpriteShape: {fileID: 8299220866995803360}
+--- !u!114 &830219134312321543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4976732079723588575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189b11e942cee5c43a26f9f5390f1113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powered: 0
+  isHarmful: 1
+  poweredActiveGOs: []
 --- !u!50 &328351504014251323
 Rigidbody2D:
   serializedVersion: 4

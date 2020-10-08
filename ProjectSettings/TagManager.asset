@@ -12,6 +12,7 @@ TagManager:
   - HUDClassify
   - MaterialObject
   - Trigger
+  - Electricity
   layers:
   - Default
   - TransparentFX

@@ -74,6 +74,7 @@ MonoBehaviour:
   - Trigger
   harmCheckTags:
   - Death
+  - Electricity
   groundCheckForwardDist: 0.2
   groundCheckLastJumpDelay: 2
   groundCheckDownDist: 3.1

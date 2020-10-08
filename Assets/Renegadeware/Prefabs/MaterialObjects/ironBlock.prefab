@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7982170362349916829}
   - component: {fileID: 1022783975670603978}
+  - component: {fileID: 3591711344145018271}
   - component: {fileID: 1063367065817408440}
   - component: {fileID: 5866816924392071822}
   - component: {fileID: 4120746985643530114}
@@ -131,6 +132,21 @@ MonoBehaviour:
   displayRootGO: {fileID: 317194136120745347}
   ghostSpriteGroup: {fileID: 1063367065817408440}
   ghostSpriteShape: {fileID: 0}
+--- !u!114 &3591711344145018271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222006473809763434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189b11e942cee5c43a26f9f5390f1113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powered: 0
+  isHarmful: 1
+  poweredActiveGOs: []
 --- !u!114 &1063367065817408440
 MonoBehaviour:
   m_ObjectHideFlags: 0

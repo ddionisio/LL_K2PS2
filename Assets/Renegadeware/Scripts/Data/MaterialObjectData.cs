@@ -14,7 +14,7 @@ namespace Renegadeware.K2PS2 {
         public MaterialTagData[] tags;
 
         [Header("Data")]
-        public GameObject template;
+        public GameObject template;        
 
         public string label {
             get {
