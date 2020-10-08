@@ -22,6 +22,7 @@ namespace Renegadeware.K2PS2 {
         public MoveState moveStart = MoveState.Right;
         public float jumpImpulse = 4.75f;
         public float jumpCancelImpulse = 1.5f;
+        public bool allowMoveOpposite = true;
 
         [Header("AI Data")]
         public LayerMask solidCheckMask;
@@ -327,7 +328,7 @@ namespace Renegadeware.K2PS2 {
                     var collFlag = moveCtrl.GetCollisionFlag(up, hit.normal);
                     if(collFlag == CollisionFlags.Sides) {
                         //only jump if it's a new collision
-                        if(mGroundLastWallChecked != hit.collider) {
+                        if(!allowMoveOpposite || mGroundLastWallChecked != hit.collider) {
                             mGroundLastWallChecked = hit.collider;
 
                             //jump!
@@ -340,7 +341,7 @@ namespace Renegadeware.K2PS2 {
                         moveOpposite = true;
                 }
 
-                if(moveOpposite) {
+                if(allowMoveOpposite && moveOpposite) {
                     switch(moveState) {
                         case MoveState.Left:
                             moveState = MoveState.Right;

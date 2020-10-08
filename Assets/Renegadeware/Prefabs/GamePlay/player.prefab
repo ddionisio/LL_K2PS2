@@ -63,6 +63,7 @@ MonoBehaviour:
   moveStart: 2
   jumpImpulse: 4.65
   jumpCancelImpulse: 1.5
+  allowMoveOpposite: 0
   solidCheckMask:
     serializedVersion: 2
     m_Bits: 1

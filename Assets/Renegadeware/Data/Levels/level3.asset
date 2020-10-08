@@ -20,11 +20,9 @@ MonoBehaviour:
     count: 1
   - materialObject: {fileID: 11400000, guid: e0bf77dddc21b7d408ce42fa825b41cc, type: 2}
     count: 1
-  - materialObject: {fileID: 11400000, guid: 8493a3b93a9f4e14eb4f06d6311984b3, type: 2}
-    count: 1
-  - materialObject: {fileID: 11400000, guid: 660fc1611b765544bbe4009b4535fb40, type: 2}
-    count: 1
   - materialObject: {fileID: 11400000, guid: f398780824d518344bf3abd2b45e65a1, type: 2}
     count: 1
   - materialObject: {fileID: 11400000, guid: 5485165bc4c639f46aa7b8493e0a206d, type: 2}
+    count: 1
+  - materialObject: {fileID: 11400000, guid: 660fc1611b765544bbe4009b4535fb40, type: 2}
     count: 1
