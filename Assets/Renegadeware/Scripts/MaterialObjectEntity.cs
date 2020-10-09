@@ -122,6 +122,8 @@ namespace Renegadeware.K2PS2 {
 
         public Collider2D coll { get; private set; }
 
+        public ConductiveController conductive { get; private set; }
+
         public bool isDraggable { get { return mDragWidget != null; } }
 
         private State mState;
@@ -200,6 +202,7 @@ namespace Renegadeware.K2PS2 {
         void Awake() {
             body = GetComponentInChildren<Rigidbody2D>();
             coll = GetComponentInChildren<Collider2D>();
+            conductive = GetComponent<ConductiveController>();
 
             if(ghostSpriteGroup)
                 ghostSpriteGroup.Init();
@@ -351,12 +354,18 @@ namespace Renegadeware.K2PS2 {
                     break;
                 case State.Ghost:
                     toPhysicsMode = PhysicsMode.Ghost;
+
+                    if(conductive)
+                        conductive.active = false;
                     break;
                 case State.Spawning:
                     mRout = StartCoroutine(DoSpawn());
                     break;
                 case State.Normal:
                     toPhysicsMode = PhysicsMode.Normal;
+
+                    if(conductive)
+                        conductive.active = true;
                     break;
                 case State.Despawning:
                     mRout = StartCoroutine(DoDespawn());

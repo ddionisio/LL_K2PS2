@@ -95,9 +95,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoDeath() {
-            yield return null;
-
             player.state = PlayerEntity.State.None;
+
+            yield return new WaitForSeconds(0.3f);
 
             //play death
 

@@ -343,6 +343,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnCollisionEnter2D(Collision2D col) {
+            if(!body.simulated)
+                return;
+
             //Debug.Log("enter: " + col.gameObject.name);
 
             /*foreach(ContactPoint cp in col.contacts) {
@@ -375,6 +378,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnCollisionStay2D(Collision2D col) {
+            if(!body.simulated)
+                return;
+
             //remove existing information with given collider
             for(int j = 0; j < mColls.Count; j++) {
                 CollideInfo inf = mColls[j];
@@ -397,6 +403,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnCollisionExit2D(Collision2D col) {
+            if(!body.simulated)
+                return;
+
             //foreach(ContactPoint cp in col.contacts) {
             //Debug.Log("out: " + cp.otherCollider.name + " n: " + cp.normal);
             //}

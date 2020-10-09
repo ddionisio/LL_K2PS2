@@ -17,5 +17,6 @@ MonoBehaviour:
   tags:
   - {fileID: 11400000, guid: 6c170a78112dce340a7f11f63d4e784b, type: 2}
   - {fileID: 11400000, guid: a8328c4634392d64398f42201d4dbd9c, type: 2}
+  - {fileID: 11400000, guid: 1998cdedc8603bb4a8520a90110ac20f, type: 2}
   template: {fileID: 2535422245202974068, guid: 5220531bff76ab149bdc754f1a5632d6,
     type: 3}

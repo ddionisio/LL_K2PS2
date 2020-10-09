@@ -48,6 +48,7 @@ namespace Renegadeware.K2PS2 {
         public Color objectGhostInvalidColor = Color.red;
 
         [Header("Conductive Settings")]
+        public LayerMask conductiveLayerMask;
         [M8.TagSelector]
         public string[] conductiveTags;
         public float conductiveRefreshDelay = 0.3f;

@@ -7,13 +7,37 @@ namespace Renegadeware.K2PS2 {
         [Header("Data")]
         [SerializeField]
         bool _powered = false;
+        [SerializeField]
+        bool _defaultActive = false;
 
         public bool isHarmful = true;
 
         [Header("Display")]
         public GameObject[] poweredActiveGOs;
 
-        public bool isPowered { get { return _powered || mPowerConnectCounter > 0; } }
+        public bool isPowered { get { return mActive && (_powered || mPowerConnectCounter > 0); } }
+
+        public Collider2D coll { get; private set; }
+
+        public bool active { 
+            get { return mActive; }
+            set {
+                if(mActive != value) {
+                    mActive = value;
+                    if(mActive)
+                        RefreshPowerActive();
+                    else {
+                        //update conductives in contact
+                        for(int i = 0; i < mConductives.Count; i++) {
+                            mConductives[i].UpdatePowerConnect();
+                            mConductives[i].RefreshPowerActive();
+                        }
+
+                        ClearConductives();
+                    }
+                }
+            }
+        }
 
         private int mPowerConnectCounter;
 
@@ -23,86 +47,113 @@ namespace Renegadeware.K2PS2 {
 
         private Coroutine mRout;
 
+        private bool mActive;
+
+        void OnEnable() {
+            mActive = _defaultActive;
+            RefreshPowerActive();
+        }
+
         void OnDisable() {
-            ClearRout();
             ClearConductives();
         }
 
-        void OnTriggerEnter2D(Collider2D coll) {
-            if(coll.gameObject == gameObject)
+        void Awake() {
+            coll = GetComponentInChildren<Collider2D>();
+        }
+
+        void OnTriggerStay2D(Collider2D collision) {
+            if(!mActive)
                 return;
 
             var gameDat = GameData.instance;
 
             //check if it's a player, kill if harmful and powered up
-            if(coll.CompareTag(gameDat.playerTag)) {
+            if(collision.CompareTag(gameDat.playerTag)) {
                 if(isHarmful && isPowered)
                     gameDat.signalPlayerDeath.Invoke();
-
                 return;
             }
 
             if(_powered) //no refresh required
                 return;
 
-            if(!GameUtils.CheckTags(coll, gameDat.conductiveTags))
+            if(!GameUtils.CheckTags(collision, gameDat.conductiveTags))
                 return;
 
-            var conductive = coll.GetComponent<ConductiveController>();
-            if(conductive) {
-                mConductives.Add(conductive);
-
-                StartRefresh();
+            //check if already added
+            for(int i = 0; i < mConductives.Count; i++) {
+                var _conductive = mConductives[i];
+                if(_conductive.coll == collision)
+                    return;
             }
+
+            var conductive = collision.GetComponentInParent<ConductiveController>();
+            if(!conductive)
+                return;
+
+            mConductives.Add(conductive);
+
+            StartRefresh();
         }
 
-        void OnTriggerExit2D(Collider2D coll) {
+        void OnTriggerExit2D(Collider2D collision) {
+            if(!mActive)
+                return;
+
             if(_powered) //no refresh required
                 return;
 
-            if(coll.gameObject == gameObject)
-                return;
+            var gameDat = GameData.instance;
 
-            if(!GameUtils.CheckTags(coll, GameData.instance.conductiveTags))
+            if(!GameUtils.CheckTags(collision, gameDat.conductiveTags))
                 return;
-
-            //remove from list
-            var go = coll.gameObject;
 
             for(int i = 0; i < mConductives.Count; i++) {
-                var conductive = mConductives[i];
-                if(conductive && conductive.gameObject == go) {
+                if(mConductives[i].coll == collision) {
                     mConductives.RemoveAt(i);
                     break;
                 }
             }
         }
 
-        void OnCollisionEnter2D(Collision2D collision) {
+        void OnCollisionStay2D(Collision2D collision) {
+            if(!mActive)
+                return;
+
             var gameDat = GameData.instance;
 
             var contactPts = collision.contacts;
             for(int i = 0; i < contactPts.Length; i++) {
                 var contactPt = contactPts[i];
-                var coll = contactPt.collider;
-
-                if(coll.gameObject == gameObject)
-                    continue;
+                var _coll = contactPt.collider;
 
                 //check if it's a player, kill if harmful and powered up
-                if(coll.CompareTag(gameDat.playerTag)) {
+                if(_coll.CompareTag(gameDat.playerTag)) {
                     if(isHarmful && isPowered)
                         gameDat.signalPlayerDeath.Invoke();
 
                     continue;
                 }
 
-                if(!GameUtils.CheckTags(coll, gameDat.conductiveTags)) {
-                    var conductive = coll.GetComponent<ConductiveController>();
-                    if(!conductive)
-                        continue;
+                if(_powered) //no refresh required
+                    return;
 
-                    if(!mConductives.Exists(conductive))
+                if(!GameUtils.CheckTags(_coll, gameDat.conductiveTags))
+                    continue;
+
+                //check if already added
+                bool isAdded = false;
+                for(int j = 0; j < mConductives.Count; j++) {
+                    if(mConductives[j].coll == _coll) {
+                        isAdded = true;
+                        break;
+                    }
+                }
+
+                if(!isAdded) {
+                    var conductive = _coll.GetComponentInParent<ConductiveController>();
+                    if(conductive)
                         mConductives.Add(conductive);
                 }
             }
@@ -111,6 +162,9 @@ namespace Renegadeware.K2PS2 {
         }
 
         void OnCollisionExit2D(Collision2D collision) {
+            if(!mActive)
+                return;
+
             if(_powered) //no refresh required
                 return;
 
@@ -119,20 +173,15 @@ namespace Renegadeware.K2PS2 {
             var contactPts = collision.contacts;
             for(int i = 0; i < contactPts.Length; i++) {
                 var contactPt = contactPts[i];
-                var coll = contactPt.collider;
-                var go = coll.gameObject;
+                var _coll = contactPt.collider;
 
-                if(go == gameObject)
+                if(!GameUtils.CheckTags(_coll, gameDat.conductiveTags))
                     continue;
 
-                if(!GameUtils.CheckTags(coll, gameDat.conductiveTags)) {
-                    //remove from list
-                    for(int j = 0; j < mConductives.Count; j++) {
-                        var conductive = mConductives[j];
-                        if(conductive && conductive.gameObject == go) {
-                            mConductives.RemoveAt(j);
-                            break;
-                        }
+                for(int j = 0; j < mConductives.Count; j++) {
+                    if(mConductives[j].coll == _coll) {
+                        mConductives.RemoveAt(j);
+                        break;
                     }
                 }
             }
@@ -145,28 +194,32 @@ namespace Renegadeware.K2PS2 {
                 var lastIsPowered = isPowered;
 
                 //check if any is powered up
-                mPowerConnectCounter = 0;
-
-                for(int i = mConductives.Count - 1; i >= 0; i--) {
-                    var conductive = mConductives[i];
-                    if(conductive) {
-                        if(conductive.isPowered)
-                            mPowerConnectCounter++;
-                    }
-                    else //fail-safe
-                        mConductives.RemoveLast();
-                }
+                UpdatePowerConnect();
 
                 if(isPowered != lastIsPowered)
-                    RefreshDisplay();
+                    RefreshPowerActive();
 
                 yield return wait;
             }
 
             mPowerConnectCounter = 0;
-            RefreshDisplay();
+            RefreshPowerActive();
 
             mRout = null;
+        }
+
+        private void UpdatePowerConnect() {
+            mPowerConnectCounter = 0;
+
+            for(int i = mConductives.Count - 1; i >= 0; i--) {
+                var conductive = mConductives[i];
+                if(conductive) {
+                    if(conductive.isPowered)
+                        mPowerConnectCounter++;
+                }
+                else //fail-safe
+                    mConductives.RemoveLast();
+            }
         }
 
         private void StartRefresh() {
@@ -179,7 +232,7 @@ namespace Renegadeware.K2PS2 {
             mRout = StartCoroutine(DoRefresh());
         }
 
-        private void RefreshDisplay() {
+        private void RefreshPowerActive() {
             var _isPowered = isPowered;
 
             for(int i = 0; i < poweredActiveGOs.Length; i++) {
@@ -190,17 +243,15 @@ namespace Renegadeware.K2PS2 {
         }
 
         private void ClearConductives() {
-            mConductives.Clear();
-            mPowerConnectCounter = 0;
-
-            RefreshDisplay();
-        }
-
-        private void ClearRout() {
             if(mRout != null) {
                 StopCoroutine(mRout);
                 mRout = null;
             }
+
+            mConductives.Clear();
+            mPowerConnectCounter = 0;
+
+            RefreshPowerActive();
         }
     }
 }

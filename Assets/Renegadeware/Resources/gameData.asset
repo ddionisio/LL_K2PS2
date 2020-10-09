@@ -45,6 +45,9 @@ MonoBehaviour:
   goalDelay: 1
   objectGhostValidColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
   objectGhostInvalidColor: {r: 0.65882355, g: 0, b: 0, a: 0.5019608}
+  conductiveLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
   conductiveTags:
   - MaterialObject
   - Electricity
