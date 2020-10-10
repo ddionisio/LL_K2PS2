@@ -22,7 +22,7 @@ namespace Renegadeware.K2PS2 {
 
         private int mTriggerCount;
 
-        private RaycastHit2D[] mHits = new RaycastHit2D[4];
+        private RaycastHit2D[] mHits = new RaycastHit2D[8];
 
         void OnEnable() {
             mTriggerCount = 0;
@@ -83,6 +83,8 @@ namespace Renegadeware.K2PS2 {
                 float t = 0f;
 
                 for(int i = 0; i < resolution; i++) {
+                    mDistances[i] = length;
+
                     t += step;
 
                     Vector2 pt = Vector2.Lerp(start, end, t);
@@ -90,14 +92,18 @@ namespace Renegadeware.K2PS2 {
                     var hitCount = Physics2D.CircleCastNonAlloc(pt, step, dir, mHits, length, collisionMask);
                     for(int j = 0; j < hitCount; j++) {
                         var hit = mHits[j];
-                        if(hit.rigidbody && IsCollisionMatch(hit.collider)) {
-                            hit.rigidbody.AddForceAtPosition(dir * force, hit.point);
+                        if(IsCollisionMatch(hit.collider)) {
+                            var body = hit.rigidbody;
+                            if(!body)
+                                body = hit.collider.GetComponentInParent<Rigidbody2D>();
 
-                            mDistances[i] = hit.distance;
-                            break;
+                            if(body) {
+                                body.AddForceAtPosition(dir * force, hit.point);
+
+                                mDistances[i] = hit.distance;
+                                break;
+                            }
                         }
-                        else
-                            mDistances[i] = length;
                     }
 
                     t += step;
