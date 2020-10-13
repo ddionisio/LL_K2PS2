@@ -1,0 +1,380 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b657d375560225e468bf4fd8259bab57, type: 3}
+  m_Name: objectCommon
+  m_EditorClassIdentifier: 
+  takeData:
+  - name: spawn
+    frameRate: 30
+    endFramePadding: 0
+    numLoop: 1
+    loopMode: 0
+    loopBackToFrame: 0
+    trackCounter: 4
+    groupCounter: 0
+    rootGroup:
+      group_name: 
+      group_id: 0
+      elements: 020000000300000004000000
+      foldout: 1
+    groupValues: []
+  - name: despawn
+    frameRate: 30
+    endFramePadding: 0
+    numLoop: 1
+    loopMode: 0
+    loopBackToFrame: 0
+    trackCounter: 4
+    groupCounter: 0
+    rootGroup:
+      group_name: 
+      group_id: 0
+      elements: 020000000300000004000000
+      foldout: 1
+    groupValues: []
+  - name: default
+    frameRate: 30
+    endFramePadding: 0
+    numLoop: 1
+    loopMode: 0
+    loopBackToFrame: 0
+    trackCounter: 4
+    groupCounter: 0
+    rootGroup:
+      group_name: 
+      group_id: 0
+      elements: 0200000004000000
+      foldout: 1
+    groupValues: []
+  serializeData:
+    _audioTracks: []
+    _audioKeys: []
+    _cameraSwitcherTracks: []
+    _cameraSwitcherKeys: []
+    _eventTracks: []
+    _eventKeys: []
+    _goSetActiveTracks:
+    - _version: 1
+      id: 2
+      name: Track1
+      foldout: 1
+      _targetPath: root
+      obj: {fileID: 0}
+      startActive: 0
+    - _version: 1
+      id: 4
+      name: Track3
+      foldout: 1
+      _targetPath: glow
+      obj: {fileID: 0}
+      startActive: 1
+    - _version: 1
+      id: 2
+      name: Track1
+      foldout: 1
+      _targetPath: root
+      obj: {fileID: 0}
+      startActive: 1
+    - _version: 1
+      id: 4
+      name: Track3
+      foldout: 1
+      _targetPath: glow
+      obj: {fileID: 0}
+      startActive: 1
+    - _version: 1
+      id: 2
+      name: Track1
+      foldout: 1
+      _targetPath: root
+      obj: {fileID: 0}
+      startActive: 1
+    - _version: 1
+      id: 4
+      name: Track3
+      foldout: 1
+      _targetPath: glow
+      obj: {fileID: 0}
+      startActive: 0
+    _goSetActiveKeys:
+    - interp: 0
+      frame: 6
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 1
+      endFrame: -1
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 0
+      endFrame: -1
+    - interp: 0
+      frame: 6
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 0
+      endFrame: -1
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 0
+      endFrame: -1
+    - interp: 0
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 1
+      endFrame: -1
+    - interp: 0
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 0
+      endFrame: -1
+    _materialTracks: []
+    _materialKeys: []
+    _orientationTracks: []
+    _orientationKeys: []
+    _propertyTracks:
+    - _version: 4
+      id: 3
+      name: Track2
+      foldout: 1
+      _targetPath: glow
+      valueType: 6
+      obj: {fileID: 0}
+      component: {fileID: 0}
+      componentName: SpriteRenderer
+      fieldName: 
+      propertyName: color
+    - _version: 4
+      id: 3
+      name: Track2
+      foldout: 1
+      _targetPath: glow
+      valueType: 6
+      obj: {fileID: 0}
+      component: {fileID: 0}
+      componentName: SpriteRenderer
+      fieldName: 
+      propertyName: color
+    _propertyKeys:
+    - interp: 0
+      frame: 1
+      easeType: 4
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths:
+      - type: 1
+        subdivisionsXSegment: 10
+        wps:
+        - vals:
+          - 1
+          - 0.8431373
+          - 0.6
+          - 0
+        - vals:
+          - 1
+          - 0.8431373
+          - 0.6
+          - 1
+        - vals:
+          - 1
+          - 0.8431373
+          - 0.6
+          - 0
+        wpsTimeTable:
+        - 0.5555556
+        controlPoints:
+        - a:
+            vals:
+            - 1
+            - 0.8431373
+            - 0.6
+            - 1
+          b:
+            vals: []
+        - a:
+            vals:
+            - 1
+            - 0.8431373
+            - 0.6
+            - 1
+          b:
+            vals: []
+        length: 2
+        timesTable: []
+        lengthsTable: []
+        _isConstantSpeed: 0
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 0.8431373, z: 0.6, w: 0}
+    - interp: 0
+      frame: 6
+      easeType: 4
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 0.8431373, z: 0.6, w: 1}
+    - interp: 0
+      frame: 10
+      easeType: 4
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 0.8431373, z: 0.6, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 4
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths:
+      - type: 1
+        subdivisionsXSegment: 10
+        wps:
+        - vals:
+          - 1
+          - 0.8431373
+          - 0.6
+          - 0
+        - vals:
+          - 1
+          - 0.8431373
+          - 0.6
+          - 1
+        - vals:
+          - 1
+          - 0.8431373
+          - 0.6
+          - 0
+        wpsTimeTable:
+        - 0.5555556
+        controlPoints:
+        - a:
+            vals:
+            - 1
+            - 0.8431373
+            - 0.6
+            - 1
+          b:
+            vals: []
+        - a:
+            vals:
+            - 1
+            - 0.8431373
+            - 0.6
+            - 1
+          b:
+            vals: []
+        length: 2
+        timesTable: []
+        lengthsTable: []
+        _isConstantSpeed: 0
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 0.8431373, z: 0.6, w: 0}
+    - interp: 0
+      frame: 6
+      easeType: 4
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 0.8431373, z: 0.6, w: 1}
+    - interp: 0
+      frame: 10
+      easeType: 4
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 0.8431373, z: 0.6, w: 0}
+    _rotationEulerTracks: []
+    _rotationEulerKeys: []
+    _rotationTracks: []
+    _rotationKeys: []
+    _translationTracks: []
+    _translationKeys: []
+    _unityAnimationTracks: []
+    _unityAnimationKeys: []
+    _scaleTracks: []
+    _scaleKeys: []
+    _trackLookups:
+    - type: 4
+      index: 0
+      keyIndices: 00000000
+    - type: 7
+      index: 0
+      keyIndices: 000000000100000002000000
+    - type: 4
+      index: 1
+      keyIndices: 01000000
+    - type: 4
+      index: 2
+      keyIndices: 02000000
+    - type: 7
+      index: 1
+      keyIndices: 030000000400000005000000
+    - type: 4
+      index: 3
+      keyIndices: 03000000
+    - type: 4
+      index: 4
+      keyIndices: 04000000
+    - type: 4
+      index: 5
+      keyIndices: 05000000
+    _takeTrackCounts: 030000000300000002000000

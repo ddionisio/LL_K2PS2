@@ -348,7 +348,7 @@ MonoBehaviour:
   signalModeChanged: {fileID: 0}
   data: {fileID: 11400000, guid: 7916ded25b378cd4ba8637dbac0e8d49, type: 2}
   sectionRoot: {fileID: 748817357}
-  debugStartSectionInd: 2
+  debugStartSectionInd: 0
 --- !u!4 &399300940
 Transform:
   m_ObjectHideFlags: 0

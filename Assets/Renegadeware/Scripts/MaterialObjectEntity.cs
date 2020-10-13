@@ -27,9 +27,17 @@ namespace Renegadeware.K2PS2 {
         }
 
         [Header("Display")]
-        public GameObject displayRootGO;
         public M8.SpriteColorGroup ghostSpriteGroup;
         public SpriteShapeRenderer ghostSpriteShape;
+
+        [Header("Animation")]
+        public M8.Animator.Animate animator;
+        [M8.Animator.TakeSelector(animatorField="animator")]
+        public string takeDefault;
+        [M8.Animator.TakeSelector(animatorField = "animator")]
+        public string takeSpawn;
+        [M8.Animator.TakeSelector(animatorField = "animator")]
+        public string takeDespawn;
 
         public State state {
             get { return mState; }
@@ -289,6 +297,9 @@ namespace Renegadeware.K2PS2 {
             mOverlapFilter.SetLayerMask(GameData.instance.placementLayerMask);
             mOverlapFilter.useTriggers = true;
 
+            if(animator && !string.IsNullOrEmpty(takeDefault))
+                animator.Play(takeDefault);
+
             mState = toState;
             ApplyCurrentState();
         }
@@ -303,8 +314,15 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoSpawn() {
-            //Do animation
-            yield return null;
+            if(animator) {
+                //wait for animation to finish
+                while(animator.isPlaying)
+                    yield return null;
+
+                //Do animation
+                if(!string.IsNullOrEmpty(takeSpawn))
+                    yield return animator.PlayWait(takeSpawn);
+            }
 
             mRout = null;
 
@@ -312,8 +330,15 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoDespawn() {
-            //Do animation
-            yield return null;
+            if(animator) {
+                //wait for animation to finish
+                while(animator.isPlaying)
+                    yield return null;
+
+                //Do animation
+                if(!string.IsNullOrEmpty(takeDespawn))
+                    yield return animator.PlayWait(takeDespawn);
+            }
 
             mRout = null;
 
@@ -338,8 +363,6 @@ namespace Renegadeware.K2PS2 {
                 StopCoroutine(mRout);
                 mRout = null;
             }
-
-            var enableDisplay = true;
             var toPhysicsMode = PhysicsMode.None;
 
             if(ghostSpriteGroup)
@@ -350,7 +373,6 @@ namespace Renegadeware.K2PS2 {
 
             switch(mState) {
                 case State.None:
-                    enableDisplay = false;
                     break;
                 case State.Ghost:
                     toPhysicsMode = PhysicsMode.Ghost;
@@ -371,8 +393,6 @@ namespace Renegadeware.K2PS2 {
                     mRout = StartCoroutine(DoDespawn());
                     break;
             }
-
-            if(displayRootGO) displayRootGO.SetActive(enableDisplay);
 
             SetPhysicsMode(toPhysicsMode);
         }
