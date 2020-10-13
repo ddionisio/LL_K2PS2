@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6043282821521509101}
   - component: {fileID: 8792558618716826138}
   m_Layer: 0
-  m_Name: blank4x4_border
+  m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7111693538957028240}
   - component: {fileID: 6608542569514567797}
   m_Layer: 0
-  m_Name: rubberBall
+  m_Name: plasticBall
   m_TagString: MaterialObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1852911901574655577}
   - component: {fileID: 3489622587835387566}
   m_Layer: 0
-  m_Name: blank4x4_border
+  m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,9 +126,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4016145520036320413}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.25881907, w: 0.9659259}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.625, y: 0.625, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6709392402754198403}
   m_RootOrder: 0
@@ -171,9 +171,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49d782ef45be5004b9edb429ea0994ce, type: 3}
-  m_Color: {r: 0.8773585, g: 0.8132816, b: 0.5752492, a: 1}
+  m_SortingOrder: -100
+  m_Sprite: {fileID: 21300000, guid: 170931e5af43a4443a305bdcaa457f58, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
