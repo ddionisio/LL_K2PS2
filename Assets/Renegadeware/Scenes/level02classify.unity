@@ -410,31 +410,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 561241880334982732, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 561241880334982732, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 561241880334982732, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3432349453819712465, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3432349453819712465, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4740800096240073658, guid: 3d03a37adeb74204697d9e0e89b9d639,
         type: 3}
       propertyPath: m_Name
@@ -493,31 +468,6 @@ PrefabInstance:
     - target: {fileID: 4746654158846878578, guid: 3d03a37adeb74204697d9e0e89b9d639,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916981333693925366, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916981333693925366, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916981333693925366, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9176699868649345415, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9176699868649345415, guid: 3d03a37adeb74204697d9e0e89b9d639,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
