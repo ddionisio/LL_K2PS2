@@ -8,49 +8,112 @@ namespace Renegadeware.K2PS2 {
     public class MaterialObjectPaletteWidget : MonoBehaviour {
         [Header("Display")]
         public MaterialTagWidget tagWidget;
-        public MaterialObjectWidget[] itemWidgets;
+        public Transform itemsRoot;
+        public MaterialObjectDragWidget dragWidget;
 
-        private int mItemCount;
+        public bool isFull { get { return mItemCache.Count == 0; } }
 
-        public void Setup(LevelData data, MaterialTagData tag, MaterialObjectDragWidget dragWidget) {
-            //initialize display
+        private M8.CacheList<MaterialObjectWidget> mItemActives;
+        private M8.CacheList<MaterialObjectWidget> mItemCache;
+
+        public void Setup(MaterialTagData tag, LevelData.ItemData[] itemData) {
+            //setup tag
             tagWidget.Setup(tag);
 
-            //filter objects based on tag
-            mItemCount = 0;
+            //setup items
+            RemoveAll();
 
-            for(int i = 0; i < data.items.Length; i++) {
-                if(mItemCount >= itemWidgets.Length)
-                    break;
+            if(itemData != null) {
+                for(int i = 0; i < itemData.Length; i++) {
+                    var objData = itemData[i].materialObject;
 
-                var objData = data.items[i].materialObject;
+                    if(objData.CompareTag(tag))
+                        AddItem(objData);
+                }
+            }
+        }
 
-                if(objData.CompareTag(tag)) {
-                    var itmWidget = itemWidgets[mItemCount];
-                    itmWidget.gameObject.SetActive(true);
-                    itmWidget.Setup(objData, dragWidget);
+        public void Refresh(bool removeEmpty) {
+            for(int i = mItemActives.Count - 1; i >= 0; i--) {
+                var itm = mItemActives[i];
+                var itmDat = itm.data;
 
-                    mItemCount++;
+                if(itmDat.maxCount - itmDat.spawnedCount > 0) {
+                    itm.gameObject.SetActive(true);
+                    itm.RefreshCountDisplay();
+                }
+                else {
+                    itm.gameObject.SetActive(false);
+
+                    if(removeEmpty) {
+                        mItemActives.RemoveAt(i);
+                        mItemCache.Add(itm);
+                    }
+                }
+            }
+        }
+
+        public void AddItem(MaterialObjectData dat) {
+            if(mItemCache.Count == 0)
+                return;
+
+            //just refresh if already exists
+            for(int i = 0; i < mItemActives.Count; i++) {
+                var itm = mItemActives[i];
+                if(itm.data == dat) {
+                    itm.RefreshCountDisplay();
+                    return;
                 }
             }
 
-            //hide excess items
-            for(int i = mItemCount; i < itemWidgets.Length; i++)
-                itemWidgets[i].gameObject.SetActive(false);
+            var newItem = mItemCache.RemoveLast();
 
-            Refresh();
+            newItem.Setup(dat, this, dragWidget);
+            newItem.RefreshCountDisplay();
+
+            newItem.transform.SetAsLastSibling();
+
+            newItem.gameObject.SetActive(true);
+
+            mItemActives.Add(newItem);
         }
 
-        public void Refresh() {
-            for(int i = 0; i < mItemCount; i++) {
-                var objWidget = itemWidgets[i];
+        public void RemoveItem(MaterialObjectData dat) {
+            for(int i = 0; i < mItemActives.Count; i++) {
+                var itm = mItemActives[i];
+                if(itm.data == dat) {
+                    itm.gameObject.SetActive(false);
 
-                if(objWidget.data.maxCount - objWidget.data.spawnedCount > 0) {
-                    objWidget.gameObject.SetActive(true);
-                    objWidget.RefreshCountDisplay();
+                    mItemActives.RemoveAt(i);
+                    mItemCache.Add(itm);
+                    break;
                 }
-                else
-                    objWidget.gameObject.SetActive(false);
+            }
+        }
+
+        public void RemoveAll() {
+            for(int i = 0; i < mItemActives.Count; i++) {
+                var itm = mItemActives[i];
+
+                itm.gameObject.SetActive(false);
+
+                mItemCache.Add(itm);
+            }
+
+            mItemActives.Clear();
+        }
+
+        void Awake() {
+            var itemCapacity = itemsRoot.childCount;
+
+            //setup item cache
+            mItemCache = new M8.CacheList<MaterialObjectWidget>(itemCapacity);
+            mItemActives = new M8.CacheList<MaterialObjectWidget>(itemCapacity);
+
+            for(int i = 0; i < itemCapacity; i++) {
+                var matObjWidget = itemsRoot.GetChild(i).GetComponent<MaterialObjectWidget>();
+                matObjWidget.gameObject.SetActive(false);
+                mItemCache.Add(matObjWidget);
             }
         }
     }

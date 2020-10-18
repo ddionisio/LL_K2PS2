@@ -8,9 +8,27 @@ namespace Renegadeware.K2PS2 {
     public class MaterialObjectDragWidget : MonoBehaviour {
         [Header("Display")]
         public TMP_Text titleText;
+        public Image iconImage;
+
+        public M8.UI.Graphics.ColorGroup colorGroup;
+
+        public void SetValid(bool isValid) {
+            if(isValid)
+                colorGroup.Revert();
+            else
+                colorGroup.ApplyColor(GameData.instance.objectDragInvalidColor);
+        }
 
         public void Setup(MaterialObjectData data) {
-            titleText.text = data.label;
+            if(titleText)
+                titleText.text = data.label;
+
+            if(iconImage)
+                iconImage.sprite = data.icon;
+        }
+
+        void Awake() {
+            colorGroup.Init();
         }
     }
 }

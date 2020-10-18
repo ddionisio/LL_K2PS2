@@ -79,7 +79,7 @@ namespace Renegadeware.K2PS2 {
                 var objEnt = mObjectEnts[i];
 
                 //show object widget and animate to be thrown towards spawn point
-                objectWidget.Setup(matObj, null);
+                objectWidget.Setup(matObj, null, null);
                 objectWidget.gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(1f);

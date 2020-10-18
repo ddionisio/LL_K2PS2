@@ -158,23 +158,27 @@ namespace Renegadeware.K2PS2 {
         /// <summary>
         /// Only call this in ghost mode
         /// </summary>
-        public void UpdateGhostPosition(Vector2 pos) {
+        public bool UpdateGhostPosition(Vector2 pos) {
+            var _isPlaceable = isPlaceable;
+
             position = pos;
 
             //change ghost display if placeable or not
             if(ghostSpriteGroup) {
-                if(isPlaceable)
+                if(_isPlaceable)
                     ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostValidColor);
                 else
                     ghostSpriteGroup.ApplyColor(GameData.instance.objectGhostInvalidColor);
             }
 
             if(ghostSpriteShape) {
-                if(isPlaceable)
+                if(_isPlaceable)
                     ghostSpriteShape.color = GameData.instance.objectGhostValidColor;
                 else
                     ghostSpriteShape.color = GameData.instance.objectGhostInvalidColor;
             }
+
+            return _isPlaceable;
         }
 
         public void Release() {
@@ -243,30 +247,54 @@ namespace Renegadeware.K2PS2 {
 
             var pos = eventData.position;
 
-            //update drag widget position
-            mDragWidget.transform.position = pos;
-
+            //update position
             var cam = Camera.main;
             var entPos = cam.ScreenToWorldPoint(pos);
-            UpdateGhostPosition(entPos);
+
+            var valid = UpdateGhostPosition(entPos);
+
+            //update drag widget position
+            mDragWidget.transform.position = pos;
+            mDragWidget.SetValid(valid);
         }
         
         void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
             if(!mIsDragging)
                 return;
 
-            //check if we are dropping on delete area
-            var deleteTag = GameData.instance.deleteTag;
+            var gameDat = GameData.instance;
 
-            var isDelete = false;
+            var cast = eventData.pointerCurrentRaycast;
 
-            if(eventData.pointerDrag && eventData.pointerDrag.CompareTag(deleteTag))
-                isDelete = true;
-            else if(eventData.pointerCurrentRaycast.gameObject && eventData.pointerCurrentRaycast.gameObject.CompareTag(deleteTag))
-                isDelete = true;
+            //check ui contact
+            if(cast.isValid && (gameDat.uiLayerMask & (1 << cast.gameObject.layer)) != 0) {
+                var go = cast.gameObject;
+                
+                //delete object?
+                if(go.CompareTag(gameDat.deleteTag)) {
+                    Release();
+                    return;
+                }
 
-            if(isDelete)
-                Release();
+                MaterialObjectPaletteWidget palette = null;
+
+                //material object widget?
+                if(go.CompareTag(gameDat.materialObjectTag)) {
+                    var matObjWidget = go.GetComponent<MaterialObjectWidget>();
+                    if(matObjWidget)
+                        palette = matObjWidget.palette;
+                }
+                //palette widget?
+                else if(go.CompareTag(gameDat.placementTag)) {
+                    palette = go.GetComponent<MaterialObjectPaletteWidget>();
+                }
+
+                if(palette && !palette.isFull) {
+                    palette.AddItem(data);
+                    Release();
+                    return;
+                }
+            }
 
             EndDrag();
         }

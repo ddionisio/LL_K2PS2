@@ -13,7 +13,6 @@ namespace Renegadeware.K2PS2 {
 
         [Header("Drag")]
         public GameObject dragRootGO;
-        public MaterialObjectDragWidget dragWidget;
 
         [Header("Trash")]
         public GameObject trashGO;
@@ -32,7 +31,7 @@ namespace Renegadeware.K2PS2 {
         private Coroutine mRout;
 
         public void RefreshCurrentPalette() {
-            paletteWidgets[mCurPaletteInd].Refresh();
+            paletteWidgets[mCurPaletteInd].Refresh(false);
         }
 
         public void ActivatePalette(int paletteIndex) {
@@ -54,7 +53,7 @@ namespace Renegadeware.K2PS2 {
             int paletteCount = Mathf.Min(paletteWidgets.Length, mData.tags.Length);
             for(int i = 0; i < paletteCount; i++) {
                 paletteWidgets[i].gameObject.SetActive(true);
-                paletteWidgets[i].Setup(mData, mData.tags[i], dragWidget);
+                paletteWidgets[i].Setup(mData.tags[i], mData.items);
                 paletteWidgets[i].transform.SetAsFirstSibling();
             }
 

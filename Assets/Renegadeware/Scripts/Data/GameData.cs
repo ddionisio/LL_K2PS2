@@ -43,6 +43,11 @@ namespace Renegadeware.K2PS2 {
 
         public float goalDelay = 1f;
 
+        [Header("UI Settings")]
+        public LayerMask uiLayerMask;
+        public Color objectDragInvalidColor = Color.red;
+        public Color draggingColor = Color.gray;
+
         [Header("Material Object Settings")]
         public Color objectGhostValidColor = Color.gray;
         public Color objectGhostInvalidColor = Color.red;

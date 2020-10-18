@@ -16,6 +16,7 @@
     "on": "ON",
     "off": "OFF",
     "close": "CLOSE",
+    "classify": "CLASSIFY",
     "tag_wide": "Wide",
     "tag_tall": "Tall",
     "tag_heavy": "Heavy",
