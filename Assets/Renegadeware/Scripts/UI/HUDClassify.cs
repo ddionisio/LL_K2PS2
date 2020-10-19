@@ -4,42 +4,47 @@ using UnityEngine;
 
 namespace Renegadeware.K2PS2 {
     public class HUDClassify : MonoBehaviour {
-        [Header("Display")]
-        public GameObject displayRootGO;
-        public GameObject tagsRootGO;
-        public GameObject classifyGO;
-        public GameObject dragRootGO;
-        public GameObject placementRootGO;        
+        [Header("Palette")]
+        public GameObject paletteRootGO;
+        public MaterialObjectPaletteWidget[] paletteWidgets;
 
-        [Header("Tags")]
-        public MaterialTagClassifyWidget[] tagWidgets;
+        public M8.Animator.Animate paletteAnimator;
+        [M8.Animator.TakeSelector(animatorField = "paletteAnimator")]
+        public string paletteTakeEnter;
+        [M8.Animator.TakeSelector(animatorField = "paletteAnimator")]
+        public string paletteTakeExit;
+
+        [Header("Drag")]
+        public GameObject dragRootGO;
+        public MaterialObjectDragWidget dragWidget;
+
+        [Header("Classify")]
+        public GameObject classifyRootGO;
+
+        public M8.Animator.Animate classifyAnimator;
+        [M8.Animator.TakeSelector(animatorField = "classifyAnimator")]
+        public string classifyTakeEnter;
+        [M8.Animator.TakeSelector(animatorField = "classifyAnimator")]
+        public string classifyTakeExit;
 
         public bool isBusy { get { return mRout != null; } }
 
-        public MaterialTagClassifyWidget attachedTag { get; private set; }
-
-        private LevelData mData;
+        public int errorCount { get; private set; }
 
         private Coroutine mRout;
 
         public void Init(LevelData data) {
             var gameDat = GameData.instance;
 
-            mData = data;
+            var paletteCount = Mathf.Min(paletteWidgets.Length, data.tags.Length);
 
-            //initialize tags
-            int tagCount = Mathf.Min(data.tags.Length, tagWidgets.Length);
-
-            for(int i = 0; i < tagCount; i++) {
-                var tag = tagWidgets[i];
-
-                tag.gameObject.SetActive(true);
-                tag.Setup(data.tags[i], dragRootGO.transform, placementRootGO.transform);
+            for(int i = 0; i < paletteCount; i++) {
+                paletteWidgets[i].gameObject.SetActive(true);
+                paletteWidgets[i].Setup(data.tags[i], null);
             }
 
-            //hide excess tags
-            for(int i = tagCount; i < tagWidgets.Length; i++)
-                tagWidgets[i].gameObject.SetActive(false);
+            for(int i = paletteCount; i < paletteWidgets.Length; i++)
+                paletteWidgets[i].gameObject.SetActive(false);
 
             gameDat.signalDragBegin.callback += OnDragBegin;
             gameDat.signalDragEnd.callback += OnDragEnd;
@@ -55,49 +60,53 @@ namespace Renegadeware.K2PS2 {
 
             ClearRout();
 
-            DetachTag();
-
-            for(int i = 0; i < tagWidgets.Length; i++)
-                tagWidgets[i].gameObject.SetActive(false);
-
-            HideAll();
-
-            mData = null;
+            HideAll(true);
         }
 
-        public void Show() {
-            //animation
+        public void ShowPalette() {
+            ClearRout();
 
-            if(displayRootGO) displayRootGO.SetActive(true);
+            if(paletteRootGO)
+                paletteRootGO.SetActive(true);
+
+            mRout = StartCoroutine(DoAnimation(paletteAnimator, paletteTakeEnter, null));
         }
 
-        public void Hide() {
-            //animation
+        public void HidePalette() {
+            ClearRout();
 
-            HideAll();
+            mRout = StartCoroutine(DoAnimation(paletteAnimator, paletteTakeExit, paletteRootGO));
         }
 
-        public void ShowTags() {
-            if(tagsRootGO) tagsRootGO.SetActive(true);
+        public void ShowClassify() {
+            ClearRout();
 
-            //animation
+            if(classifyRootGO)
+                classifyRootGO.SetActive(true);
+
+            mRout = StartCoroutine(DoAnimation(classifyAnimator, classifyTakeEnter, null));
         }
 
-        public void HideTags() {
-            //animation
+        public void HideClassify() {
+            ClearRout();
 
-            if(tagsRootGO) tagsRootGO.SetActive(false);
+            mRout = StartCoroutine(DoAnimation(classifyAnimator, classifyTakeExit, classifyRootGO));
         }
 
-        public void DetachTag() {
-            if(attachedTag) {
-                attachedTag.Detach();
-                attachedTag = null;
+        public void HideAll(bool instant) {
+            if(instant) {
+                if(paletteRootGO) paletteRootGO.SetActive(false);
+                if(classifyRootGO) classifyRootGO.SetActive(false);
+                if(dragRootGO) dragRootGO.SetActive(false);
+            }
+            else {
+                ClearRout();
+                mRout = StartCoroutine(DoHideAll());
             }
         }
 
         void Awake() {
-            HideAll();
+            HideAll(true);
         }
 
         void OnDragBegin() {
@@ -106,52 +115,59 @@ namespace Renegadeware.K2PS2 {
 
         void OnDragEnd() {
             if(dragRootGO) dragRootGO.SetActive(false);
-
-            MaterialTagClassifyWidget newAttachedTag = null;
-            for(int i = 0; i < tagWidgets.Length; i++) {
-                if(tagWidgets[i].isAttached) {
-                    newAttachedTag = tagWidgets[i];
-                    break;
-                }
-            }
-
-            //check if first time attached
-            if(!attachedTag) {
-                //show classify
-                ShowClassify();
-            }
-            else if(attachedTag != newAttachedTag) {
-                //check if attachment changed
-                attachedTag.Detach();
-            }
-
-            attachedTag = newAttachedTag;
         }
 
         void OnClassify() {
-            HideClassify();
+            //check for errors
+            errorCount = 0;
+
+            for(int i = 0; i < paletteWidgets.Length; i++) {
+                var palette = paletteWidgets[i];
+
+                var paletteErrorCount = 0;
+
+                for(int j = 0; j < palette.itemActives.Count; j++) {
+                    var itm = palette.itemActives[j];
+
+                    if(itm.data.CompareTag(palette.tagData)) {
+                        itm.SetError(false);
+                    }
+                    else {
+                        itm.SetError(true);
+                        paletteErrorCount++;
+                    }
+                }
+
+                if(paletteErrorCount > 0)
+                    palette.Error();
+
+                errorCount += paletteErrorCount;
+            }
+
+            //show error message
         }
 
-        private void ShowClassify() {
-            if(classifyGO) classifyGO.SetActive(true);
-            if(placementRootGO) placementRootGO.SetActive(true);
+        IEnumerator DoAnimation(M8.Animator.Animate animator, string take, GameObject disableAtEndGO) {
+            if(animator && !string.IsNullOrEmpty(take))
+                yield return animator.PlayWait(take);
 
-            //show animation
+            if(disableAtEndGO)
+                disableAtEndGO.SetActive(false);
+
+            mRout = null;
         }
 
-        private void HideClassify() {
-            //hide animation
+        IEnumerator DoHideAll() {
+            if(paletteAnimator && !string.IsNullOrEmpty(paletteTakeExit))
+                paletteAnimator.Play(paletteTakeExit);
 
-            if(classifyGO) classifyGO.SetActive(false);
-            if(placementRootGO) placementRootGO.SetActive(false);
-        }
+            if(classifyAnimator && !string.IsNullOrEmpty(classifyTakeExit))
+                classifyAnimator.Play(classifyTakeExit);
 
-        private void HideAll() {
-            if(displayRootGO) displayRootGO.SetActive(false);
-            if(tagsRootGO) tagsRootGO.SetActive(false);
-            if(classifyGO) classifyGO.SetActive(false);
-            if(dragRootGO) dragRootGO.SetActive(false);
-            if(placementRootGO) placementRootGO.SetActive(false);            
+            while((paletteAnimator && paletteAnimator.isPlaying) || (classifyAnimator && classifyAnimator.isPlaying))
+                yield return null;
+
+            mRout = null;
         }
 
         private void ClearRout() {

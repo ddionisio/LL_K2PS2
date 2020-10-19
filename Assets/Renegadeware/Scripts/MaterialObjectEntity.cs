@@ -155,6 +155,8 @@ namespace Renegadeware.K2PS2 {
 
         private bool mIsGamePlay;
 
+        private MaterialObjectPaletteWidget mHighlightPalette;
+
         /// <summary>
         /// Only call this in ghost mode
         /// </summary>
@@ -182,8 +184,10 @@ namespace Renegadeware.K2PS2 {
         }
 
         public void Release() {
-            if(mIsNonPool)
+            if(mIsNonPool) {
+                state = State.None;
                 gameObject.SetActive(false);
+            }
             else
                 poolDataCtrl.Release();
         }
@@ -221,6 +225,9 @@ namespace Renegadeware.K2PS2 {
 
             if(ghostSpriteShape)
                 mGhostSpriteShapeDefaultColor = ghostSpriteShape.color;
+
+            mOverlapFilter.SetLayerMask(GameData.instance.placementLayerMask);
+            mOverlapFilter.useTriggers = true;
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
@@ -256,8 +263,48 @@ namespace Renegadeware.K2PS2 {
             //update drag widget position
             mDragWidget.transform.position = pos;
             mDragWidget.SetValid(valid);
+
+            //update palette highlight
+            var gameDat = GameData.instance;
+
+            var cast = eventData.pointerCurrentRaycast;
+
+            MaterialObjectPaletteWidget highlightPalette = null;
+
+            if(cast.isValid && (gameDat.uiLayerMask & (1 << cast.gameObject.layer)) != 0) {
+                var go = cast.gameObject;
+
+                //check if it's another material object widget
+                if(go.CompareTag(gameDat.materialObjectTag)) {
+                    var otherMatObjWidget = go.GetComponent<MaterialObjectWidget>();
+                    if(otherMatObjWidget)
+                        highlightPalette = otherMatObjWidget.palette;
+                }
+                //check if it's palette
+                else if(go.CompareTag(gameDat.placementTag))
+                    highlightPalette = go.GetComponent<MaterialObjectPaletteWidget>();
+            }
+
+            if(highlightPalette) {
+                if(mHighlightPalette != highlightPalette) {
+                    if(mHighlightPalette && mHighlightPalette.highlightGO)
+                        mHighlightPalette.highlightGO.SetActive(false);
+
+                    mHighlightPalette = highlightPalette;
+
+                    if(mHighlightPalette.highlightGO)
+                        mHighlightPalette.highlightGO.SetActive(true);
+                }
+            }
+            else if(mHighlightPalette) {
+                if(mHighlightPalette.highlightGO)
+                    mHighlightPalette.highlightGO.SetActive(false);
+
+                mHighlightPalette = null;
+            }
+            //
         }
-        
+
         void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
             if(!mIsDragging)
                 return;
@@ -321,9 +368,6 @@ namespace Renegadeware.K2PS2 {
                 if(parms.ContainsKey(parmIsNonPool))
                     mIsNonPool = parms.GetValue<bool>(parmIsNonPool);
             }
-
-            mOverlapFilter.SetLayerMask(GameData.instance.placementLayerMask);
-            mOverlapFilter.useTriggers = true;
 
             if(animator && !string.IsNullOrEmpty(takeDefault))
                 animator.Play(takeDefault);
@@ -476,6 +520,13 @@ namespace Renegadeware.K2PS2 {
                     position = mLastPos;
                     rotation = mLastRot;
                 }
+            }
+
+            if(mHighlightPalette) {
+                if(mHighlightPalette.highlightGO)
+                    mHighlightPalette.highlightGO.SetActive(false);
+
+                mHighlightPalette = null;
             }
 
             mIsDragging = false;

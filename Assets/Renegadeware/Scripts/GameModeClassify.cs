@@ -6,22 +6,43 @@ using LoLExt;
 
 namespace Renegadeware.K2PS2 {
     public class GameModeClassify : GameModeController<GameModeClassify> {
+        public enum SpawnMode {
+            Stagger, //one-by-one
+            Multi
+        }
+
+        public class SpawnAnimation {
+            public string tagName { get { return animator ? animator.name : ""; } } //match tag
+
+            public M8.Animator.Animate animator;
+            public string takeEnter;
+            public string takeExit;
+
+            public IEnumerator PlayEnter() {
+                if(animator && !string.IsNullOrEmpty(takeEnter))
+                    yield return animator.PlayWait(takeEnter);
+            }
+
+            public IEnumerator PlayExit() {
+                if(animator && !string.IsNullOrEmpty(takeExit))
+                    yield return animator.PlayWait(takeExit);
+            }
+        }
+
         [Header("Data")]
         public LevelData data;
-        public bool shuffleObjects;
 
-        [Header("Object Entity Data")]
-        public Transform holderRoot;
-        public Transform objectEntSpawnPt;
-        public MaterialObjectWidget objectWidget;
+        public SpawnMode spawnMode;
+        public Transform spawnPointDefault;
+        public Transform spawnPointsRoot; //use name as match for material object
+
+        public SpawnAnimation[] spawnAnimations; //use for stagger spawn mode
 
         private HUDClassify mHUD;
 
-        private MaterialObjectEntity[] mObjectEnts;
+        private Transform[] mSpawnPoints;
 
         private bool mIsClassifyPressed;
-
-        private M8.GenericParams mObjParms = new M8.GenericParams();
 
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
@@ -29,28 +50,18 @@ namespace Renegadeware.K2PS2 {
             var gameDat = GameData.instance;
 
             //initialize objects
-            holderRoot.gameObject.SetActive(false);
-            objectWidget.gameObject.SetActive(false);
-
-            mObjectEnts = new MaterialObjectEntity[data.items.Length];
-
-            for(int i = 0; i < mObjectEnts.Length; i++) {
-                var itm = data.items[i];
-
-                var entGO = Instantiate(itm.materialObject.template);
-                var ent = entGO.GetComponent<MaterialObjectEntity>();
-
-                ent.transform.SetParent(holderRoot, false);
-
-                mObjectEnts[i] = ent;
-            }
+            data.InitItemPools(1);
 
             //initialize HUD
-            var hudGO = GameObject.FindGameObjectWithTag(gameDat.HUDGameTag);
+            var hudGO = GameObject.FindGameObjectWithTag(gameDat.HUDClassifyTag);
             if(hudGO)
                 mHUD = hudGO.GetComponent<HUDClassify>();
 
             mHUD.Init(data);
+
+            mSpawnPoints = new Transform[spawnPointsRoot.childCount];
+            for(int i = 0; i < mSpawnPoints.Length; i++)
+                mSpawnPoints[i] = spawnPointsRoot.GetChild(i);
 
             gameDat.signalClassify.callback += OnClassify;
         }
@@ -63,6 +74,8 @@ namespace Renegadeware.K2PS2 {
             if(mHUD)
                 mHUD.Deinit();
 
+            data.DeinitItemPools();
+
             base.OnInstanceDeinit();
         }
 
@@ -71,73 +84,63 @@ namespace Renegadeware.K2PS2 {
 
             //dialog, animation
 
-            mHUD.Show();
+            mHUD.ShowPalette();
+            while(mHUD.isBusy)
+                yield return null;
 
-            for(int i = 0; i < mObjectEnts.Length; i++) {
-                var itm = data.items[i];
-                var matObj = itm.materialObject;
-                var objEnt = mObjectEnts[i];
+            var items = data.items;
 
-                //show object widget and animate to be thrown towards spawn point
-                objectWidget.Setup(matObj, null, null);
-                objectWidget.gameObject.SetActive(true);
+            if(spawnMode == SpawnMode.Stagger) {
+                for(int i = 0; i < items.Length; i++) {
+                    var matObjData = items[i].materialObject;
 
-                yield return new WaitForSeconds(1f);
+                    var spawnPt = GetSpawnPoint(matObjData);
+                    var spawnAnim = GetSpawnAnimation(matObjData);
 
-                objectWidget.gameObject.SetActive(false);
+                    //animation enter
+                    if(spawnAnim != null)
+                        yield return spawnAnim.PlayEnter();
 
-                //spawn object
-                mObjParms[MaterialObjectEntity.parmData] = matObj;
-                mObjParms[MaterialObjectEntity.parmState] = MaterialObjectEntity.State.Spawning;
-                mObjParms[MaterialObjectEntity.parmIsNonPool] = true;
+                    //spawn object
+                    var obj = matObjData.Spawn(spawnPt.position, MaterialObjectEntity.State.Spawning, mHUD.dragWidget);
 
-                objEnt.poolDataCtrl.Spawn(mObjParms);
+                    while(obj.state == MaterialObjectEntity.State.Spawning)
+                        yield return null;
 
-                objEnt.transform.SetParent(null, false);
-                objEnt.position = objectEntSpawnPt.position;
-                //
+                    //animation exit
+                    if(spawnAnim != null)
+                        yield return spawnAnim.PlayExit();
 
-                bool proceed = false;
-                while(!proceed) {
-                    mHUD.ShowTags();
+                    //wait for object to be placed in palette
+                    while(obj.state != MaterialObjectEntity.State.None)
+                        yield return null;
+                }
 
-                    //wait for classify pressed
+                //show classify
+                mHUD.ShowClassify();
+
+                bool isDone = false;
+
+                while(!isDone) {
+                    //wait for classify press
                     mIsClassifyPressed = false;
                     while(!mIsClassifyPressed)
                         yield return null;
 
-                    mHUD.HideTags();
-
-                    //check if tag matched
-                    var attachedTag = mHUD.attachedTag.data;
-                    if(matObj.CompareTag(attachedTag)) {
-                        //correct animation, fx
-
-                        //dialog, etc.
-
-                        proceed = true;
-                    }
-                    else {
-                        //incorrect animation, fx
-
-                        //dialog etc.
-
-                        //clear attached tag
-                        mHUD.DetachTag();
-                    }
+                    //check if all palettes have matched objects
+                    if(mHUD.errorCount == 0)
+                        break;
 
                     yield return null;
                 }
+            }
+            else if(spawnMode == SpawnMode.Multi) {
 
-                //despawn object
-                objEnt.state = MaterialObjectEntity.State.Despawning;
-
-                while(objEnt.state == MaterialObjectEntity.State.Despawning)
-                    yield return null;
-                //
             }
 
-            mHUD.Hide();
+            mHUD.HideAll(false);
+            while(mHUD.isBusy)
+                yield return null;
 
             //dialog, etc.
 
@@ -147,6 +150,26 @@ namespace Renegadeware.K2PS2 {
 
         void OnClassify() {
             mIsClassifyPressed = true;
+        }
+
+        private Transform GetSpawnPoint(MaterialObjectData dat) {
+            for(int i = 0; i < mSpawnPoints.Length; i++) {
+                var spawnPt = mSpawnPoints[i];
+                if(spawnPt.name == dat.name)
+                    return spawnPt;
+            }
+
+            return spawnPointDefault;
+        }
+
+        private SpawnAnimation GetSpawnAnimation(MaterialObjectData dat) {
+            for(int i = 0; i < spawnAnimations.Length; i++) {
+                var spawnAnim = spawnAnimations[i];
+                if(dat.CompareTag(spawnAnim.tagName))
+                    return spawnAnim;
+            }
+
+            return null;
         }
     }
 }

@@ -49,6 +49,15 @@ namespace Renegadeware.K2PS2 {
             return false;
         }
 
+        public bool CompareTag(string tagName) {
+            for(int i = 0; i < tags.Length; i++) {
+                if(tags[i].name == tagName)
+                    return true;
+            }
+
+            return false;
+        }
+
         public void InitPool(int count) {
             mPool = M8.PoolController.CreatePool("materialObjectPool");
             mPool.AddType(template, count, count);
@@ -77,13 +86,13 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
-        public MaterialObjectEntity Spawn(Vector2 pos, MaterialObjectDragWidget dragWidget) {
+        public MaterialObjectEntity Spawn(Vector2 pos, MaterialObjectEntity.State state, MaterialObjectDragWidget dragWidget) {
             if(!mPool)
                 return null;
 
             mSpawnParms[MaterialObjectEntity.parmData] = this;
             mSpawnParms[MaterialObjectEntity.parmDragWidget] = dragWidget;
-            mSpawnParms[MaterialObjectEntity.parmState] = MaterialObjectEntity.State.Ghost;
+            mSpawnParms[MaterialObjectEntity.parmState] = state;
 
             var ent = mPool.Spawn<MaterialObjectEntity>(template.name, template.name, null, mSpawnParms);
             ent.transform.position = pos;

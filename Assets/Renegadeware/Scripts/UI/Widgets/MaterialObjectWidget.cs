@@ -13,6 +13,7 @@ namespace Renegadeware.K2PS2 {
         public GameObject countRootGO;
         public TMP_Text countText;
         public M8.UI.Graphics.ColorGroup colorGroup;
+        public GameObject errorRootGO;
 
         public MaterialObjectData data { get; private set; }
 
@@ -23,6 +24,8 @@ namespace Renegadeware.K2PS2 {
         private MaterialObjectDragWidget mDragWidget;
 
         private MaterialObjectEntity mEntGhost;
+
+        private MaterialObjectPaletteWidget mHighlightPalette;
 
         public void Setup(MaterialObjectData aData, MaterialObjectPaletteWidget palette, MaterialObjectDragWidget dragWidget) {
             data = aData;
@@ -36,6 +39,9 @@ namespace Renegadeware.K2PS2 {
 
             if(colorGroup)
                 colorGroup.Revert();
+
+            if(errorRootGO)
+                errorRootGO.SetActive(false);
         }
 
         public void RefreshCountDisplay() {
@@ -52,6 +58,11 @@ namespace Renegadeware.K2PS2 {
                 if(countRootGO)
                     countRootGO.SetActive(false);
             }
+        }
+
+        public void SetError(bool error) {
+            if(errorRootGO)
+                errorRootGO.SetActive(error);
         }
 
         void OnApplicationFocus(bool focus) {
@@ -76,10 +87,13 @@ namespace Renegadeware.K2PS2 {
             //spawn entity ghost
             var cam = Camera.main;
             var entPos = cam.ScreenToWorldPoint(pos);
-            mEntGhost = data.Spawn(entPos, mDragWidget);
+            mEntGhost = data.Spawn(entPos, MaterialObjectEntity.State.Ghost, mDragWidget);
 
             if(colorGroup)
                 colorGroup.ApplyColor(GameData.instance.draggingColor);
+
+            if(errorRootGO)
+                errorRootGO.SetActive(false);
 
             GameData.instance.signalDragBegin.Invoke();
         }
@@ -99,6 +113,50 @@ namespace Renegadeware.K2PS2 {
             //update drag widget position
             mDragWidget.transform.position = pos;
             mDragWidget.SetValid(valid);
+
+            //update palette highlight
+            var gameDat = GameData.instance;
+
+            var cast = eventData.pointerCurrentRaycast;
+
+            MaterialObjectPaletteWidget highlightPalette = null;
+
+            if(cast.isValid && (gameDat.uiLayerMask & (1 << cast.gameObject.layer)) != 0) {
+                var go = cast.gameObject;
+
+                //check if it's another material object widget
+                if(go.CompareTag(gameDat.materialObjectTag)) {
+                    var otherMatObjWidget = go.GetComponent<MaterialObjectWidget>();
+                    if(otherMatObjWidget)
+                        highlightPalette = otherMatObjWidget.palette;
+                }
+                //check if it's palette
+                else if(go.CompareTag(gameDat.placementTag)) {
+                    if(go == palette.gameObject)
+                        highlightPalette = palette;
+                    else
+                        highlightPalette = go.GetComponent<MaterialObjectPaletteWidget>();
+                }
+            }
+
+            if(highlightPalette) {
+                if(mHighlightPalette != highlightPalette) {
+                    if(mHighlightPalette && mHighlightPalette.highlightGO)
+                        mHighlightPalette.highlightGO.SetActive(false);
+
+                    mHighlightPalette = highlightPalette;
+
+                    if(mHighlightPalette.highlightGO)
+                        mHighlightPalette.highlightGO.SetActive(true);
+                }
+            }
+            else if(mHighlightPalette) {
+                if(mHighlightPalette.highlightGO)
+                    mHighlightPalette.highlightGO.SetActive(false);
+
+                    mHighlightPalette = null;
+            }
+            //
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
@@ -150,8 +208,6 @@ namespace Renegadeware.K2PS2 {
             if(!isDragging)
                 return;
 
-            isDragging = false;
-
             //release entity ghost if it wasn't placed
             if(mEntGhost) {
                 mEntGhost.Release();
@@ -160,6 +216,15 @@ namespace Renegadeware.K2PS2 {
 
             if(colorGroup)
                 colorGroup.Revert();
+
+            if(mHighlightPalette) {
+                if(mHighlightPalette.highlightGO)
+                    mHighlightPalette.highlightGO.SetActive(false);
+
+                mHighlightPalette = null;
+            }
+
+            isDragging = false;
 
             GameData.instance.signalDragEnd.Invoke();
         }

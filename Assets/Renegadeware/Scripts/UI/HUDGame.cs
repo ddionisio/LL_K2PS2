@@ -25,7 +25,6 @@ namespace Renegadeware.K2PS2 {
 
         public bool isPaletteActive { get; private set; }
 
-        private LevelData mData;
         private int mCurPaletteInd;
 
         private Coroutine mRout;
@@ -45,15 +44,13 @@ namespace Renegadeware.K2PS2 {
         }
 
         public void Init(LevelData data) {
-            mData = data;
-
             HideAll();
 
             //initialize palette widgets
-            int paletteCount = Mathf.Min(paletteWidgets.Length, mData.tags.Length);
+            int paletteCount = Mathf.Min(paletteWidgets.Length, data.tags.Length);
             for(int i = 0; i < paletteCount; i++) {
                 paletteWidgets[i].gameObject.SetActive(true);
-                paletteWidgets[i].Setup(mData.tags[i], mData.items);
+                paletteWidgets[i].Setup(data.tags[i], data.items);
                 paletteWidgets[i].transform.SetAsFirstSibling();
             }
 
@@ -88,8 +85,6 @@ namespace Renegadeware.K2PS2 {
                 paletteWidgets[i].gameObject.SetActive(false);
 
             HideAll();
-
-            mData = null;
         }
 
         public void Show() {

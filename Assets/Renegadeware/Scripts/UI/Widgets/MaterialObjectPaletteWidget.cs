@@ -10,13 +10,25 @@ namespace Renegadeware.K2PS2 {
         public MaterialTagWidget tagWidget;
         public Transform itemsRoot;
         public MaterialObjectDragWidget dragWidget;
+        public GameObject highlightGO;
+
+        [Header("Error")]        
+        public M8.Animator.Animate errorAnimator;
+        [M8.Animator.TakeSelector(animatorField = "errorAnimator")]
+        public string errorTakePlay;
+
+        public MaterialTagData tagData { get; private set; }
 
         public bool isFull { get { return mItemCache.Count == 0; } }
+
+        public M8.CacheList<MaterialObjectWidget> itemActives { get { return mItemActives; } }
 
         private M8.CacheList<MaterialObjectWidget> mItemActives;
         private M8.CacheList<MaterialObjectWidget> mItemCache;
 
         public void Setup(MaterialTagData tag, LevelData.ItemData[] itemData) {
+            tagData = tag;
+
             //setup tag
             tagWidget.Setup(tag);
 
@@ -31,6 +43,9 @@ namespace Renegadeware.K2PS2 {
                         AddItem(objData);
                 }
             }
+
+            if(highlightGO)
+                highlightGO.SetActive(false);
         }
 
         public void Refresh(bool removeEmpty) {
@@ -101,6 +116,11 @@ namespace Renegadeware.K2PS2 {
             }
 
             mItemActives.Clear();
+        }
+
+        public void Error() {
+            if(errorAnimator && !string.IsNullOrEmpty(errorTakePlay))
+                errorAnimator.Play(errorTakePlay);
         }
 
         void Awake() {
