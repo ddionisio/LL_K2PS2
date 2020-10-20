@@ -31,6 +31,8 @@ namespace Renegadeware.K2PS2 {
 
         public int errorCount { get; private set; }
 
+        public bool isClassifyVisible { get { return classifyRootGO ? classifyRootGO.activeSelf : false; } }
+
         private Coroutine mRout;
 
         public void Init(LevelData data) {

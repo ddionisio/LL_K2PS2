@@ -259,21 +259,17 @@ namespace Renegadeware.K2PS2 {
             var entPos = cam.ScreenToWorldPoint(pos);
 
             var valid = UpdateGhostPosition(entPos);
-
-            //update drag widget position
-            mDragWidget.transform.position = pos;
-            //mDragWidget.SetValid(valid);
+            var isTrash = false;
 
             //update palette highlight
             var gameDat = GameData.instance;
 
             var cast = eventData.pointerCurrentRaycast;
+            var go = cast.gameObject;
 
             MaterialObjectPaletteWidget highlightPalette = null;
 
             if(cast.isValid && (gameDat.uiLayerMask & (1 << cast.gameObject.layer)) != 0) {
-                var go = cast.gameObject;
-
                 //check if it's another material object widget
                 if(go.CompareTag(gameDat.materialObjectTag)) {
                     var otherMatObjWidget = go.GetComponent<MaterialObjectWidget>();
@@ -283,6 +279,8 @@ namespace Renegadeware.K2PS2 {
                 //check if it's palette
                 else if(go.CompareTag(gameDat.placementTag))
                     highlightPalette = go.GetComponent<MaterialObjectPaletteWidget>();
+                else if(go.CompareTag(gameDat.deleteTag))
+                    isTrash = true;
             }
 
             if(highlightPalette && !highlightPalette.isFull) {
@@ -303,6 +301,10 @@ namespace Renegadeware.K2PS2 {
                 mHighlightPalette = null;
             }
             //
+
+            //update drag widget position
+            mDragWidget.transform.position = pos;
+            mDragWidget.SetValid(valid || isTrash);
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData) {

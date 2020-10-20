@@ -48,8 +48,8 @@ MonoBehaviour:
     m_Bits: 32
   objectDragInvalidColor: {r: 0.72156864, g: 0.1764706, b: 0.227451, a: 1}
   draggingColor: {r: 0.319, g: 0.319, b: 0.319, a: 1}
-  objectGhostValidColor: {r: 1, g: 1, b: 1, a: 0.5019608}
-  objectGhostInvalidColor: {r: 0.72156864, g: 0.1764706, b: 0.227451, a: 0.5019608}
+  objectGhostValidColor: {r: 0.70199996, g: 0.70199996, b: 0.70199996, a: 1}
+  objectGhostInvalidColor: {r: 0.72156864, g: 0.1764706, b: 0.227451, a: 1}
   conductiveLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -75,3 +75,4 @@ MonoBehaviour:
     type: 2}
   signalObjectReleased: {fileID: 11400000, guid: 502499f2a5e24824188d1caef793ef21,
     type: 2}
+  signalReset: {fileID: 11400000, guid: a8ec373d2cc5a9442888a9a60a18fdfb, type: 2}

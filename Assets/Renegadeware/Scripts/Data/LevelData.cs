@@ -43,5 +43,12 @@ namespace Renegadeware.K2PS2 {
 
             return false;
         }
+
+        public void DespawnAll() {
+            for(int i = 0; i < items.Length; i++) {
+                var itm = items[i];
+                itm.materialObject.DespawnAll();
+            }
+        }
     }
 }

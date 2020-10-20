@@ -117,7 +117,7 @@ namespace Renegadeware.K2PS2 {
 
             //update drag widget position
             mDragWidget.transform.position = pos;
-            //mDragWidget.SetValid(valid);
+            mDragWidget.SetValid(valid);
 
             //update palette highlight
             var gameDat = GameData.instance;

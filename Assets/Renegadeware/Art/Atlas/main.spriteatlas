@@ -48,14 +48,16 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 8d803384006c3fc4282657a165d467b1, type: 3}
     - {fileID: 102900000, guid: d9a2a8bca9999974f9f8f57699bb4bab, type: 3}
     - {fileID: 102900000, guid: fa0cb14f897744d4caea68ecc157cc61, type: 3}
-    totalSpriteSurfaceArea: 270168
+    totalSpriteSurfaceArea: 280562
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 91fe0e40bd0acce44bb27d56e315b470, type: 3}
   - {fileID: 21300000, guid: aac4e580a0653bf4893dfd7d8cc2cc1a, type: 3}
   - {fileID: 21300000, guid: be98f690b6a68d8478a95623f406a172, type: 3}
   - {fileID: 21300000, guid: f4683e31b11d8c249ac19e37611319cd, type: 3}
   - {fileID: 21300000, guid: 1bb0cc5141a073b4aa089346df8cd0a3, type: 3}
+  - {fileID: 21300000, guid: c15727612b5c3304ba9771bb96b4ebe0, type: 3}
   - {fileID: 21300000, guid: 2c182d91a96c3c949bcbade9ea5d4ba4, type: 3}
   - {fileID: 21300000, guid: cfce0ce1b6c72e54f9981e474f39ca7c, type: 3}
   - {fileID: 21300002, guid: bf8c0222be72dfd48a68e5cf2a7ed5c1, type: 3}
@@ -72,11 +74,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7428624581668694ca5e5ec7e287bb0d, type: 3}
   - {fileID: 21300000, guid: 4b76464519ee21f4c89fc90b3d600dd9, type: 3}
   - {fileID: 21300000, guid: e9c8ee955c09c344aa79e9bb93b94216, type: 3}
+  - {fileID: 21300000, guid: 20c8f2b5794aefe4b83183789547897c, type: 3}
   - {fileID: 21300000, guid: 748bdcb56e7a9f7438a0976bf718cdb5, type: 3}
   - {fileID: 21300000, guid: 170931e5af43a4443a305bdcaa457f58, type: 3}
   - {fileID: 21300000, guid: 9c108b26df0789b47b12b9195e86323c, type: 3}
   - {fileID: 21300000, guid: 8abd9776829c71149a34c39f8eb8cdcc, type: 3}
   - {fileID: 21300000, guid: 405096a6dc0da5540856e0daa36b63ae, type: 3}
+  - {fileID: 21300000, guid: 54ad48f6842a9c341a4166003eb3abea, type: 3}
   - {fileID: 21300000, guid: 645b3927402c74a499ab73d893ea7465, type: 3}
   - {fileID: 21300000, guid: 776b54876e58fd140a4b13395cbfdd6f, type: 3}
   - {fileID: 21300000, guid: bf01b0b7199ec26448b016fd2de647e5, type: 3}
@@ -131,10 +135,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 49f63cbf9fa458c4cbc656fbdbb5124a, type: 3}
   - {fileID: 21300000, guid: 49d782ef45be5004b9edb429ea0994ce, type: 3}
   m_PackedSpriteNamesToIndex:
+  - retryButton
   - chinchilla_up_2
   - star
   - downArrow
   - triangle
+  - iconTrash
   - tutorialArrow2
   - edge_shade_left_8x1
   - shadeWhite_bottomLeft
@@ -151,11 +157,13 @@ SpriteAtlas:
   - wrongX
   - oakBranch
   - outline1x1
+  - recycleArrow
   - blockIron
   - plasticBall
   - roundRectFill_24
   - chinchilla_down_3
   - chinchilla_move_2
+  - arrow
   - chinchilla_move_1
   - chinchilla_move_6
   - explodePixel1

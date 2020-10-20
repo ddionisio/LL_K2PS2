@@ -6,11 +6,6 @@ using LoLExt;
 
 namespace Renegadeware.K2PS2 {
     public class GameModeClassify : GameModeController<GameModeClassify> {
-        public enum SpawnMode {
-            Stagger, //one-by-one
-            Multi
-        }
-
         [System.Serializable]
         public class SpawnAnimation {
             public string tagName { get { return animator ? animator.name : ""; } } //match tag
@@ -33,7 +28,6 @@ namespace Renegadeware.K2PS2 {
         [Header("Data")]
         public LevelData data;
 
-        public SpawnMode spawnMode;
         public Transform spawnPointDefault;
         public Transform spawnPointsRoot; //use name as match for material object
 
@@ -95,52 +89,62 @@ namespace Renegadeware.K2PS2 {
 
             var items = data.items;
 
-            if(spawnMode == SpawnMode.Stagger) {
-                for(int i = 0; i < items.Length; i++) {
-                    var matObjData = items[i].materialObject;
+            for(int i = 0; i < items.Length; i++) {
+                var matObjData = items[i].materialObject;
 
-                    var spawnPt = GetSpawnPoint(matObjData);
-                    var spawnAnim = GetSpawnAnimation(matObjData);
+                var spawnPt = GetSpawnPoint(matObjData);
+                var spawnAnim = GetSpawnAnimation(matObjData);
 
-                    //animation enter
-                    if(spawnAnim != null)
-                        yield return spawnAnim.PlayEnter();
+                //animation enter
+                if(spawnAnim != null)
+                    yield return spawnAnim.PlayEnter();
 
-                    //spawn object
-                    var obj = matObjData.Spawn(spawnPt.position, MaterialObjectEntity.State.Spawning, mHUD.dragWidget);
+                //spawn object
+                var obj = matObjData.Spawn(spawnPt.position, MaterialObjectEntity.State.Spawning, mHUD.dragWidget);
 
-                    while(obj.state == MaterialObjectEntity.State.Spawning)
+                while(obj.state == MaterialObjectEntity.State.Spawning)
+                    yield return null;
+
+                //animation exit
+                if(spawnAnim != null)
+                    yield return spawnAnim.PlayExit();
+
+                //wait for object to be placed in palette
+                while(obj.state != MaterialObjectEntity.State.None)
+                    yield return null;
+            }
+
+            bool isDone = false;
+
+            while(!isDone) {
+                //wait for classify press
+                mIsClassifyPressed = false;
+                while(!mIsClassifyPressed) {
+                    while(mHUD.isBusy)
                         yield return null;
 
-                    //animation exit
-                    if(spawnAnim != null)
-                        yield return spawnAnim.PlayExit();
+                    //show classify if everything is placed in palette, hide otherwise
+                    int spawnCount = 0;
+                    for(int i = 0; i < data.items.Length; i++)
+                        spawnCount += data.items[i].materialObject.spawnedCount;
 
-                    //wait for object to be placed in palette
-                    while(obj.state != MaterialObjectEntity.State.None)
-                        yield return null;
-                }
-
-                //show classify
-                mHUD.ShowClassify();
-
-                bool isDone = false;
-
-                while(!isDone) {
-                    //wait for classify press
-                    mIsClassifyPressed = false;
-                    while(!mIsClassifyPressed)
-                        yield return null;
-
-                    //check if all palettes have matched objects
-                    if(mHUD.errorCount == 0)
-                        break;
+                    if(spawnCount == 0) {
+                        if(!mHUD.isClassifyVisible)
+                            mHUD.ShowClassify();
+                    }
+                    else {
+                        if(mHUD.isClassifyVisible)
+                            mHUD.HideClassify();
+                    }
 
                     yield return null;
                 }
-            }
-            else if(spawnMode == SpawnMode.Multi) {
 
+                //check if all palettes have matched objects
+                if(mHUD.errorCount == 0)
+                    break;
+
+                yield return null;
             }
 
             mHUD.HideAll(false);

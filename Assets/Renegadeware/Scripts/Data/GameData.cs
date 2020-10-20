@@ -77,6 +77,7 @@ namespace Renegadeware.K2PS2 {
         public M8.Signal signalClassify;
         public M8.Signal signalObjectDespawn;
         public M8.Signal signalObjectReleased;
+        public M8.Signal signalReset;
 
         public bool isGameStarted { get; private set; } //true: we got through start normally, false: debug
 

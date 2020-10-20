@@ -12,7 +12,12 @@ namespace Renegadeware.K2PS2 {
 
         public M8.UI.Graphics.ColorGroup colorGroup;
 
+        public bool allowValid;
+
         public void SetValid(bool isValid) {
+            if(!allowValid)
+                return;
+
             if(isValid)
                 colorGroup.Revert();
             else
