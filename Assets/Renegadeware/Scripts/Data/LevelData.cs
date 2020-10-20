@@ -34,5 +34,14 @@ namespace Renegadeware.K2PS2 {
                 itm.materialObject.DeinitPool();
             }
         }
+
+        public bool IsTagMatch(MaterialTagData tag) {
+            for(int i = 0; i < tags.Length; i++) {
+                if(tags[i] == tag)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

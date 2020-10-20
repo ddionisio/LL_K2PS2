@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 6346181251155571422}
-  pulsePerSecond: 0.3
+  pulsePerSecond: 1
   startColor: {r: 1, g: 0.8431373, b: 0.6, a: 0.31764707}
   endColor: {r: 1, g: 0.8431373, b: 0.6, a: 1}
   realtime: 1
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

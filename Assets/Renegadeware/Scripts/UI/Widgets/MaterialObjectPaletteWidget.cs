@@ -26,7 +26,11 @@ namespace Renegadeware.K2PS2 {
         private M8.CacheList<MaterialObjectWidget> mItemActives;
         private M8.CacheList<MaterialObjectWidget> mItemCache;
 
+        private bool mIsInit;
+
         public void Setup(MaterialTagData tag, LevelData.ItemData[] itemData) {
+            Init();
+
             tagData = tag;
 
             //setup tag
@@ -123,7 +127,10 @@ namespace Renegadeware.K2PS2 {
                 errorAnimator.Play(errorTakePlay);
         }
 
-        void Awake() {
+        private void Init() {
+            if(mIsInit)
+                return;
+
             var itemCapacity = itemsRoot.childCount;
 
             //setup item cache
@@ -135,6 +142,8 @@ namespace Renegadeware.K2PS2 {
                 matObjWidget.gameObject.SetActive(false);
                 mItemCache.Add(matObjWidget);
             }
+
+            mIsInit = true;
         }
     }
 }

@@ -262,7 +262,7 @@ namespace Renegadeware.K2PS2 {
 
             //update drag widget position
             mDragWidget.transform.position = pos;
-            mDragWidget.SetValid(valid);
+            //mDragWidget.SetValid(valid);
 
             //update palette highlight
             var gameDat = GameData.instance;
@@ -285,7 +285,7 @@ namespace Renegadeware.K2PS2 {
                     highlightPalette = go.GetComponent<MaterialObjectPaletteWidget>();
             }
 
-            if(highlightPalette) {
+            if(highlightPalette && !highlightPalette.isFull) {
                 if(mHighlightPalette != highlightPalette) {
                     if(mHighlightPalette && mHighlightPalette.highlightGO)
                         mHighlightPalette.highlightGO.SetActive(false);
@@ -368,9 +368,6 @@ namespace Renegadeware.K2PS2 {
                 if(parms.ContainsKey(parmIsNonPool))
                     mIsNonPool = parms.GetValue<bool>(parmIsNonPool);
             }
-
-            if(animator && !string.IsNullOrEmpty(takeDefault))
-                animator.Play(takeDefault);
 
             mState = toState;
             ApplyCurrentState();
@@ -456,6 +453,9 @@ namespace Renegadeware.K2PS2 {
                     mRout = StartCoroutine(DoSpawn());
                     break;
                 case State.Normal:
+                    if(animator && !string.IsNullOrEmpty(takeDefault))
+                        animator.Play(takeDefault);
+
                     toPhysicsMode = PhysicsMode.Normal;
 
                     if(conductive)

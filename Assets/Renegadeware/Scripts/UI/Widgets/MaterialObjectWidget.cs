@@ -14,6 +14,7 @@ namespace Renegadeware.K2PS2 {
         public TMP_Text countText;
         public M8.UI.Graphics.ColorGroup colorGroup;
         public GameObject errorRootGO;
+        public GameObject highlightGO;
 
         public MaterialObjectData data { get; private set; }
 
@@ -26,6 +27,7 @@ namespace Renegadeware.K2PS2 {
         private MaterialObjectEntity mEntGhost;
 
         private MaterialObjectPaletteWidget mHighlightPalette;
+        private MaterialObjectWidget mHighlightObjectWidget;
 
         public void Setup(MaterialObjectData aData, MaterialObjectPaletteWidget palette, MaterialObjectDragWidget dragWidget) {
             data = aData;
@@ -39,6 +41,9 @@ namespace Renegadeware.K2PS2 {
 
             if(colorGroup)
                 colorGroup.Revert();
+
+            if(highlightGO)
+                highlightGO.SetActive(false);
 
             if(errorRootGO)
                 errorRootGO.SetActive(false);
@@ -112,7 +117,7 @@ namespace Renegadeware.K2PS2 {
 
             //update drag widget position
             mDragWidget.transform.position = pos;
-            mDragWidget.SetValid(valid);
+            //mDragWidget.SetValid(valid);
 
             //update palette highlight
             var gameDat = GameData.instance;
@@ -120,29 +125,40 @@ namespace Renegadeware.K2PS2 {
             var cast = eventData.pointerCurrentRaycast;
 
             MaterialObjectPaletteWidget highlightPalette = null;
+            MaterialObjectWidget highlightObjWidget = null;
 
             if(cast.isValid && (gameDat.uiLayerMask & (1 << cast.gameObject.layer)) != 0) {
                 var go = cast.gameObject;
 
-                //check if it's another material object widget
+                //check if it's another material object widget in another palette
                 if(go.CompareTag(gameDat.materialObjectTag)) {
                     var otherMatObjWidget = go.GetComponent<MaterialObjectWidget>();
-                    if(otherMatObjWidget)
-                        highlightPalette = otherMatObjWidget.palette;
+                    if(otherMatObjWidget && otherMatObjWidget.palette != palette)
+                        highlightObjWidget = otherMatObjWidget;
                 }
-                //check if it's palette
+                //check if it's another palette
                 else if(go.CompareTag(gameDat.placementTag)) {
-                    if(go == palette.gameObject)
-                        highlightPalette = palette;
-                    else
-                        highlightPalette = go.GetComponent<MaterialObjectPaletteWidget>();
+                    if(go != palette.gameObject) {
+                        var otherPalette = go.GetComponent<MaterialObjectPaletteWidget>();
+                        if(otherPalette && !otherPalette.isFull)
+                            highlightPalette = otherPalette;
+                    }
                 }
             }
 
-            if(highlightPalette) {
+            if(highlightObjWidget) {
+                if(mHighlightObjectWidget != highlightObjWidget) {
+                    ClearHighlight();
+
+                    mHighlightObjectWidget = highlightObjWidget;
+
+                    if(mHighlightObjectWidget.highlightGO)
+                        mHighlightObjectWidget.highlightGO.SetActive(true);
+                }
+            }
+            else if(highlightPalette) {
                 if(mHighlightPalette != highlightPalette) {
-                    if(mHighlightPalette && mHighlightPalette.highlightGO)
-                        mHighlightPalette.highlightGO.SetActive(false);
+                    ClearHighlight();
 
                     mHighlightPalette = highlightPalette;
 
@@ -150,12 +166,8 @@ namespace Renegadeware.K2PS2 {
                         mHighlightPalette.highlightGO.SetActive(true);
                 }
             }
-            else if(mHighlightPalette) {
-                if(mHighlightPalette.highlightGO)
-                    mHighlightPalette.highlightGO.SetActive(false);
-
-                    mHighlightPalette = null;
-            }
+            else
+                ClearHighlight();
             //
         }
 
@@ -217,6 +229,14 @@ namespace Renegadeware.K2PS2 {
             if(colorGroup)
                 colorGroup.Revert();
 
+            ClearHighlight();
+
+            isDragging = false;
+
+            GameData.instance.signalDragEnd.Invoke();
+        }
+
+        private void ClearHighlight() {
             if(mHighlightPalette) {
                 if(mHighlightPalette.highlightGO)
                     mHighlightPalette.highlightGO.SetActive(false);
@@ -224,9 +244,12 @@ namespace Renegadeware.K2PS2 {
                 mHighlightPalette = null;
             }
 
-            isDragging = false;
+            if(mHighlightObjectWidget) {
+                if(mHighlightObjectWidget.highlightGO)
+                    mHighlightObjectWidget.highlightGO.SetActive(false);
 
-            GameData.instance.signalDragEnd.Invoke();
+                mHighlightObjectWidget = null;
+            }
         }
     }
 }

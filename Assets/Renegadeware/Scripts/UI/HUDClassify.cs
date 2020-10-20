@@ -168,6 +168,8 @@ namespace Renegadeware.K2PS2 {
                 yield return null;
 
             mRout = null;
+
+            HideAll(true);
         }
 
         private void ClearRout() {

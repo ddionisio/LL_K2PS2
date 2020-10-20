@@ -10,9 +10,19 @@ namespace Renegadeware.K2PS2 {
         public Image tagIcon;
         public TMP_Text tagText;
 
+        [Header("Animation")]
+        public M8.Animator.Animate animator;
+        [M8.Animator.TakeSelector(animatorField = "animator")]
+        public string takeEnter;
+
         public void Setup(MaterialTagData tag) {
             if(tagIcon) tagIcon.sprite = tag.icon;
             if(tagText) tagText.text = tag.label;
+        }
+
+        public IEnumerator PlayEnterWait() {
+            if(animator && !string.IsNullOrEmpty(takeEnter))
+                yield return animator.PlayWait(takeEnter);
         }
     }
 }

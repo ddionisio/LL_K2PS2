@@ -11,6 +11,7 @@ namespace Renegadeware.K2PS2 {
             Multi
         }
 
+        [System.Serializable]
         public class SpawnAnimation {
             public string tagName { get { return animator ? animator.name : ""; } } //match tag
 
@@ -43,6 +44,8 @@ namespace Renegadeware.K2PS2 {
         private Transform[] mSpawnPoints;
 
         private bool mIsClassifyPressed;
+
+        private M8.GenericParams mClassifySummaryParam = new M8.GenericParams();
 
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
@@ -81,6 +84,8 @@ namespace Renegadeware.K2PS2 {
 
         protected override IEnumerator Start() {
             yield return base.Start();
+
+            yield return null;
 
             //dialog, animation
 
@@ -145,7 +150,8 @@ namespace Renegadeware.K2PS2 {
             //dialog, etc.
 
             //show summary
-            M8.ModalManager.main.Open(GameData.instance.modalClassifySummary);
+            mClassifySummaryParam[ModalClassifySummary.parmLevelData] = data;
+            M8.ModalManager.main.Open(GameData.instance.modalClassifySummary, mClassifySummaryParam);
         }
 
         void OnClassify() {
