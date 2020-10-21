@@ -4,15 +4,17 @@ using UnityEngine;
 
 namespace Renegadeware.K2PS2 {
     public class HUDGame : MonoBehaviour {
-        [Header("Palette")]
-        public GameObject paletteRootGO; //also includes Play button
-        public MaterialObjectPaletteWidget[] paletteWidgets;
+        [Header("Edit")]
+        public GameObject editRootGO; //also includes Play button
 
-        public M8.Animator.Animate paletteAnimator;
-        [M8.Animator.TakeSelector(animatorField = "paletteAnimator")]
-        public string paletteTakeEnter;
-        [M8.Animator.TakeSelector(animatorField = "paletteAnimator")]
-        public string paletteTakeExit;
+        public M8.Animator.Animate editAnimator;
+        [M8.Animator.TakeSelector(animatorField = "editAnimator")]
+        public string editTakeEnter;
+        [M8.Animator.TakeSelector(animatorField = "editAnimator")]
+        public string editTakeExit;
+
+        [Header("Palette")]
+        public MaterialObjectPaletteWidget[] paletteWidgets;
 
         [Header("Drag")]
         public GameObject dragRootGO;
@@ -26,15 +28,6 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "trashAnimator")]
         public string trashTakeExit;
 
-        [Header("Play")]
-        public GameObject playRootGO;
-
-        public M8.Animator.Animate playAnimator;
-        [M8.Animator.TakeSelector(animatorField = "playAnimator")]
-        public string playTakeEnter;
-        [M8.Animator.TakeSelector(animatorField = "playAnimator")]
-        public string playTakeExit;
-
         [Header("Stop")]
         public GameObject stopRootGO;
 
@@ -43,15 +36,6 @@ namespace Renegadeware.K2PS2 {
         public string stopTakeEnter;
         [M8.Animator.TakeSelector(animatorField = "stopAnimator")]
         public string stopTakeExit;
-
-        [Header("Reset")]
-        public GameObject resetRootGO;
-
-        public M8.Animator.Animate resetAnimator;
-        [M8.Animator.TakeSelector(animatorField = "resetAnimator")]
-        public string resetTakeEnter;
-        [M8.Animator.TakeSelector(animatorField = "resetAnimator")]
-        public string resetTakeExit;
 
         public bool isPaletteActive { get; private set; }
 
@@ -181,18 +165,10 @@ namespace Renegadeware.K2PS2 {
             while(IsAnyAnimationPlaying())
                 yield return null;
 
-            if(paletteRootGO) paletteRootGO.SetActive(true);
-            if(playRootGO) playRootGO.SetActive(true);
-            if(resetRootGO) resetRootGO.SetActive(true);
+            if(editRootGO) editRootGO.SetActive(true);
 
-            if(paletteAnimator && !string.IsNullOrEmpty(paletteTakeEnter))
-                paletteAnimator.Play(paletteTakeEnter);
-
-            if(playAnimator && !string.IsNullOrEmpty(playTakeEnter))
-                playAnimator.Play(playTakeEnter);
-
-            if(resetAnimator && !string.IsNullOrEmpty(resetTakeEnter))
-                resetAnimator.Play(resetTakeEnter);
+            if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
+                editAnimator.Play(editTakeEnter);
 
             mRout = null;
         }
@@ -202,20 +178,14 @@ namespace Renegadeware.K2PS2 {
             while(IsAnyAnimationPlaying())
                 yield return null;
 
-            if(paletteRootGO.activeSelf && paletteAnimator && !string.IsNullOrEmpty(paletteTakeExit))
-                paletteAnimator.Play(paletteTakeExit);
+            if(editRootGO.activeSelf && editAnimator && !string.IsNullOrEmpty(editTakeExit))
+                editAnimator.Play(editTakeExit);
 
             if(trashRootGO.activeSelf && trashAnimator && !string.IsNullOrEmpty(trashTakeExit))
                 trashAnimator.Play(trashTakeExit);
 
-            if(playRootGO.activeSelf && playAnimator && !string.IsNullOrEmpty(playTakeExit))
-                playAnimator.Play(playTakeExit);
-
             if(stopRootGO.activeSelf && stopAnimator && !string.IsNullOrEmpty(stopTakeExit))
                 stopAnimator.Play(stopTakeExit);
-
-            if(resetRootGO.activeSelf && resetAnimator && !string.IsNullOrEmpty(resetTakeExit))
-                stopAnimator.Play(resetTakeExit);
 
             while(IsAnyAnimationPlaying())
                 yield return null;
@@ -232,23 +202,11 @@ namespace Renegadeware.K2PS2 {
             while(IsAnyAnimationPlaying())
                 yield return null;
 
-            //palette/play exit animation
-            if(paletteAnimator && !string.IsNullOrEmpty(paletteTakeExit))
-                paletteAnimator.Play(paletteTakeExit);
+            //edit exit animation
+            if(editAnimator && !string.IsNullOrEmpty(editTakeExit))
+                yield return editAnimator.PlayWait(editTakeExit);
 
-            if(playAnimator && !string.IsNullOrEmpty(playTakeExit))
-                playAnimator.Play(playTakeExit);
-
-            if(resetAnimator && !string.IsNullOrEmpty(resetTakeExit))
-                resetAnimator.Play(resetTakeExit);
-
-            while((paletteAnimator && paletteAnimator.isPlaying) || (playAnimator && playAnimator.isPlaying) || (resetAnimator && resetAnimator.isPlaying))
-                yield return null;
-
-            //hide edit display
-            paletteRootGO.SetActive(false);
-            playRootGO.SetActive(false);
-            resetRootGO.SetActive(false);
+            editRootGO.SetActive(false);
 
             //show stop
             stopRootGO.SetActive(true);
@@ -276,18 +234,10 @@ namespace Renegadeware.K2PS2 {
             stopRootGO.SetActive(false);
 
             //show edit display
-            paletteRootGO.SetActive(true);
-            playRootGO.SetActive(true);
-            resetRootGO.SetActive(true);
+            editRootGO.SetActive(true);
 
-            if(paletteAnimator && !string.IsNullOrEmpty(paletteTakeEnter))
-                paletteAnimator.Play(paletteTakeEnter);
-
-            if(playAnimator && !string.IsNullOrEmpty(playTakeEnter))
-                playAnimator.Play(playTakeEnter);
-
-            if(resetAnimator && !string.IsNullOrEmpty(resetTakeEnter))
-                resetAnimator.Play(resetTakeEnter);
+            if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
+                editAnimator.Play(editTakeEnter);
 
             mRout = null;
         }
@@ -300,21 +250,9 @@ namespace Renegadeware.K2PS2 {
             while(IsAnyAnimationPlaying())
                 yield return null;
 
-            //hide palette and play
-            if(paletteAnimator && !string.IsNullOrEmpty(paletteTakeExit))
-                paletteAnimator.Play(paletteTakeExit);
-
-            if(playAnimator && !string.IsNullOrEmpty(playTakeExit))
-                playAnimator.Play(playTakeExit);
-
-            if(resetAnimator && !string.IsNullOrEmpty(resetTakeExit))
-                resetAnimator.Play(resetTakeExit);
-
-            while((playAnimator && playAnimator.isPlaying) || (resetAnimator && resetAnimator.isPlaying))
-                yield return null;
-
-            playRootGO.SetActive(false);
-            resetRootGO.SetActive(false);
+            //hide edit
+            if(editAnimator && !string.IsNullOrEmpty(editTakeExit))
+                yield return editAnimator.PlayWait(editTakeExit);
 
             //show trash
             trashRootGO.SetActive(true);
@@ -341,36 +279,23 @@ namespace Renegadeware.K2PS2 {
             if(trashRootGO) trashRootGO.SetActive(false);
 
             //show edit display
-            playRootGO.SetActive(true);
-            resetRootGO.SetActive(true);
-
-            if(paletteAnimator && !string.IsNullOrEmpty(paletteTakeEnter))
-                paletteAnimator.Play(paletteTakeEnter);
-
-            if(playAnimator && !string.IsNullOrEmpty(playTakeEnter))
-                playAnimator.Play(playTakeEnter);
-
-            if(resetAnimator && !string.IsNullOrEmpty(resetTakeEnter))
-                resetAnimator.Play(resetTakeEnter);
+            if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
+                editAnimator.Play(editTakeEnter);
 
             mRout = null;
         }
 
         private bool IsAnyAnimationPlaying() {
-            return (paletteAnimator && paletteAnimator.isPlaying) 
-                || (trashAnimator && trashAnimator.isPlaying) 
-                || (playAnimator && playAnimator.isPlaying) 
-                || (stopAnimator && stopAnimator.isPlaying)
-                || (resetAnimator && resetAnimator.isPlaying);
+            return (editAnimator && editAnimator.isPlaying) 
+                || (trashAnimator && trashAnimator.isPlaying)
+                || (stopAnimator && stopAnimator.isPlaying);
         }
 
         private void HideAll() {
-            paletteRootGO.SetActive(false);
-            playRootGO.SetActive(false);
+            editRootGO.SetActive(false);
             dragRootGO.SetActive(false);
             trashRootGO.SetActive(false);
             stopRootGO.SetActive(false);
-            resetRootGO.SetActive(false);
 
             isPaletteActive = false;
         }

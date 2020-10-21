@@ -42,7 +42,7 @@ MonoBehaviour:
   materialObjectTag: MaterialObject
   cameraMoveDelay: 0.5
   cameraMoveTween: 7
-  goalDelay: 1
+  goalDelay: 3
   uiLayerMask:
     serializedVersion: 2
     m_Bits: 32

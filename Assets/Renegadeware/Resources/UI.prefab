@@ -74,240 +74,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &348780145
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 348780146}
-  - component: {fileID: 6546392854672296459}
-  - component: {fileID: 2727465824230520950}
-  - component: {fileID: 2510703186735078370}
-  m_Layer: 5
-  m_Name: palettes
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &348780146
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348780145}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2373879924783336740}
-  m_Father: {fileID: 4814671152217780010}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &6546392854672296459
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348780145}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &2727465824230520950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348780145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 3
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &2510703186735078370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348780145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189a50e0ddb1421498ef25dcd885c95b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takeData:
-  - name: enter
-    frameRate: 30
-    endFramePadding: 0
-    numLoop: 1
-    loopMode: 0
-    loopBackToFrame: 0
-    trackCounter: 3
-    groupCounter: 0
-    rootGroup:
-      group_name: Group0
-      group_id: 0
-      elements: 03000000
-      foldout: 1
-    groupValues: []
-  - name: exit
-    frameRate: 30
-    endFramePadding: 0
-    numLoop: 1
-    loopMode: 0
-    loopBackToFrame: 0
-    trackCounter: 3
-    groupCounter: 0
-    rootGroup:
-      group_name: Group0
-      group_id: 0
-      elements: 03000000
-      foldout: 1
-    groupValues: []
-  _defaultTakeName: 
-  _meta: {fileID: 0}
-  sequenceLoadAll: 1
-  sequenceKillWhenDone: 0
-  playOnEnable: 0
-  isGlobal: 0
-  onDisableAction: 3
-  updateType: 0
-  updateTimeIndependent: 1
-  serializeData:
-    _audioTracks: []
-    _audioKeys: []
-    _cameraSwitcherTracks: []
-    _cameraSwitcherKeys: []
-    _eventTracks: []
-    _eventKeys: []
-    _goSetActiveTracks: []
-    _goSetActiveKeys: []
-    _materialTracks: []
-    _materialKeys: []
-    _orientationTracks: []
-    _orientationKeys: []
-    _propertyTracks:
-    - _version: 4
-      id: 3
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 7374079149859350511}
-      component: {fileID: 2373879924783336740}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: anchoredPosition
-    - _version: 4
-      id: 3
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 7374079149859350511}
-      component: {fileID: 2373879924783336740}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: anchoredPosition
-    _propertyKeys:
-    - interp: 0
-      frame: 1
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 15, y: -170, z: 0, w: 0}
-    - interp: 0
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 15, y: 15, z: 0, w: 0}
-    - interp: 0
-      frame: 1
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 15, y: 15, z: 0, w: 0}
-    - interp: 0
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 15, y: -170, z: 0, w: 0}
-    _rotationEulerTracks: []
-    _rotationEulerKeys: []
-    _rotationTracks: []
-    _rotationKeys: []
-    _translationTracks: []
-    _translationKeys: []
-    _unityAnimationTracks: []
-    _unityAnimationKeys: []
-    _scaleTracks: []
-    _scaleKeys: []
-    _trackLookups:
-    - type: 7
-      index: 0
-      keyIndices: 0000000001000000
-    - type: 7
-      index: 1
-      keyIndices: 0200000003000000
-    _takeTrackCounts: 0100000001000000
 --- !u!1 &818901568
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 16, y: 16}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: -0.00000014901161, y: -0.000000014901161}
 --- !u!222 &818901570
 CanvasRenderer:
@@ -574,13 +340,13 @@ RectTransform:
   - {fileID: 4939013631896583754}
   - {fileID: 938089429}
   - {fileID: 9085484029355300714}
-  m_Father: {fileID: 6057204717471903611}
-  m_RootOrder: 0
+  m_Father: {fileID: 2680303426239563035}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 80}
-  m_SizeDelta: {x: 66, y: 66}
+  m_AnchoredPosition: {x: 395, y: 113}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.50000024, y: 0.5}
 --- !u!222 &1423295494
 CanvasRenderer:
@@ -3230,307 +2996,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1273861302788038720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6057204717471903611}
-  - component: {fileID: 656503506886096999}
-  - component: {fileID: 5110901610164107507}
-  - component: {fileID: 5837062772180704299}
-  m_Layer: 5
-  m_Name: play
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &6057204717471903611
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273861302788038720}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1423295490}
-  m_Father: {fileID: 4814671152217780010}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &656503506886096999
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273861302788038720}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &5110901610164107507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273861302788038720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 3
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &5837062772180704299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273861302788038720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189a50e0ddb1421498ef25dcd885c95b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takeData:
-  - name: enter
-    frameRate: 30
-    endFramePadding: 0
-    numLoop: 1
-    loopMode: 0
-    loopBackToFrame: 0
-    trackCounter: 4
-    groupCounter: 0
-    rootGroup:
-      group_name: Group0
-      group_id: 0
-      elements: 0400000003000000
-      foldout: 1
-    groupValues: []
-  - name: exit
-    frameRate: 30
-    endFramePadding: 0
-    numLoop: 1
-    loopMode: 0
-    loopBackToFrame: 0
-    trackCounter: 4
-    groupCounter: 0
-    rootGroup:
-      group_name: Group0
-      group_id: 0
-      elements: 0400000003000000
-      foldout: 1
-    groupValues: []
-  _defaultTakeName: 
-  _meta: {fileID: 0}
-  sequenceLoadAll: 1
-  sequenceKillWhenDone: 0
-  playOnEnable: 0
-  isGlobal: 0
-  onDisableAction: 3
-  updateType: 0
-  updateTimeIndependent: 1
-  serializeData:
-    _audioTracks: []
-    _audioKeys: []
-    _cameraSwitcherTracks: []
-    _cameraSwitcherKeys: []
-    _eventTracks: []
-    _eventKeys: []
-    _goSetActiveTracks: []
-    _goSetActiveKeys: []
-    _materialTracks: []
-    _materialKeys: []
-    _orientationTracks: []
-    _orientationKeys: []
-    _propertyTracks:
-    - _version: 4
-      id: 3
-      name: Track2
-      foldout: 1
-      _targetPath: 
-      valueType: 12
-      obj: {fileID: 1423295489}
-      component: {fileID: 1423295492}
-      componentName: Button
-      fieldName: 
-      propertyName: interactable
-    - _version: 4
-      id: 4
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 1423295489}
-      component: {fileID: 1423295490}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: anchoredPosition
-    - _version: 4
-      id: 3
-      name: Track2
-      foldout: 1
-      _targetPath: 
-      valueType: 12
-      obj: {fileID: 1423295489}
-      component: {fileID: 1423295492}
-      componentName: Button
-      fieldName: 
-      propertyName: interactable
-    - _version: 4
-      id: 4
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 1423295489}
-      component: {fileID: 1423295490}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: anchoredPosition
-    _propertyKeys:
-    - interp: 2
-      frame: 1
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: -1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 2
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 0
-      frame: 1
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 400, y: -48, z: 0, w: 0}
-    - interp: 0
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 400, y: 80, z: 0, w: 0}
-    - interp: 2
-      frame: 1
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 1
-      isConstSpeed: 0
-      _paths: []
-      val: -1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 0
-      frame: 1
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 400, y: 80, z: 0, w: 0}
-    - interp: 0
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 400, y: -48, z: 0, w: 0}
-    _rotationEulerTracks: []
-    _rotationEulerKeys: []
-    _rotationTracks: []
-    _rotationKeys: []
-    _translationTracks: []
-    _translationKeys: []
-    _unityAnimationTracks: []
-    _unityAnimationKeys: []
-    _scaleTracks: []
-    _scaleKeys: []
-    _trackLookups:
-    - type: 7
-      index: 0
-      keyIndices: 0000000001000000
-    - type: 7
-      index: 1
-      keyIndices: 0200000003000000
-    - type: 7
-      index: 2
-      keyIndices: 04000000
-    - type: 7
-      index: 3
-      keyIndices: 0500000006000000
-    _takeTrackCounts: 0200000002000000
 --- !u!1 &1283112039946989612
 GameObject:
   m_ObjectHideFlags: 0
@@ -5170,8 +4635,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22, y: -20}
-  m_SizeDelta: {x: 64, y: 46}
+  m_AnchoredPosition: {x: -21, y: -15}
+  m_SizeDelta: {x: 64, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6022067022901957273
 CanvasRenderer:
@@ -5552,8 +5017,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22, y: 20}
-  m_SizeDelta: {x: 64, y: 46}
+  m_AnchoredPosition: {x: 21, y: 15}
+  m_SizeDelta: {x: 64, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4843088012563203563
 CanvasRenderer:
@@ -6767,6 +6232,536 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3755938862560556964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2680303426239563035}
+  - component: {fileID: 4961439779832864775}
+  - component: {fileID: 8813918884036614709}
+  - component: {fileID: 481463989363690508}
+  m_Layer: 5
+  m_Name: edit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2680303426239563035
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755938862560556964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2373879924783336740}
+  - {fileID: 1423295490}
+  - {fileID: 5082619761566786256}
+  m_Father: {fileID: 4814671152217780010}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &4961439779832864775
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755938862560556964}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &8813918884036614709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755938862560556964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 3
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &481463989363690508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755938862560556964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189a50e0ddb1421498ef25dcd885c95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeData:
+  - name: enter
+    frameRate: 30
+    endFramePadding: 0
+    numLoop: 1
+    loopMode: 0
+    loopBackToFrame: 0
+    trackCounter: 6
+    groupCounter: 0
+    rootGroup:
+      group_name: Group0
+      group_id: 0
+      elements: 0200000003000000040000000500000006000000
+      foldout: 1
+    groupValues: []
+  - name: exit
+    frameRate: 30
+    endFramePadding: 0
+    numLoop: 1
+    loopMode: 0
+    loopBackToFrame: 0
+    trackCounter: 6
+    groupCounter: 0
+    rootGroup:
+      group_name: Group0
+      group_id: 0
+      elements: 0200000003000000040000000500000006000000
+      foldout: 1
+    groupValues: []
+  _defaultTakeName: 
+  _meta: {fileID: 0}
+  sequenceLoadAll: 1
+  sequenceKillWhenDone: 0
+  playOnEnable: 0
+  isGlobal: 0
+  onDisableAction: 3
+  updateType: 0
+  updateTimeIndependent: 1
+  serializeData:
+    _audioTracks: []
+    _audioKeys: []
+    _cameraSwitcherTracks: []
+    _cameraSwitcherKeys: []
+    _eventTracks: []
+    _eventKeys: []
+    _goSetActiveTracks: []
+    _goSetActiveKeys: []
+    _materialTracks: []
+    _materialKeys: []
+    _orientationTracks: []
+    _orientationKeys: []
+    _propertyTracks:
+    - _version: 4
+      id: 2
+      name: Track1
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 7374079149859350511}
+      component: {fileID: 2373879924783336740}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: anchoredPosition
+    - _version: 4
+      id: 3
+      name: Track2
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 1423295489}
+      component: {fileID: 1423295490}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: anchoredPosition
+    - _version: 4
+      id: 4
+      name: Track3
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 6649340589083684231}
+      component: {fileID: 5082619761566786256}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: anchoredPosition
+    - _version: 4
+      id: 5
+      name: Track4
+      foldout: 1
+      _targetPath: 
+      valueType: 12
+      obj: {fileID: 1423295489}
+      component: {fileID: 1423295492}
+      componentName: Button
+      fieldName: 
+      propertyName: interactable
+    - _version: 4
+      id: 6
+      name: Track5
+      foldout: 1
+      _targetPath: 
+      valueType: 12
+      obj: {fileID: 6649340589083684231}
+      component: {fileID: 202421192455196843}
+      componentName: Invisible
+      fieldName: 
+      propertyName: raycastTarget
+    - _version: 4
+      id: 2
+      name: Track1
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 7374079149859350511}
+      component: {fileID: 2373879924783336740}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: anchoredPosition
+    - _version: 4
+      id: 3
+      name: Track2
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 1423295489}
+      component: {fileID: 1423295490}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: anchoredPosition
+    - _version: 4
+      id: 4
+      name: Track3
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 6649340589083684231}
+      component: {fileID: 5082619761566786256}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: anchoredPosition
+    - _version: 4
+      id: 5
+      name: Track4
+      foldout: 1
+      _targetPath: 
+      valueType: 12
+      obj: {fileID: 1423295489}
+      component: {fileID: 1423295492}
+      componentName: Button
+      fieldName: 
+      propertyName: interactable
+    - _version: 4
+      id: 6
+      name: Track5
+      foldout: 1
+      _targetPath: 
+      valueType: 12
+      obj: {fileID: 6649340589083684231}
+      component: {fileID: 202421192455196843}
+      componentName: Invisible
+      fieldName: 
+      propertyName: raycastTarget
+    _propertyKeys:
+    - interp: 0
+      frame: 1
+      easeType: 3
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 15, y: -172, z: 0, w: 0}
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 15, y: 15, z: 0, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 3
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: -77, z: 0, w: 0}
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: 113, z: 0, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 3
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: -146.1, z: 0, w: 0}
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: 45.000015, z: 0, w: 0}
+    - interp: 2
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: -1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 2
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 2
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: -1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 2
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 15, y: 15, z: 0, w: 0}
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 15, y: -172, z: 0, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: 113, z: 0, w: 0}
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: -77, z: 0, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: 45.000015, z: 0, w: 0}
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 395, y: -146.1, z: 0, w: 0}
+    - interp: 2
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 1
+      isConstSpeed: 0
+      _paths: []
+      val: -1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 2
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 1
+      isConstSpeed: 0
+      _paths: []
+      val: -1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    _rotationEulerTracks: []
+    _rotationEulerKeys: []
+    _rotationTracks: []
+    _rotationKeys: []
+    _translationTracks: []
+    _translationKeys: []
+    _unityAnimationTracks: []
+    _unityAnimationKeys: []
+    _scaleTracks: []
+    _scaleKeys: []
+    _trackLookups:
+    - type: 7
+      index: 0
+      keyIndices: 0000000001000000
+    - type: 7
+      index: 1
+      keyIndices: 0200000003000000
+    - type: 7
+      index: 2
+      keyIndices: 0400000005000000
+    - type: 7
+      index: 3
+      keyIndices: 0600000007000000
+    - type: 7
+      index: 4
+      keyIndices: 0800000009000000
+    - type: 7
+      index: 5
+      keyIndices: 0a0000000b000000
+    - type: 7
+      index: 6
+      keyIndices: 0c0000000d000000
+    - type: 7
+      index: 7
+      keyIndices: 0e0000000f000000
+    - type: 7
+      index: 8
+      keyIndices: 10000000
+    - type: 7
+      index: 9
+      keyIndices: 11000000
+    _takeTrackCounts: 0500000005000000
 --- !u!1 &3783076244281079388
 GameObject:
   m_ObjectHideFlags: 0
@@ -6802,7 +6797,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 46, y: 46}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2312936899044660435
 CanvasRenderer:
@@ -8424,7 +8419,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4, y: 0}
-  m_SizeDelta: {x: 38, y: 44}
+  m_SizeDelta: {x: 38, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8833964093592553286
 CanvasRenderer:
@@ -9115,11 +9110,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5181143775664126747}
-  - {fileID: 6057204717471903611}
-  - {fileID: 348780146}
   - {fileID: 197154361431927042}
+  - {fileID: 2680303426239563035}
   - {fileID: 8812085886276958066}
-  - {fileID: 3012141574550908093}
   m_Father: {fileID: 4815591494420644214}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9140,30 +9133,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4613c85eb1a0373469ada3629147eb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paletteRootGO: {fileID: 348780145}
+  editRootGO: {fileID: 3755938862560556964}
+  editAnimator: {fileID: 481463989363690508}
+  editTakeEnter: enter
+  editTakeExit: exit
   paletteWidgets:
   - {fileID: 5652003176180903946}
   - {fileID: 6124796593404424376}
-  paletteAnimator: {fileID: 2510703186735078370}
-  paletteTakeEnter: enter
-  paletteTakeExit: exit
   dragRootGO: {fileID: 8757888352264924369}
   trashRootGO: {fileID: 7976600075720585826}
   trashAnimator: {fileID: 6695367170174193502}
   trashTakeEnter: enter
   trashTakeExit: exit
-  playRootGO: {fileID: 1273861302788038720}
-  playAnimator: {fileID: 5837062772180704299}
-  playTakeEnter: enter
-  playTakeExit: exit
   stopRootGO: {fileID: 5146159891145031922}
   stopAnimator: {fileID: 1996927768693958008}
   stopTakeEnter: enter
   stopTakeExit: exit
-  resetRootGO: {fileID: 8089971382729863026}
-  resetAnimator: {fileID: 2491955182147998819}
-  resetTakeEnter: enter
-  resetTakeExit: exit
 --- !u!1 &4776473942388379122
 GameObject:
   m_ObjectHideFlags: 0
@@ -9725,7 +9710,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 40, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3301201762746557565
 CanvasRenderer:
@@ -13065,14 +13050,14 @@ RectTransform:
   - {fileID: 3848531158087524421}
   - {fileID: 156377219058444637}
   - {fileID: 2923488211866124531}
-  m_Father: {fileID: 3012141574550908093}
-  m_RootOrder: 0
+  m_Father: {fileID: 2680303426239563035}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -72, y: 12}
-  m_SizeDelta: {x: 66, y: 66}
-  m_Pivot: {x: 1.0000004, y: -0.00000008195639}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 395, y: 45.000015}
+  m_SizeDelta: {x: 60, y: 60}
+  m_Pivot: {x: 0.50000036, y: 0.50000006}
 --- !u!222 &7895699338363795415
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14678,7 +14663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2373879924783336740}
   m_Layer: 5
-  m_Name: panel
+  m_Name: palettes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14691,13 +14676,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7374079149859350511}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3257048404266072122}
   - {fileID: 4009057679762323592}
-  m_Father: {fileID: 348780146}
+  m_Father: {fileID: 2680303426239563035}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -15255,7 +15240,7 @@ RectTransform:
   m_Children:
   - {fileID: 818901571}
   m_Father: {fileID: 4814671152217780010}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -15955,307 +15940,6 @@ MonoBehaviour:
     - type: 7
       index: 1
       keyIndices: 02000000
-    _takeTrackCounts: 0200000002000000
---- !u!1 &8089971382729863026
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3012141574550908093}
-  - component: {fileID: 4947237824511459691}
-  - component: {fileID: 372279174807882987}
-  - component: {fileID: 2491955182147998819}
-  m_Layer: 5
-  m_Name: reset
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &3012141574550908093
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8089971382729863026}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5082619761566786256}
-  m_Father: {fileID: 4814671152217780010}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &4947237824511459691
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8089971382729863026}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &372279174807882987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8089971382729863026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 3
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &2491955182147998819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8089971382729863026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189a50e0ddb1421498ef25dcd885c95b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takeData:
-  - name: enter
-    frameRate: 30
-    endFramePadding: 0
-    numLoop: 1
-    loopMode: 0
-    loopBackToFrame: 0
-    trackCounter: 3
-    groupCounter: 0
-    rootGroup:
-      group_name: Group0
-      group_id: 0
-      elements: 0200000003000000
-      foldout: 1
-    groupValues: []
-  - name: exit
-    frameRate: 30
-    endFramePadding: 0
-    numLoop: 1
-    loopMode: 0
-    loopBackToFrame: 0
-    trackCounter: 3
-    groupCounter: 0
-    rootGroup:
-      group_name: Group0
-      group_id: 0
-      elements: 0200000003000000
-      foldout: 1
-    groupValues: []
-  _defaultTakeName: 
-  _meta: {fileID: 0}
-  sequenceLoadAll: 1
-  sequenceKillWhenDone: 0
-  playOnEnable: 0
-  isGlobal: 0
-  onDisableAction: 3
-  updateType: 0
-  updateTimeIndependent: 1
-  serializeData:
-    _audioTracks: []
-    _audioKeys: []
-    _cameraSwitcherTracks: []
-    _cameraSwitcherKeys: []
-    _eventTracks: []
-    _eventKeys: []
-    _goSetActiveTracks: []
-    _goSetActiveKeys: []
-    _materialTracks: []
-    _materialKeys: []
-    _orientationTracks: []
-    _orientationKeys: []
-    _propertyTracks:
-    - _version: 4
-      id: 2
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 6649340589083684231}
-      component: {fileID: 5082619761566786256}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: anchoredPosition
-    - _version: 4
-      id: 3
-      name: Track2
-      foldout: 1
-      _targetPath: 
-      valueType: 12
-      obj: {fileID: 6649340589083684231}
-      component: {fileID: 202421192455196843}
-      componentName: Invisible
-      fieldName: 
-      propertyName: raycastTarget
-    - _version: 4
-      id: 2
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 6649340589083684231}
-      component: {fileID: 5082619761566786256}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: anchoredPosition
-    - _version: 4
-      id: 3
-      name: Track2
-      foldout: 1
-      _targetPath: 
-      valueType: 12
-      obj: {fileID: 6649340589083684231}
-      component: {fileID: 202421192455196843}
-      componentName: Invisible
-      fieldName: 
-      propertyName: raycastTarget
-    _propertyKeys:
-    - interp: 0
-      frame: 1
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: -72, y: -75, z: 0, w: 0}
-    - interp: 0
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: -72, y: 12, z: 0, w: 0}
-    - interp: 2
-      frame: 1
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: -1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 2
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 0
-      frame: 1
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 10
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: -72, y: 12, z: 0, w: 0}
-    - interp: 0
-      frame: 10
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: -72, y: -75, z: 0, w: 0}
-    - interp: 2
-      frame: 1
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 1
-      isConstSpeed: 0
-      _paths: []
-      val: -1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    _rotationEulerTracks: []
-    _rotationEulerKeys: []
-    _rotationTracks: []
-    _rotationKeys: []
-    _translationTracks: []
-    _translationKeys: []
-    _unityAnimationTracks: []
-    _unityAnimationKeys: []
-    _scaleTracks: []
-    _scaleKeys: []
-    _trackLookups:
-    - type: 7
-      index: 0
-      keyIndices: 0000000001000000
-    - type: 7
-      index: 1
-      keyIndices: 0200000003000000
-    - type: 7
-      index: 2
-      keyIndices: 0400000005000000
-    - type: 7
-      index: 3
-      keyIndices: 06000000
     _takeTrackCounts: 0200000002000000
 --- !u!1 &8120505989647378327
 GameObject:
@@ -17622,7 +17306,7 @@ RectTransform:
   m_Children:
   - {fileID: 1714888783}
   m_Father: {fileID: 4814671152217780010}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18601,6 +18285,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e075767003f35f448eb55fe17f70fff, type: 3}
+--- !u!224 &8506030205777147467 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1495197601147067215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1137026065659231945 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1947672034487657862, guid: 3e075767003f35f448eb55fe17f70fff,
@@ -18613,12 +18303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8506030205777147467 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1495197601147067215}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5270026516118402321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18803,6 +18487,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e075767003f35f448eb55fe17f70fff, type: 3}
+--- !u!224 &3164229666027706389 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 5270026516118402321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5919243202241040535 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1947672034487657862, guid: 3e075767003f35f448eb55fe17f70fff,
@@ -18815,12 +18505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &3164229666027706389 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 5270026516118402321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5762394654917907774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19410,27 +19094,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e075767003f35f448eb55fe17f70fff, type: 3}
---- !u!114 &6124796593404424376 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1947672034487657862, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 5762394654917907774}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3257048404266072122 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 5762394654917907774}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6244396153060950286 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1824149576190153776, guid: 3e075767003f35f448eb55fe17f70fff,
     type: 3}
   m_PrefabInstance: {fileID: 5762394654917907774}
   m_PrefabAsset: {fileID: 0}
@@ -19444,6 +19110,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6244396153060950286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1824149576190153776, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 5762394654917907774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6124796593404424376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1947672034487657862, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 5762394654917907774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6154300368797635980
@@ -19800,30 +19484,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e075767003f35f448eb55fe17f70fff, type: 3}
---- !u!114 &5652003176180903946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1947672034487657862, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 6154300368797635980}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &5492379215418573244 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1824149576190153776, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 6154300368797635980}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &4009057679762323592 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 6154300368797635980}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4235065309008941541 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8047245209608897641, guid: 3e075767003f35f448eb55fe17f70fff,
@@ -19836,3 +19496,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5492379215418573244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1824149576190153776, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 6154300368797635980}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5652003176180903946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1947672034487657862, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 6154300368797635980}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &4009057679762323592 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 6154300368797635980}
+  m_PrefabAsset: {fileID: 0}

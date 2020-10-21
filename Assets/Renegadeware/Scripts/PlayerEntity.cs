@@ -262,7 +262,7 @@ namespace Renegadeware.K2PS2 {
             lastJumpTime = 0f;
         }
 
-        private bool CheckCast(Vector2 dir, out RaycastHit2D hit, float dist) {
+        private bool CheckSolidCast(Vector2 dir, out RaycastHit2D hit, float dist) {
             var hitCount = moveCtrl.CheckAllCasts(Vector2.zero, radiusCheckOfs, dir, mHitCache, dist, solidCheckMask);
             for(int i = 0; i < hitCount; i++) {
                 var _hit = mHitCache[i];
@@ -292,6 +292,10 @@ namespace Renegadeware.K2PS2 {
                 if(_hit.collider == moveCtrl.coll)
                     continue;
 
+                //return harm tags
+                if(GameUtils.CheckTags(_hit.collider, harmCheckTags))
+                    return _hit;
+
                 //ignore certain tags
                 if(GameUtils.CheckTags(_hit.collider, solidIgnoreTags))
                     continue;
@@ -317,7 +321,7 @@ namespace Renegadeware.K2PS2 {
             float forwardDist = moveCtrl.radius + groundCheckForwardDist;
 
             RaycastHit2D hit;
-            if(CheckCast(dir, out hit, forwardDist)) {
+            if(CheckSolidCast(dir, out hit, forwardDist)) {
                 //check if it's harm's way
                 if(GameUtils.CheckTags(hit.collider, harmCheckTags)) {
                     //move the opposite direction

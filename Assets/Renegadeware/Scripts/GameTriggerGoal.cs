@@ -4,7 +4,12 @@ using UnityEngine;
 
 namespace Renegadeware.K2PS2 {
     public class GameTriggerGoal : MonoBehaviour {
-        //animation
+        [Header("Animation")]
+        public M8.Animator.Animate animator;
+        [M8.Animator.TakeSelector(animatorField = "animator")]
+        public string takeActive;
+        [M8.Animator.TakeSelector(animatorField = "animator")]
+        public string takeCollect;
 
         private bool mIsTriggered;
 
@@ -24,9 +29,12 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
+        void Start() {
+            animator.Play(takeActive);
+        }
+
         IEnumerator DoGoalTrigger() {
-            //play animation
-            yield return null;
+            yield return animator.PlayWait(takeCollect);
 
             gameObject.SetActive(false);
         }
