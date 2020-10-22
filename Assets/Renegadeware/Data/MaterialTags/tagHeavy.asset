@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: tagHeavy
   m_EditorClassIdentifier: 
   labelRef: tag_heavy
-  icon: {fileID: 21300000, guid: 326ab6c73d9e81346bb6774298a0d825, type: 3}
+  icon: {fileID: 21300000, guid: 54d91cec3e7bcae45a7feeb43501965b, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}

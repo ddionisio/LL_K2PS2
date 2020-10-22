@@ -14,6 +14,7 @@ namespace Renegadeware.K2PS2 {
 
         [Header("Display")]
         public GameObject[] poweredActiveGOs;
+        public GameObject[] unpoweredActiveGOs;
 
         public bool isPowered { get { return mActive && (_powered || mPowerConnectCounter > 0); } }
 
@@ -239,6 +240,12 @@ namespace Renegadeware.K2PS2 {
                 var go = poweredActiveGOs[i];
                 if(go)
                     go.SetActive(_isPowered);
+            }
+
+            for(int i = 0; i < unpoweredActiveGOs.Length; i++) {
+                var go = unpoweredActiveGOs[i];
+                if(go)
+                    go.SetActive(!_isPowered);
             }
         }
 

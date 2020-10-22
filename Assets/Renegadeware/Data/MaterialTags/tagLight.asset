@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: tagLight
   m_EditorClassIdentifier: 
   labelRef: tag_light
-  icon: {fileID: 21300000, guid: 326ab6c73d9e81346bb6774298a0d825, type: 3}
+  icon: {fileID: 21300000, guid: 8be002e25a1b6b043b285b3698a67929, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}

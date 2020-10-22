@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: objectSteelAnvil
   m_EditorClassIdentifier: 
   labelRef: material_steel_anvil
-  icon: {fileID: 21300000, guid: 326ab6c73d9e81346bb6774298a0d825, type: 3}
+  icon: {fileID: 21300000, guid: 10ef4f4b8996cdc4e9bf66ea1ab17123, type: 3}
   tags:
   - {fileID: 11400000, guid: 599c65560a1eaee42a42b176640d2303, type: 2}
   - {fileID: 11400000, guid: 138a2894393d5fd40848b8d5f7d6d8f9, type: 2}

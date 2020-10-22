@@ -31,6 +31,12 @@ MonoBehaviour:
     playScene:
       name: level03play
       path: Assets/Renegadeware/Scenes/level03play.unity
+  - classifyScene:
+      name: level04classify
+      path: Assets/Renegadeware/Scenes/level04classify.unity
+    playScene:
+      name: level04play
+      path: Assets/Renegadeware/Scenes/level04play.unity
   HUDClassifyTag: HUDClassify
   HUDGameTag: HUDGame
   playerTag: Player
@@ -64,8 +70,8 @@ MonoBehaviour:
   - Electricity
   conductiveRefreshDelay: 0.3
   endScene:
-    name: 
-    path: 
+    name: end
+    path: Assets/Renegadeware/Scenes/end.unity
   modalClassifySummary: classifySummary
   modalVictory: victory
   signalDragBegin: {fileID: 11400000, guid: 9457b1fe92e556e4b9fd19f98290a9b4, type: 2}
