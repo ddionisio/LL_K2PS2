@@ -23,6 +23,8 @@ namespace Renegadeware.K2PS2 {
         public string takeDespawn;
         [M8.Animator.TakeSelector(animatorField = "animator")]
         public string takeDeath;
+        [M8.Animator.TakeSelector(animatorField = "animator")]
+        public string takeVictory;
 
         public PlayerEntity player { get; private set; }
 
@@ -35,6 +37,7 @@ namespace Renegadeware.K2PS2 {
         private int mTakeAirDownInd;
         private int mTakeDespawnInd;
         private int mTakeDeathInd;
+        private int mTakeVictoryInd;
 
         private PlayerEntity.MoveState mCurMoveState;
         private bool mCurGrounded;
@@ -81,6 +84,7 @@ namespace Renegadeware.K2PS2 {
             mTakeAirDownInd = animator.GetTakeIndex(takeAirDown);
             mTakeDespawnInd = animator.GetTakeIndex(takeDespawn);
             mTakeDeathInd = animator.GetTakeIndex(takeDeath);
+            mTakeVictoryInd = animator.GetTakeIndex(takeVictory);
 
             //default hidden
             spriteRenderer.gameObject.SetActive(false);
@@ -169,7 +173,7 @@ namespace Renegadeware.K2PS2 {
             }
 
             //play victory
-            animator.Play(mTakeIdleInd);
+            animator.Play(mTakeVictoryInd);
 
             mRout = null;
         }
@@ -183,6 +187,8 @@ namespace Renegadeware.K2PS2 {
             if(body.position.x < toX) {
                 player.moveState = PlayerEntity.MoveState.Right;
 
+                MoveStartAnimation();
+
                 while(body.position.x < toX) {
                     MoveUpdateAnimation();
                     yield return null;
@@ -190,6 +196,8 @@ namespace Renegadeware.K2PS2 {
             }
             else if(body.position.x > toX) {
                 player.moveState = PlayerEntity.MoveState.Left;
+
+                MoveStartAnimation();
 
                 while(body.position.x > toX) {
                     MoveUpdateAnimation();
@@ -226,6 +234,11 @@ namespace Renegadeware.K2PS2 {
 
         private void MoveApplyAnimation() {
             var moveCtrl = player.moveCtrl;
+
+            if(player.moveState == PlayerEntity.MoveState.Left)
+                spriteRenderer.flipX = true;
+            else if(player.moveState == PlayerEntity.MoveState.Right)
+                spriteRenderer.flipX = false;
 
             if(moveCtrl.isGrounded) {
                 if(mCurMoveState == PlayerEntity.MoveState.Stop)

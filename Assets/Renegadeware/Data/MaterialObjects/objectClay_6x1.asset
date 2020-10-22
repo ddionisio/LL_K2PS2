@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: objectClay_6x1
   m_EditorClassIdentifier: 
   labelRef: material_clay_6x1
-  icon: {fileID: 21300000, guid: 326ab6c73d9e81346bb6774298a0d825, type: 3}
+  icon: {fileID: 21300000, guid: c9ceccc638f0f3e4ca58acffc63d2b55, type: 3}
   tags:
   - {fileID: 11400000, guid: 947eb8d631cba5e42b32698a7caa37fb, type: 2}
   template: {fileID: 2259364942073407323, guid: 7f75055cfff795a409c967266c4d0eea,

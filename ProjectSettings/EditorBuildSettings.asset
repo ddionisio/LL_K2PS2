@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Renegadeware/Scenes/level02play.unity
     guid: 81e4d5d8018e2fb4ba0ba3709dad6740
   - enabled: 1
+    path: Assets/Renegadeware/Scenes/level03classify.unity
+    guid: 342a9b2fd28b44a4c9ecfc60924b11c1
+  - enabled: 1
     path: Assets/Renegadeware/Scenes/level03play.unity
     guid: bc30d910ea6d9a04fb0da2e6848246ad
   - enabled: 1

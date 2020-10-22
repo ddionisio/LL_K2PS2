@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: spriteShape
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 98707d9687a57184ca7efea2221374c7, type: 3}
+    totalSpriteSurfaceArea: 23146
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 5cdf48e00a231d04293bb3ddfcafc217, type: 3}
+  - {fileID: 21300000, guid: 932a673449dd17d4b9fa927d1b52dc17, type: 3}
+  - {fileID: 21300000, guid: 84abc456a11766248a61fc7a449a252c, type: 3}
+  - {fileID: 21300000, guid: c70755a65a627e2469dd164a7da5e020, type: 3}
+  - {fileID: 21300000, guid: fa154a9a006f99e40a9c929eb1660df4, type: 3}
+  - {fileID: 21300000, guid: 097a501b1760353409257e753ff52123, type: 3}
+  - {fileID: 21300000, guid: 2154a69bc7b0e4c44817852a2b68cca9, type: 3}
+  - {fileID: 21300000, guid: 1f67240c1c8e5f94dbc98d981a889361, type: 3}
+  - {fileID: 21300000, guid: 8197bf2c3b0feb241a280ecb413517ca, type: 3}
+  - {fileID: 21300000, guid: c9c9ae9cd5022d640a9ae5ef3c7c9c45, type: 3}
+  - {fileID: 21300000, guid: e5544f9c9b459684b894b354fa7319ed, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - tile_rocky_3_top
+  - tile_rocky_top
+  - ground4_top
+  - ground2_top
+  - rockLayerTile
+  - ground5_top
+  - ground3_top
+  - plank
+  - tile_shade
+  - rockEdge
+  - tile_rocky_2_top
+  m_Tag: spriteShape
+  m_IsVariant: 0

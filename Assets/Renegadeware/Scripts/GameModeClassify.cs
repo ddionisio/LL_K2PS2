@@ -8,7 +8,7 @@ namespace Renegadeware.K2PS2 {
     public class GameModeClassify : GameModeController<GameModeClassify> {
         [System.Serializable]
         public class SpawnAnimation {
-            public string tagName { get { return animator ? animator.name : ""; } } //match tag
+            public string tagName; //match tag
 
             public M8.Animator.Animate animator;
             public string takeEnter;
@@ -56,9 +56,13 @@ namespace Renegadeware.K2PS2 {
 
             mHUD.Init(data);
 
-            mSpawnPoints = new Transform[spawnPointsRoot.childCount];
-            for(int i = 0; i < mSpawnPoints.Length; i++)
-                mSpawnPoints[i] = spawnPointsRoot.GetChild(i);
+            if(spawnPointsRoot) {
+                mSpawnPoints = new Transform[spawnPointsRoot.childCount];
+                for(int i = 0; i < mSpawnPoints.Length; i++)
+                    mSpawnPoints[i] = spawnPointsRoot.GetChild(i);
+            }
+            else
+                mSpawnPoints = new Transform[0];
 
             gameDat.signalClassify.callback += OnClassify;
         }
@@ -109,9 +113,18 @@ namespace Renegadeware.K2PS2 {
                 if(spawnAnim != null)
                     yield return spawnAnim.PlayExit();
 
-                //wait for object to be placed in palette
-                while(obj.state != MaterialObjectEntity.State.None)
+                //wait for all objects to be placed
+                int spawnCount;
+                do {
                     yield return null;
+
+                    spawnCount = 0;
+                    for(int j = 0; j < data.items.Length; j++)
+                        spawnCount += data.items[j].materialObject.spawnedCount;
+                } while(spawnCount > 0);
+
+                //while(obj.state != MaterialObjectEntity.State.None)
+                //yield return null;
             }
 
             bool isDone = false;

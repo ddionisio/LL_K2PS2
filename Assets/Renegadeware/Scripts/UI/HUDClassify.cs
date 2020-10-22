@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Renegadeware.K2PS2 {
@@ -117,6 +118,9 @@ namespace Renegadeware.K2PS2 {
 
         void OnDragEnd() {
             if(dragRootGO) dragRootGO.SetActive(false);
+
+            for(int i = 0; i < paletteWidgets.Length; i++)
+                paletteWidgets[i].Refresh(true);
         }
 
         void OnClassify() {

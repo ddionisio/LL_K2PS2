@@ -18,7 +18,23 @@ namespace Renegadeware.K2PS2 {
         private DG.Tweening.EaseFunction mFadeInEaseFunc;
         private DG.Tweening.EaseFunction mFadeOutEaseFunc;
 
-        void OnDestroy() {
+        void OnEnable() {
+            if(Application.isPlaying) {
+                //default hidden
+                gridSprite.gameObject.SetActive(false);
+                gridSprite.color = new Color(mDefaultColor.r, mDefaultColor.g, mDefaultColor.b, 0f);
+
+                mFadeInEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeInEase);
+                mFadeOutEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeOutEase);
+
+                var gameDat = GameData.instance;
+
+                gameDat.signalDragBegin.callback += OnDragBegin;
+                gameDat.signalDragEnd.callback += OnDragEnd;
+            }
+        }
+
+        void OnDisable() {
             if(Application.isPlaying) {
                 var gameDat = GameData.instance;
 
@@ -29,20 +45,7 @@ namespace Renegadeware.K2PS2 {
 
         void Awake() {
             if(Application.isPlaying) {
-                gridSprite.gameObject.SetActive(false);
-
                 mDefaultColor = gridSprite.color;
-
-                //default hidden
-                gridSprite.color = new Color(mDefaultColor.r, mDefaultColor.g, mDefaultColor.b, 0f);
-
-                mFadeInEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeInEase);
-                mFadeOutEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeOutEase);
-
-                var gameDat = GameData.instance;
-
-                gameDat.signalDragBegin.callback += OnDragBegin;
-                gameDat.signalDragEnd.callback += OnDragEnd;
             }
         }
 

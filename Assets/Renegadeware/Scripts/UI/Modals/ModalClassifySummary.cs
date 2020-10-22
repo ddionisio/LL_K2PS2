@@ -182,6 +182,7 @@ namespace Renegadeware.K2PS2 {
             var newTag = mTagCache.RemoveLast();
 
             newTag.Setup(tagData);
+            newTag.transform.SetAsLastSibling();
             newTag.gameObject.SetActive(true);
 
             mTags.Add(newTag);

@@ -40,23 +40,22 @@ namespace Renegadeware.K2PS2 {
 
             //initialize game
             mSections = new GamePlaySection[sectionRoot.childCount];
-            for(int i = 0; i < mSections.Length; i++)
+            for(int i = 0; i < mSections.Length; i++) {
                 mSections[i] = sectionRoot.GetChild(i).GetComponent<GamePlaySection>();
+                mSections[i].gameObject.SetActive(false);
+            }
 
             int startSectionInd = 0;
 
 #if UNITY_EDITOR
             startSectionInd = Mathf.Clamp(debugStartSectionInd, 0, mSections.Length - 1);
-
-            for(int i = 0; i < startSectionInd; i++) {
-                if(mSections[i])
-                    mSections[i].gameObject.SetActive(false);
-            }
 #endif
 
             mCurSectionInd = mNextSectionInd = startSectionInd;
 
             var startSection = mSections[mCurSectionInd];
+
+            startSection.gameObject.SetActive(true);
 
             var cam = Camera.main;
             mGameCamTrans = cam.transform.parent ? cam.transform.parent : cam.transform;
@@ -134,17 +133,21 @@ namespace Renegadeware.K2PS2 {
             if(mHUD)
                 mHUD.Hide();
 
-            yield return new WaitForSeconds(gameDat.goalDelay);
-
             //victory?
             if(mNextSectionInd >= mSections.Length) {
                 M8.ModalManager.main.Open(gameDat.modalVictory);
             }
             else {
+                yield return new WaitForSeconds(gameDat.goalDelay);
+
+                var prevSection = mSections[mCurSectionInd];
+
                 //move to next section
                 mCurSectionInd = mNextSectionInd;
 
                 var curSection = mSections[mCurSectionInd];
+
+                curSection.gameObject.SetActive(true);
 
                 var items = data.items;
 
@@ -172,6 +175,9 @@ namespace Renegadeware.K2PS2 {
 
                     mGameCamTrans.position = Vector2.Lerp(camStartPos, camEndPos, t);
                 }
+
+                if(prevSection)
+                    prevSection.gameObject.SetActive(false);
 
                 //wait for all objects to fully despawn (fail-safe)
                 while(true) {
