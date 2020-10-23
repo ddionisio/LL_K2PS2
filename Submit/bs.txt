@@ -1,0 +1,14 @@
+Mighty Chin-Chin: What's the Matter
+
+The mighty Chin-Chin needs your help!  By mastering the properties of matter, you shall be the guiding hand that topples the mightiest of trials that impede our intrepid hero. Gather all the stars and restore the brilliance that once sparks the universe.
+
+Controls:
+Use the touchpad or mouse for interactions.
+
+To drag/drop an item – press and hold the item of interest using the touchpad or mouse. While pressing, slide towards where you want to drop the item, and then release the touchpad or mouse left button.
+
+When classifying objects, you can drag an existing item in one of the groups. Do this to swap to another group if they do not match.
+
+Press and hold the restart button (red button with a cycle arrow) to clear out all objects placed in the world.
+
+You can delete an object placed in the world by dragging it to the recycle area at the bottom-left of the screen.
