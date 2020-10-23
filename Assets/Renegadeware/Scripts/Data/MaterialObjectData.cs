@@ -32,6 +32,19 @@ namespace Renegadeware.K2PS2 {
 
         public int maxCount { get; private set; }
 
+        public int placedCount {
+            get {
+                int c = 0;
+
+                for(int i = 0; i < mSpawnedEntities.Count; i++) {
+                    if(mSpawnedEntities[i].state == MaterialObjectEntity.State.Normal || mSpawnedEntities[i].state == MaterialObjectEntity.State.Spawning)
+                        c++;
+                }
+
+                return c;
+            }
+        }
+
         private string mLabelText;
 
         private M8.PoolController mPool;
@@ -39,6 +52,15 @@ namespace Renegadeware.K2PS2 {
         private M8.CacheList<MaterialObjectEntity> mSpawnedEntities;
 
         private M8.GenericParams mSpawnParms = new M8.GenericParams();
+
+        public MaterialObjectEntity GetPlacedEntity() {
+            for(int i = 0; i < mSpawnedEntities.Count; i++) {
+                if(mSpawnedEntities[i].state == MaterialObjectEntity.State.Normal)
+                    return mSpawnedEntities[i];
+            }
+
+            return null;
+        }
 
         public bool CompareTag(MaterialTagData tagData) {
             for(int i = 0; i < tags.Length; i++) {

@@ -48,6 +48,9 @@ namespace Renegadeware.K2PS2 {
         public Color objectDragInvalidColor = Color.red;
         public Color draggingColor = Color.gray;
 
+        [M8.TagSelector]
+        public string dragGuideTag;
+
         [Header("Material Object Settings")]
         public Color objectGhostValidColor = Color.gray;
         public Color objectGhostInvalidColor = Color.red;
@@ -80,6 +83,8 @@ namespace Renegadeware.K2PS2 {
         public M8.Signal signalReset;
 
         public bool isGameStarted { get; private set; } //true: we got through start normally, false: debug
+
+        private DragToGuideWidget mDragGuide;
 
         /// <summary>
         /// Called in start scene
@@ -165,6 +170,16 @@ namespace Renegadeware.K2PS2 {
 
             //load to new scene
             Current();
+        }
+
+        public DragToGuideWidget GetDragGuide() {
+            if(!mDragGuide) {
+                var dragGuideGO = GameObject.FindGameObjectWithTag(dragGuideTag);
+                if(dragGuideGO)
+                    mDragGuide = dragGuideGO.GetComponent<DragToGuideWidget>();
+            }
+
+            return mDragGuide;
         }
 
         protected override void OnInstanceInit() {

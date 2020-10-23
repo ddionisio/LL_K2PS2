@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Renegadeware.K2PS2 {
     public class HUDGame : MonoBehaviour {
@@ -13,8 +14,12 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "editAnimator")]
         public string editTakeExit;
 
+        public Button playButton;
+        public GameObject playInstructionGO;
+
         [Header("Palette")]
         public MaterialObjectPaletteWidget[] paletteWidgets;
+        public GameObject paletteBlockerGO;
 
         [Header("Drag")]
         public GameObject dragRootGO;
@@ -37,7 +42,13 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "stopAnimator")]
         public string stopTakeExit;
 
+        public GameObject stopGlowGO;
+
         public bool isPaletteActive { get; private set; }
+
+        public int paletteActiveIndex { get { return mCurPaletteInd; } }
+
+        public bool isBusy { get { return mRout != null; } }
 
         private int mCurPaletteInd;
 
@@ -56,6 +67,16 @@ namespace Renegadeware.K2PS2 {
                 paletteWidgets[mCurPaletteInd].Refresh(false);
                 paletteWidgets[mCurPaletteInd].transform.SetAsLastSibling();
             }
+        }
+
+        public MaterialObjectWidget GetMaterialObjectWidget(MaterialObjectData matObjDat) {
+            for(int i = 0; i < paletteWidgets.Length; i++) {
+                var matObjWidget = paletteWidgets[i].GetItemWidget(matObjDat);
+                if(matObjWidget)
+                    return matObjWidget;
+            }
+
+            return null;
         }
 
         public void Init(LevelData data) {
@@ -168,7 +189,7 @@ namespace Renegadeware.K2PS2 {
             if(editRootGO) editRootGO.SetActive(true);
 
             if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
-                editAnimator.Play(editTakeEnter);
+                yield return editAnimator.PlayWait(editTakeEnter);
 
             mRout = null;
         }
@@ -213,7 +234,7 @@ namespace Renegadeware.K2PS2 {
 
             //stop enter animation
             if(stopAnimator && !string.IsNullOrEmpty(stopTakeEnter))
-                stopAnimator.Play(stopTakeEnter);
+                yield return stopAnimator.PlayWait(stopTakeEnter);
 
             mRout = null;
         }
@@ -232,6 +253,9 @@ namespace Renegadeware.K2PS2 {
 
             //hide stop
             stopRootGO.SetActive(false);
+
+            if(stopGlowGO)
+                stopGlowGO.SetActive(false);
 
             //show edit display
             editRootGO.SetActive(true);
@@ -253,6 +277,10 @@ namespace Renegadeware.K2PS2 {
             //hide edit
             if(editAnimator && !string.IsNullOrEmpty(editTakeExit))
                 yield return editAnimator.PlayWait(editTakeExit);
+
+            //hide instructions
+            if(playInstructionGO)
+                playInstructionGO.SetActive(false);
 
             //show trash
             trashRootGO.SetActive(true);
@@ -280,7 +308,7 @@ namespace Renegadeware.K2PS2 {
 
             //show edit display
             if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
-                editAnimator.Play(editTakeEnter);
+                yield return editAnimator.PlayWait(editTakeEnter);
 
             mRout = null;
         }
@@ -296,6 +324,15 @@ namespace Renegadeware.K2PS2 {
             dragRootGO.SetActive(false);
             trashRootGO.SetActive(false);
             stopRootGO.SetActive(false);
+
+            if(paletteBlockerGO)
+                paletteBlockerGO.SetActive(false);
+
+            if(playInstructionGO)
+                playInstructionGO.SetActive(false);
+
+            if(stopGlowGO)
+                stopGlowGO.SetActive(false);
 
             isPaletteActive = false;
         }

@@ -11,6 +11,7 @@ namespace Renegadeware.K2PS2 {
         public Transform itemsRoot;
         public MaterialObjectDragWidget dragWidget;
         public GameObject highlightGO;
+        public GameObject clickInstructGO;
 
         [Header("Error")]        
         public M8.Animator.Animate errorAnimator;
@@ -50,6 +51,9 @@ namespace Renegadeware.K2PS2 {
 
             if(highlightGO)
                 highlightGO.SetActive(false);
+
+            if(clickInstructGO)
+                clickInstructGO.SetActive(false);
         }
 
         public void Refresh(bool removeEmpty) {
@@ -108,6 +112,16 @@ namespace Renegadeware.K2PS2 {
                     break;
                 }
             }
+        }
+
+        public MaterialObjectWidget GetItemWidget(MaterialObjectData dat) {
+            for(int i = 0; i < mItemActives.Count; i++) {
+                var itm = mItemActives[i];
+                if(itm.data == dat)
+                    return itm;
+            }
+
+            return null;
         }
 
         public void RemoveAll() {

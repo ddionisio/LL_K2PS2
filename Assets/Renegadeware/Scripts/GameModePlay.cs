@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using LoLExt;
+using System.Data;
 
 namespace Renegadeware.K2PS2 {
     public class GameModePlay : GameModeController<GameModePlay> {
@@ -15,6 +16,8 @@ namespace Renegadeware.K2PS2 {
         [Header("Debug")]
         public int debugStartSectionInd;
 
+        public HUDGame HUD { get { return mHUD; } }
+
         private HUDGame mHUD;
 
         private GamePlaySection[] mSections;
@@ -22,6 +25,8 @@ namespace Renegadeware.K2PS2 {
         private int mNextSectionInd;
         
         private Transform mGameCamTrans;
+
+        private GameModeFlow mFlow;
 
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
@@ -68,11 +73,14 @@ namespace Renegadeware.K2PS2 {
             playerEnt.transform.position = startSection.playerStart.position;
             playerEnt.startPosition = startSection.playerStart.position;
 
+            mFlow = GetComponent<GameModeFlow>();
+
             //setup signals
             gameDat.signalGoal.callback += OnGoal;
             gameDat.signalDragBegin.callback += OnDragBegin;
             gameDat.signalDragEnd.callback += OnDragEnd;
             gameDat.signalReset.callback += OnReset;
+            gameDat.signalPlayerDeath.callback += OnPlayerDeath;
         }
 
         protected override void OnInstanceDeinit() {
@@ -82,6 +90,7 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalDragBegin.callback -= OnDragBegin;
             gameDat.signalDragEnd.callback -= OnDragEnd;
             gameDat.signalReset.callback -= OnReset;
+            gameDat.signalPlayerDeath.callback -= OnPlayerDeath;
 
             if(mHUD)
                 mHUD.Deinit();
@@ -97,6 +106,10 @@ namespace Renegadeware.K2PS2 {
 
             //spawn player
             GameData.instance.signalPlayerSpawn.Invoke();
+
+            //intro
+            if(mFlow)
+                yield return mFlow.Intro();
 
             StartCoroutine(DoGamePlay());
         }
@@ -117,24 +130,36 @@ namespace Renegadeware.K2PS2 {
             data.DespawnAll();
         }
 
+        void OnPlayerDeath() {
+            if(mHUD.stopGlowGO)
+                mHUD.stopGlowGO.SetActive(true);
+        }
+
         IEnumerator DoGamePlay() {
             var gameDat = GameData.instance;
-
-            yield return null;
 
             //show HUD
             if(mHUD)
                 mHUD.Show();
 
+            if(mFlow)
+                yield return mFlow.SectionBegin(mCurSectionInd);
+
             //wait for goal
             while(mCurSectionInd == mNextSectionInd)
                 yield return null;
+
+            if(mFlow)
+                yield return mFlow.SectionEnd(mCurSectionInd);
 
             if(mHUD)
                 mHUD.Hide();
 
             //victory?
             if(mNextSectionInd >= mSections.Length) {
+                if(mFlow)
+                    yield return mFlow.Outro();
+
                 M8.ModalManager.main.Open(gameDat.modalVictory);
             }
             else {
@@ -180,16 +205,8 @@ namespace Renegadeware.K2PS2 {
                     prevSection.gameObject.SetActive(false);
 
                 //wait for all objects to fully despawn (fail-safe)
-                while(true) {
-                    int curObjectCount = 0;
-                    for(int i = 0; i < items.Length; i++)
-                        curObjectCount += items[i].materialObject.spawnedCount;
-
-                    if(curObjectCount == 0)
-                        break;
-
+                while(data.spawnedCount > 0)
                     yield return null;
-                }
 
                 mHUD.RefreshCurrentPalette();
 

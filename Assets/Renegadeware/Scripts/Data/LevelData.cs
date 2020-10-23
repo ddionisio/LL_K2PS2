@@ -14,6 +14,17 @@ namespace Renegadeware.K2PS2 {
         public MaterialTagData[] tags;
         public ItemData[] items;
 
+        public int spawnedCount {
+            get {
+                int c = 0;
+
+                for(int i = 0; i < items.Length; i++)
+                    c += items[i].materialObject.spawnedCount;
+
+                return c;
+            }
+        }
+
         public void InitItemPools() {
             for(int i = 0; i < items.Length; i++) {
                 var itm = items[i];
@@ -49,6 +60,16 @@ namespace Renegadeware.K2PS2 {
                 var itm = items[i];
                 itm.materialObject.DespawnAll();
             }
+        }
+
+        public bool IsAnyPlaced(MaterialObjectData matObjDat) {
+            for(int i = 0; i < items.Length; i++) {
+                var itm = items[i];
+                if(itm.materialObject == matObjDat)
+                    return itm.materialObject.placedCount > 0;
+            }
+
+            return false;
         }
     }
 }

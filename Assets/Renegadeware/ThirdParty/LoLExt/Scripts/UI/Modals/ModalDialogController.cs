@@ -22,28 +22,7 @@ namespace LoLExt {
         private Coroutine mPlayRout;
         private bool mIsNext;
 
-        public void Play() {
-            if(mPlayRout == null)
-                mPlayRout = StartCoroutine(DoPlay());
-        }
-
-        public void Stop() {
-            if(mPlayRout != null) {
-                StopCoroutine(mPlayRout);
-                mPlayRout = null;
-            }
-
-            if(M8.ModalManager.main && M8.ModalManager.main.IsInStack(modal))
-                M8.ModalManager.main.CloseUpTo(modal, true);
-
-            mIsNext = false;
-        }
-
-        void OnDisable() {
-            Stop();
-        }
-
-        IEnumerator DoPlay() {
+        public IEnumerator PlayWait() {
             for(int i = 0; i < dialogTextRefs.Length; i++) {
                 string textRef = dialogTextRefs[i];
                 if(string.IsNullOrEmpty(textRef))
@@ -68,6 +47,27 @@ namespace LoLExt {
                 yield return null;
 
             mPlayRout = null;
+        }
+
+        public void Play() {
+            if(mPlayRout == null)
+                mPlayRout = StartCoroutine(PlayWait());
+        }
+
+        public void Stop() {
+            if(mPlayRout != null) {
+                StopCoroutine(mPlayRout);
+                mPlayRout = null;
+            }
+
+            if(M8.ModalManager.main && M8.ModalManager.main.IsInStack(modal))
+                M8.ModalManager.main.CloseUpTo(modal, true);
+
+            mIsNext = false;
+        }
+
+        void OnDisable() {
+            Stop();
         }
 
         void OnDialogNext() {

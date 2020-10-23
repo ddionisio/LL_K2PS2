@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 207363956112901083}
   - component: {fileID: 620147009421579377}
   - component: {fileID: 6753712896321585567}
+  - component: {fileID: 8566372585805583191}
   m_Layer: 0
   m_Name: graniteBoulder
   m_TagString: MaterialObject
@@ -461,6 +462,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!60 &8566372585805583191
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027865140236533627}
+  m_Enabled: 1
+  m_Density: 2
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.309233, y: -0.8556757}
+      - {x: -1.9175913, y: -0.36201268}
+      - {x: -1.7827322, y: 0.56084186}
+      - {x: -1.0918148, y: 0.95514536}
+      - {x: 1.3211417, y: 0.8621801}
+      - {x: 1.8503115, y: 0.39789128}
+      - {x: 1.7981102, y: -0.5882032}
+      - {x: 1.1588031, y: -0.8358722}
+      - {x: -1.309233, y: -0.8556757}
 --- !u!1 &6221196993418516545
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,13 +686,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4633770052488152574}
-  - component: {fileID: 7223169649715187046}
   - component: {fileID: 3033256284054765636}
   - component: {fileID: 4166812522284083889}
-  - component: {fileID: 6886312075509228485}
   m_Layer: 0
   m_Name: root
-  m_TagString: MaterialObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -676,19 +709,6 @@ Transform:
   m_Father: {fileID: 7068189983040745868}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7223169649715187046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6463465077903213774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab87a3c37b269740aab76971d18e099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 2027865140236533627}
 --- !u!1971053207 &3033256284054765636
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -839,38 +859,3 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
---- !u!60 &6886312075509228485
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6463465077903213774}
-  m_Enabled: 1
-  m_Density: 2
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -1.309233, y: -0.8556757}
-      - {x: -1.9175913, y: -0.36201268}
-      - {x: -1.7827322, y: 0.56084186}
-      - {x: -1.0918148, y: 0.95514536}
-      - {x: 1.3211417, y: 0.8621801}
-      - {x: 1.8503115, y: 0.39789128}
-      - {x: 1.7981102, y: -0.5882032}
-      - {x: 1.1588031, y: -0.8358722}
-      - {x: -0.67602044, y: -0.85059476}
-      - {x: -1.309233, y: -0.8556757}

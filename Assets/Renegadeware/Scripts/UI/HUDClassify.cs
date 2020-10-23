@@ -66,6 +66,17 @@ namespace Renegadeware.K2PS2 {
             HideAll(true);
         }
 
+        public MaterialObjectPaletteWidget GetPaletteMatch(MaterialObjectData matObj) {
+            for(int i = 0; i < paletteWidgets.Length; i++) {
+                var paletteWidget = paletteWidgets[i];
+
+                if(matObj.CompareTag(paletteWidget.tagData))
+                    return paletteWidget;
+            }
+
+            return null;
+        }
+
         public void ShowPalette() {
             ClearRout();
 
@@ -118,6 +129,12 @@ namespace Renegadeware.K2PS2 {
 
         void OnDragEnd() {
             if(dragRootGO) dragRootGO.SetActive(false);
+
+            StartCoroutine(DoPaletteRefresh());
+        }
+
+        IEnumerator DoPaletteRefresh() {
+            yield return null;
 
             for(int i = 0; i < paletteWidgets.Length; i++)
                 paletteWidgets[i].Refresh(true);

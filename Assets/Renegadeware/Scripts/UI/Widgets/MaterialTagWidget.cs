@@ -15,6 +15,16 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "animator")]
         public string takeEnter;
 
+        public Button button {
+            get {
+                if(!mButton)
+                    mButton = GetComponent<Button>();
+                return mButton;
+            }
+        }
+
+        private Button mButton;
+
         public void Setup(MaterialTagData tag) {
             if(tagIcon) tagIcon.sprite = tag.icon;
             if(tagText) tagText.text = tag.label;

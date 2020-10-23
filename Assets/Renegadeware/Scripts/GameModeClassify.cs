@@ -33,11 +33,15 @@ namespace Renegadeware.K2PS2 {
 
         public SpawnAnimation[] spawnAnimations; //use for stagger spawn mode
 
+        public HUDClassify HUD { get { return mHUD; } }
+
         private HUDClassify mHUD;
 
         private Transform[] mSpawnPoints;
 
         private bool mIsClassifyPressed;
+
+        private GameModeFlow mFlow;
 
         private M8.GenericParams mClassifySummaryParam = new M8.GenericParams();
 
@@ -64,6 +68,8 @@ namespace Renegadeware.K2PS2 {
             else
                 mSpawnPoints = new Transform[0];
 
+            mFlow = GetComponent<GameModeFlow>();
+
             gameDat.signalClassify.callback += OnClassify;
         }
 
@@ -83,9 +89,9 @@ namespace Renegadeware.K2PS2 {
         protected override IEnumerator Start() {
             yield return base.Start();
 
-            yield return null;
-
             //dialog, animation
+            if(mFlow)
+                yield return mFlow.Intro();
 
             mHUD.ShowPalette();
             while(mHUD.isBusy)
@@ -113,6 +119,9 @@ namespace Renegadeware.K2PS2 {
                 if(spawnAnim != null)
                     yield return spawnAnim.PlayExit();
 
+                if(mFlow)
+                    yield return mFlow.SectionBegin(i);
+
                 //wait for all objects to be placed
                 int spawnCount;
                 do {
@@ -122,6 +131,9 @@ namespace Renegadeware.K2PS2 {
                     for(int j = 0; j < data.items.Length; j++)
                         spawnCount += data.items[j].materialObject.spawnedCount;
                 } while(spawnCount > 0);
+
+                if(mFlow)
+                    yield return mFlow.SectionEnd(i);
 
                 //while(obj.state != MaterialObjectEntity.State.None)
                 //yield return null;
@@ -165,6 +177,9 @@ namespace Renegadeware.K2PS2 {
                 yield return null;
 
             //dialog, etc.
+            //dialog, animation
+            if(mFlow)
+                yield return mFlow.Outro();
 
             //show summary
             mClassifySummaryParam[ModalClassifySummary.parmLevelData] = data;

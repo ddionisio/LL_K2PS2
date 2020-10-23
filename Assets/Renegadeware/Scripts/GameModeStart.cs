@@ -20,6 +20,13 @@ namespace Renegadeware.K2PS2 {
         [Header("Play")]
         public Button playButton;
 
+        [Header("Ready")]
+        public M8.Animator.Animate readyAnimator;
+        [M8.Animator.TakeSelector(animatorField = "readyAnimator")]
+        public string readyTakeEnter;
+        [M8.Animator.TakeSelector(animatorField = "readyAnimator")]
+        public string readyTakeExit;
+
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
 
@@ -45,9 +52,26 @@ namespace Renegadeware.K2PS2 {
             if(titleText) titleText.text = M8.Localize.Get(titleRef);
 
             if(readyGO) readyGO.SetActive(true);
+
+            yield return readyAnimator.PlayWait(readyTakeEnter);
         }
 
         void OnPlayClick() {
+            StartCoroutine(DoPlay());
+        }
+
+        IEnumerator DoPlay() {
+            yield return readyAnimator.PlayWait(readyTakeExit);
+
+            if(LoLManager.instance.curProgress > 0)
+                GameData.instance.Begin();
+            else
+                StartCoroutine(DoIntro());
+        }
+
+        IEnumerator DoIntro() {
+            yield return null;
+
             GameData.instance.Begin();
         }
     }

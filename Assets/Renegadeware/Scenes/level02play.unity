@@ -798,7 +798,7 @@ MonoBehaviour:
   hinge: {fileID: 123503984}
   platforms:
   - {fileID: 357261419}
-  - {fileID: 0}
+  - {fileID: 742394767}
   angularVelocityMax: 15
   stopDelay: 0.3
 --- !u!4 &123503986
