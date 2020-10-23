@@ -659,6 +659,9 @@ MonoBehaviour:
   takeDespawn: despawn
   takeDeath: death
   takeVictory: victory
+  sfxJump: boop
+  sfxSpawn: revive
+  sfxDeath: death
 --- !u!114 &6260101760623668263
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6035,6 +6035,7 @@ MonoBehaviour:
   signalModeChanged: {fileID: 0}
   data: {fileID: 11400000, guid: 409a0ce57ac1b1647a8c2716c0a9fa8f, type: 2}
   sectionRoot: {fileID: 748817357}
+  music: level
   debugStartSectionInd: 0
 --- !u!4 &399300940
 Transform:

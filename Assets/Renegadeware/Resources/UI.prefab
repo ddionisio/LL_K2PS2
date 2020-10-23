@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 1423295493}
   - component: {fileID: 1423295492}
   - component: {fileID: 1423295491}
+  - component: {fileID: 4946224335559620779}
   m_Layer: 5
   m_Name: playButton
   m_TagString: Untagged
@@ -441,6 +442,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4946224335559620779}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1423295491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +466,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signal: {fileID: 11400000, guid: bccbc2d3fb14a6c4ca0e81be8292c1a8, type: 2}
+--- !u!114 &4946224335559620779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423295489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &1714888782
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +563,7 @@ GameObject:
   - component: {fileID: 2098534902}
   - component: {fileID: 2098534901}
   - component: {fileID: 2098534900}
+  - component: {fileID: 5194786562302752325}
   m_Layer: 5
   m_Name: stopButton
   m_TagString: Untagged
@@ -659,6 +686,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5194786562302752325}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2098534900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +710,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signal: {fileID: 11400000, guid: 52c6f35e0b42470438ae0f509243f781, type: 2}
+--- !u!114 &5194786562302752325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098534898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &20615849685845180
 GameObject:
   m_ObjectHideFlags: 0
@@ -5965,6 +6017,7 @@ GameObject:
   - component: {fileID: 1182624595039381197}
   - component: {fileID: 1330859629241041910}
   - component: {fileID: 6640718468875104080}
+  - component: {fileID: 3160810164077625406}
   m_Layer: 5
   m_Name: classifyButton
   m_TagString: Untagged
@@ -6096,6 +6149,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3160810164077625406}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6640718468875104080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6109,6 +6173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signal: {fileID: 11400000, guid: 4bfb3f6ee9b30824da735e007eba4baa, type: 2}
+--- !u!114 &3160810164077625406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624212124437651325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &2635287387090574442
 GameObject:
   m_ObjectHideFlags: 0
@@ -6957,6 +7035,7 @@ GameObject:
   - component: {fileID: 203524261830987525}
   - component: {fileID: 6214101283975751984}
   - component: {fileID: 3991559575785511815}
+  - component: {fileID: 1420492966412828048}
   m_Layer: 5
   m_Name: finishButton
   m_TagString: Untagged
@@ -7078,6 +7157,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1420492966412828048}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1420492966412828048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270861212659889104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &3379436787985034156
 GameObject:
   m_ObjectHideFlags: 0
@@ -7165,6 +7269,7 @@ GameObject:
   - component: {fileID: 4124055690402136461}
   - component: {fileID: 6622021290112839809}
   - component: {fileID: 3696196273762860574}
+  - component: {fileID: 7709822502611996259}
   m_Layer: 5
   m_Name: optionButton
   m_TagString: Untagged
@@ -7282,6 +7387,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7709822502611996259}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3696196273762860574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7300,6 +7416,20 @@ MonoBehaviour:
   modal: options
   onlyIfEmpty: 0
   closeIfOpened: 0
+--- !u!114 &7709822502611996259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397695273470588297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &3443359136801153053
 GameObject:
   m_ObjectHideFlags: 0
@@ -9550,6 +9680,7 @@ MonoBehaviour:
   finishAnimator: {fileID: 4785954271658695128}
   finishTakeEnter: enter
   finishTakeExit: exit
+  sfxNewTag: boop
 --- !u!114 &5896892590379898883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11268,6 +11399,8 @@ MonoBehaviour:
   stopTakeEnter: enter
   stopTakeExit: exit
   stopGlowGO: {fileID: 5272623118981757188}
+  sfxPaletteEnter: paletteOpen
+  sfxPaletteExit: paletteClose
 --- !u!1 &4776473942388379122
 GameObject:
   m_ObjectHideFlags: 0
@@ -12368,6 +12501,7 @@ RectTransform:
   - {fileID: 2869148998030103920}
   - {fileID: 1855139050259666159}
   - {fileID: 547136672080990509}
+  - {fileID: 1062143293019961913}
   - {fileID: 7499285370676988529}
   - {fileID: 2451836111238005811}
   m_Father: {fileID: 4815041688045228586}
@@ -12391,6 +12525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _exclusive: 0
+  sfxVictory: success
 --- !u!114 &1307141117307002959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12425,12 +12560,12 @@ MonoBehaviour:
     numLoop: 1
     loopMode: 0
     loopBackToFrame: 0
-    trackCounter: 18
+    trackCounter: 19
     groupCounter: 0
     rootGroup:
       group_name: 
       group_id: 0
-      elements: 0e0000000f00000002000000030000000400000005000000060000000700000008000000090000000a0000000b00000011000000100000000c0000000d00000012000000
+      elements: 0e0000000f00000002000000030000000400000005000000060000000700000008000000090000000a0000000b00000011000000100000000c0000000d0000001200000013000000
       foldout: 1
     groupValues: []
   - name: exit
@@ -12461,8 +12596,45 @@ MonoBehaviour:
     _audioKeys: []
     _cameraSwitcherTracks: []
     _cameraSwitcherKeys: []
-    _eventTracks: []
-    _eventKeys: []
+    _eventTracks:
+    - _version: 1
+      id: 19
+      name: Track18
+      foldout: 1
+      _targetPath: 
+      obj: {fileID: 7840227343058472883}
+      componentName: 
+    _eventKeys:
+    - interp: 0
+      frame: 35
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
+    - interp: 0
+      frame: 50
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
+    - interp: 0
+      frame: 65
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
     _goSetActiveTracks:
     - _version: 1
       id: 17
@@ -12486,57 +12658,13 @@ MonoBehaviour:
     _orientationKeys: []
     _propertyTracks:
     - _version: 4
-      id: 16
-      name: Track15
-      foldout: 1
-      _targetPath: 
-      valueType: 4
-      obj: {fileID: 8892267509031075899}
-      component: {fileID: 1084091694299662631}
-      componentName: RectTransform
-      fieldName: 
-      propertyName: sizeDelta
-    - _version: 4
-      id: 15
-      name: Track14
+      id: 4
+      name: Track3
       foldout: 1
       _targetPath: 
       valueType: 6
-      obj: {fileID: 1427307379242052751}
-      component: {fileID: 5035803368342059396}
-      componentName: Image
-      fieldName: 
-      propertyName: color
-    - _version: 4
-      id: 14
-      name: Track13
-      foldout: 1
-      _targetPath: 
-      valueType: 6
-      obj: {fileID: 5907204780301411106}
-      component: {fileID: 4441659298203768904}
-      componentName: Image
-      fieldName: 
-      propertyName: color
-    - _version: 4
-      id: 13
-      name: Track12
-      foldout: 1
-      _targetPath: 
-      valueType: 12
-      obj: {fileID: 9009295466028668273}
-      component: {fileID: 4557870614572288756}
-      componentName: Button
-      fieldName: 
-      propertyName: interactable
-    - _version: 4
-      id: 10
-      name: Track9
-      foldout: 1
-      _targetPath: 
-      valueType: 6
-      obj: {fileID: 3451333564117078847}
-      component: {fileID: 4850318845147911212}
+      obj: {fileID: 3443359136801153053}
+      component: {fileID: 613956786978809319}
       componentName: Image
       fieldName: 
       propertyName: color
@@ -12552,13 +12680,57 @@ MonoBehaviour:
       fieldName: 
       propertyName: color
     - _version: 4
-      id: 4
-      name: Track3
+      id: 13
+      name: Track12
+      foldout: 1
+      _targetPath: 
+      valueType: 12
+      obj: {fileID: 9009295466028668273}
+      component: {fileID: 4557870614572288756}
+      componentName: Button
+      fieldName: 
+      propertyName: interactable
+    - _version: 4
+      id: 14
+      name: Track13
       foldout: 1
       _targetPath: 
       valueType: 6
-      obj: {fileID: 3443359136801153053}
-      component: {fileID: 613956786978809319}
+      obj: {fileID: 5907204780301411106}
+      component: {fileID: 4441659298203768904}
+      componentName: Image
+      fieldName: 
+      propertyName: color
+    - _version: 4
+      id: 15
+      name: Track14
+      foldout: 1
+      _targetPath: 
+      valueType: 6
+      obj: {fileID: 1427307379242052751}
+      component: {fileID: 5035803368342059396}
+      componentName: Image
+      fieldName: 
+      propertyName: color
+    - _version: 4
+      id: 16
+      name: Track15
+      foldout: 1
+      _targetPath: 
+      valueType: 4
+      obj: {fileID: 8892267509031075899}
+      component: {fileID: 1084091694299662631}
+      componentName: RectTransform
+      fieldName: 
+      propertyName: sizeDelta
+    - _version: 4
+      id: 10
+      name: Track9
+      foldout: 1
+      _targetPath: 
+      valueType: 6
+      obj: {fileID: 3451333564117078847}
+      component: {fileID: 4850318845147911212}
       componentName: Image
       fieldName: 
       propertyName: color
@@ -12597,116 +12769,12 @@ MonoBehaviour:
       propertyName: color
     _propertyKeys:
     - interp: 0
-      frame: 20
+      frame: 30
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      endFrame: 60
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 1, y: 16, z: 0, w: 0}
-    - interp: 0
-      frame: 60
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 294, y: 16, z: 0, w: 0}
-    - interp: 0
-      frame: 1
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 5
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 1, y: 1, z: 1, w: 0}
-    - interp: 0
-      frame: 5
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 1, y: 1, z: 1, w: 0.6431373}
-    - interp: 0
-      frame: 1
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 5
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 0
-      frame: 5
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      val: 0
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0.2509804}
-    - interp: 2
-      frame: 65
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 75
-      isConstSpeed: 0
-      _paths: []
-      val: -1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 2
-      frame: 75
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 75
-      isConstSpeed: 0
-      _paths: []
-      val: 1
-      valString: 
-      valObj: {fileID: 0}
-      vect4: {x: 0, y: 0, z: 0, w: 0}
-    - interp: 0
-      frame: 60
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 65
+      endFrame: 35
       isConstSpeed: 0
       _paths: []
       val: 0
@@ -12714,7 +12782,7 @@ MonoBehaviour:
       valObj: {fileID: 0}
       vect4: {x: 1, y: 0.8431373, z: 0.6, w: 0}
     - interp: 0
-      frame: 65
+      frame: 35
       easeType: 1
       amplitude: 0
       period: 0
@@ -12752,13 +12820,117 @@ MonoBehaviour:
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 0.8431373, z: 0.6, w: 1}
-    - interp: 0
-      frame: 30
+    - interp: 2
+      frame: 65
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      endFrame: 35
+      endFrame: 75
+      isConstSpeed: 0
+      _paths: []
+      val: -1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 2
+      frame: 75
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 75
+      isConstSpeed: 0
+      _paths: []
+      val: 1
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 0
+      frame: 1
+      easeType: 3
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 5
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
+    - interp: 0
+      frame: 5
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0.2509804}
+    - interp: 0
+      frame: 1
+      easeType: 3
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 5
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 1, z: 1, w: 0}
+    - interp: 0
+      frame: 5
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 1, z: 1, w: 0.6431373}
+    - interp: 0
+      frame: 20
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 60
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 16, z: 0, w: 0}
+    - interp: 0
+      frame: 60
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 294, y: 16, z: 0, w: 0}
+    - interp: 0
+      frame: 60
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 65
       isConstSpeed: 0
       _paths: []
       val: 0
@@ -12766,7 +12938,7 @@ MonoBehaviour:
       valObj: {fileID: 0}
       vect4: {x: 1, y: 0.8431373, z: 0.6, w: 0}
     - interp: 0
-      frame: 35
+      frame: 65
       easeType: 1
       amplitude: 0
       period: 0
@@ -12849,6 +13021,14 @@ MonoBehaviour:
     _rotationKeys: []
     _translationTracks:
     - _version: 3
+      id: 18
+      name: Track17
+      foldout: 1
+      _targetPath: 
+      _obj: {fileID: 7499285370676988529}
+      pixelSnap: 0
+      pixelPerUnit: 100
+    - _version: 3
       id: 12
       name: Track11
       foldout: 1
@@ -12862,14 +13042,6 @@ MonoBehaviour:
       foldout: 1
       _targetPath: 
       _obj: {fileID: 547136672080990509}
-      pixelSnap: 0
-      pixelPerUnit: 100
-    - _version: 3
-      id: 18
-      name: Track17
-      foldout: 1
-      _targetPath: 
-      _obj: {fileID: 7499285370676988529}
       pixelSnap: 0
       pixelPerUnit: 100
     - _version: 3
@@ -12897,6 +13069,18 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
+    - interp: 0
+      frame: 1
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      position: {x: 0, y: 103, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     - interp: 0
       frame: 65
       easeType: 3
@@ -12943,18 +13127,6 @@ MonoBehaviour:
       isConstSpeed: 0
       _paths: []
       position: {x: 0, y: 224, z: 0}
-      orientMode: 0
-      orientLockAxis: 0
-    - interp: 0
-      frame: 1
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      position: {x: 0, y: 103, z: 0}
       orientMode: 0
       orientLockAxis: 0
     - interp: 0
@@ -13040,6 +13212,27 @@ MonoBehaviour:
       axis: -1
       _obj: {fileID: 5820610892233718698}
     - _version: 3
+      id: 9
+      name: Track8
+      foldout: 1
+      _targetPath: 
+      axis: -1
+      _obj: {fileID: 6329343127513953249}
+    - _version: 3
+      id: 5
+      name: Track4
+      foldout: 1
+      _targetPath: 
+      axis: -1
+      _obj: {fileID: 7153682489825709029}
+    - _version: 3
+      id: 6
+      name: Track5
+      foldout: 1
+      _targetPath: 
+      axis: -1
+      _obj: {fileID: 1517982538500103375}
+    - _version: 3
       id: 11
       name: Track10
       foldout: 1
@@ -13053,27 +13246,6 @@ MonoBehaviour:
       _targetPath: 
       axis: -1
       _obj: {fileID: 5590784143423446676}
-    - _version: 3
-      id: 6
-      name: Track5
-      foldout: 1
-      _targetPath: 
-      axis: -1
-      _obj: {fileID: 1517982538500103375}
-    - _version: 3
-      id: 5
-      name: Track4
-      foldout: 1
-      _targetPath: 
-      axis: -1
-      _obj: {fileID: 7153682489825709029}
-    - _version: 3
-      id: 9
-      name: Track8
-      foldout: 1
-      _targetPath: 
-      axis: -1
-      _obj: {fileID: 6329343127513953249}
     _scaleKeys:
     - interp: 0
       frame: 20
@@ -13133,6 +13305,204 @@ MonoBehaviour:
       scale: {x: 1.1, y: 1.1, z: 1}
     - interp: 0
       frame: 30
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 0
+      frame: 50
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 60
+      isConstSpeed: 0
+      _paths:
+      - type: 1
+        subdivisionsXSegment: 10
+        wps:
+        - vals:
+          - 0
+          - 0
+          - 1
+        - vals:
+          - 1.1
+          - 1.1
+          - 1
+        - vals:
+          - 1
+          - 1
+          - 1
+        wpsTimeTable:
+        - 0.3
+        controlPoints:
+        - a:
+            vals:
+            - 1.1
+            - 1.1
+            - 1
+          b:
+            vals: []
+        - a:
+            vals:
+            - 0.9
+            - 0.9
+            - 1
+          b:
+            vals: []
+        length: 1.865002
+        timesTable: []
+        lengthsTable: []
+        _isConstantSpeed: 0
+      scale: {x: 0, y: 0, z: 1}
+    - interp: 0
+      frame: 53
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1.1, y: 1.1, z: 1}
+    - interp: 0
+      frame: 60
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 0
+      frame: 30
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 35
+      isConstSpeed: 0
+      _paths:
+      - type: 1
+        subdivisionsXSegment: 10
+        wps:
+        - vals:
+          - 0
+          - 0
+          - 1
+        - vals:
+          - 1.2
+          - 1.2
+          - 1
+        - vals:
+          - 1
+          - 1
+          - 1
+        wpsTimeTable:
+        - 0.4
+        controlPoints:
+        - a:
+            vals:
+            - 1.2
+            - 1.2
+            - 1
+          b:
+            vals: []
+        - a:
+            vals:
+            - 0.79999995
+            - 0.79999995
+            - 1
+          b:
+            vals: []
+        length: 2.120189
+        timesTable: []
+        lengthsTable: []
+        _isConstantSpeed: 0
+      scale: {x: 0, y: 0, z: 1}
+    - interp: 0
+      frame: 32
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1.2, y: 1.2, z: 1}
+    - interp: 0
+      frame: 35
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 0
+      frame: 35
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 45
+      isConstSpeed: 0
+      _paths:
+      - type: 1
+        subdivisionsXSegment: 10
+        wps:
+        - vals:
+          - 0
+          - 0
+          - 1
+        - vals:
+          - 1.1
+          - 1.1
+          - 1
+        - vals:
+          - 1
+          - 1
+          - 1
+        wpsTimeTable:
+        - 0.3
+        controlPoints:
+        - a:
+            vals:
+            - 1.1
+            - 1.1
+            - 1
+          b:
+            vals: []
+        - a:
+            vals:
+            - 0.9
+            - 0.9
+            - 1
+          b:
+            vals: []
+        length: 1.865002
+        timesTable: []
+        lengthsTable: []
+        _isConstantSpeed: 0
+      scale: {x: 0, y: 0, z: 1}
+    - interp: 0
+      frame: 38
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1.1, y: 1.1, z: 1}
+    - interp: 0
+      frame: 45
       easeType: 1
       amplitude: 0
       period: 0
@@ -13273,217 +13643,31 @@ MonoBehaviour:
       isConstSpeed: 0
       _paths: []
       scale: {x: 1, y: 1, z: 1}
-    - interp: 0
-      frame: 35
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 45
-      isConstSpeed: 0
-      _paths:
-      - type: 1
-        subdivisionsXSegment: 10
-        wps:
-        - vals:
-          - 0
-          - 0
-          - 1
-        - vals:
-          - 1.1
-          - 1.1
-          - 1
-        - vals:
-          - 1
-          - 1
-          - 1
-        wpsTimeTable:
-        - 0.3
-        controlPoints:
-        - a:
-            vals:
-            - 1.1
-            - 1.1
-            - 1
-          b:
-            vals: []
-        - a:
-            vals:
-            - 0.9
-            - 0.9
-            - 1
-          b:
-            vals: []
-        length: 1.865002
-        timesTable: []
-        lengthsTable: []
-        _isConstantSpeed: 0
-      scale: {x: 0, y: 0, z: 1}
-    - interp: 0
-      frame: 38
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      scale: {x: 1.1, y: 1.1, z: 1}
-    - interp: 0
-      frame: 45
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      scale: {x: 1, y: 1, z: 1}
-    - interp: 0
-      frame: 30
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 35
-      isConstSpeed: 0
-      _paths:
-      - type: 1
-        subdivisionsXSegment: 10
-        wps:
-        - vals:
-          - 0
-          - 0
-          - 1
-        - vals:
-          - 1.2
-          - 1.2
-          - 1
-        - vals:
-          - 1
-          - 1
-          - 1
-        wpsTimeTable:
-        - 0.4
-        controlPoints:
-        - a:
-            vals:
-            - 1.2
-            - 1.2
-            - 1
-          b:
-            vals: []
-        - a:
-            vals:
-            - 0.79999995
-            - 0.79999995
-            - 1
-          b:
-            vals: []
-        length: 2.120189
-        timesTable: []
-        lengthsTable: []
-        _isConstantSpeed: 0
-      scale: {x: 0, y: 0, z: 1}
-    - interp: 0
-      frame: 32
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      scale: {x: 1.2, y: 1.2, z: 1}
-    - interp: 0
-      frame: 35
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      scale: {x: 1, y: 1, z: 1}
-    - interp: 0
-      frame: 50
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 60
-      isConstSpeed: 0
-      _paths:
-      - type: 1
-        subdivisionsXSegment: 10
-        wps:
-        - vals:
-          - 0
-          - 0
-          - 1
-        - vals:
-          - 1.1
-          - 1.1
-          - 1
-        - vals:
-          - 1
-          - 1
-          - 1
-        wpsTimeTable:
-        - 0.3
-        controlPoints:
-        - a:
-            vals:
-            - 1.1
-            - 1.1
-            - 1
-          b:
-            vals: []
-        - a:
-            vals:
-            - 0.9
-            - 0.9
-            - 1
-          b:
-            vals: []
-        length: 1.865002
-        timesTable: []
-        lengthsTable: []
-        _isConstantSpeed: 0
-      scale: {x: 0, y: 0, z: 1}
-    - interp: 0
-      frame: 53
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      scale: {x: 1.1, y: 1.1, z: 1}
-    - interp: 0
-      frame: 60
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      scale: {x: 1, y: 1, z: 1}
     _trackLookups:
     - type: 11
       index: 0
       keyIndices: 000000000100000002000000
-    - type: 4
-      index: 0
-      keyIndices: 00000000
+    - type: 11
+      index: 1
+      keyIndices: 030000000400000005000000
     - type: 7
       index: 0
       keyIndices: 0000000001000000
+    - type: 11
+      index: 2
+      keyIndices: 060000000700000008000000
+    - type: 11
+      index: 3
+      keyIndices: 090000000a0000000b000000
     - type: 7
       index: 1
       keyIndices: 0200000003000000
+    - type: 11
+      index: 4
+      keyIndices: 0c0000000d0000000e000000
+    - type: 11
+      index: 5
+      keyIndices: 0f0000001000000011000000
     - type: 7
       index: 2
       keyIndices: 0400000005000000
@@ -13493,36 +13677,27 @@ MonoBehaviour:
     - type: 7
       index: 4
       keyIndices: 0800000009000000
-    - type: 11
-      index: 1
-      keyIndices: 030000000400000005000000
-    - type: 11
-      index: 2
-      keyIndices: 060000000700000008000000
     - type: 7
       index: 5
       keyIndices: 0a0000000b000000
-    - type: 11
-      index: 3
-      keyIndices: 090000000a0000000b000000
-    - type: 11
-      index: 4
-      keyIndices: 0c0000000d0000000e000000
+    - type: 4
+      index: 0
+      keyIndices: 00000000
     - type: 7
       index: 6
       keyIndices: 0c0000000d000000
-    - type: 11
-      index: 5
-      keyIndices: 0f0000001000000011000000
+    - type: 3
+      index: 0
+      keyIndices: 000000000100000002000000
     - type: 10
       index: 0
-      keyIndices: 0000000001000000
+      keyIndices: 00000000
     - type: 10
       index: 1
-      keyIndices: 0200000003000000
+      keyIndices: 0100000002000000
     - type: 10
       index: 2
-      keyIndices: 04000000
+      keyIndices: 0300000004000000
     - type: 7
       index: 7
       keyIndices: 0e000000
@@ -13541,7 +13716,7 @@ MonoBehaviour:
     - type: 10
       index: 5
       keyIndices: 090000000a000000
-    _takeTrackCounts: 1100000006000000
+    _takeTrackCounts: 1200000006000000
 --- !u!1 &5281449302338516986
 GameObject:
   m_ObjectHideFlags: 0
@@ -13990,6 +14165,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7676430538025377517}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6779810702054288095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14009,6 +14195,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7676430538025377517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492379215418573244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: tap
+  mode: 0
 --- !u!1 &5523682949502600434
 GameObject:
   m_ObjectHideFlags: 0
@@ -14578,6 +14778,8 @@ GameObject:
   - component: {fileID: 416540183486385841}
   - component: {fileID: 366942000026842468}
   - component: {fileID: 4031032322536787587}
+  - component: {fileID: 7273521536297701172}
+  - component: {fileID: 2818151926799612187}
   m_Layer: 5
   m_Name: closeButton
   m_TagString: Untagged
@@ -14697,6 +14899,55 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7273521536297701172}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2818151926799612187}
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7273521536297701172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5700245702072458157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
+--- !u!114 &2818151926799612187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5700245702072458157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4560da5412179a479a46569b609b036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userData: {fileID: 11400000, guid: 9ab6acfbc605b1b45aa1c7a95ea3ebb6, type: 2}
 --- !u!1 &5753470743389513500
 GameObject:
   m_ObjectHideFlags: 0
@@ -15289,6 +15540,10 @@ MonoBehaviour:
   classifyAnimator: {fileID: 8519450193988245865}
   classifyTakeEnter: enter
   classifyTakeExit: exit
+  sfxPaletteEnter: paletteOpen
+  sfxPaletteExit: paletteClose
+  sfxError: wrong
+  sfxCorrect: correct
 --- !u!1 &5907204780301411106
 GameObject:
   m_ObjectHideFlags: 0
@@ -16056,6 +16311,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3655482166187252912}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3655482166187252912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6244396153060950286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: tap
+  mode: 0
 --- !u!114 &5794593315110432490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16259,6 +16539,7 @@ GameObject:
   - component: {fileID: 4450928502370175701}
   - component: {fileID: 6808568709732597464}
   - component: {fileID: 1680893027390235216}
+  - component: {fileID: 1063832397938214680}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -16379,6 +16660,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1063832397938214680}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1063832397938214680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6306545611888147549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &6440431204015452004
 GameObject:
   m_ObjectHideFlags: 0
@@ -16541,6 +16847,7 @@ GameObject:
   - component: {fileID: 7397136735717380644}
   - component: {fileID: 3106239876337013173}
   - component: {fileID: 7484648801126318795}
+  - component: {fileID: 2236232728521229611}
   m_Layer: 5
   m_Name: resetButton
   m_TagString: Untagged
@@ -16643,6 +16950,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2236232728521229611}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3106239876337013173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16670,6 +16988,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1652969357050787447}
   selectSticky: 0
+--- !u!114 &2236232728521229611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6649340589083684231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &6823266914418355089
 GameObject:
   m_ObjectHideFlags: 0
@@ -17950,6 +18282,7 @@ GameObject:
   - component: {fileID: 68535993941646358}
   - component: {fileID: 6832122283262191003}
   - component: {fileID: 2368660835667020955}
+  - component: {fileID: 7448081027249033958}
   m_Layer: 5
   m_Name: nextButton
   m_TagString: Untagged
@@ -18070,6 +18403,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7448081027249033958}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7448081027249033958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7278461883355574264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &7290271762174257910
 GameObject:
   m_ObjectHideFlags: 0
@@ -18931,6 +19289,56 @@ MonoBehaviour:
   startColor: {r: 1, g: 0.8431373, b: 0.6, a: 0.29803923}
   endColor: {r: 1, g: 0.8431373, b: 0.6, a: 1}
   realtime: 1
+--- !u!1 &7840227343058472883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1062143293019961913}
+  - component: {fileID: 8106770901727405319}
+  m_Layer: 5
+  m_Name: starSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1062143293019961913
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7840227343058472883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7426912080726026531}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8106770901727405319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7840227343058472883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: boop
+  mode: 0
 --- !u!1 &7894630415419743068
 GameObject:
   m_ObjectHideFlags: 0
@@ -21609,7 +22017,7 @@ RectTransform:
   - {fileID: 1517982538500103375}
   - {fileID: 6329343127513953249}
   m_Father: {fileID: 7426912080726026531}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21998,6 +22406,7 @@ GameObject:
   - component: {fileID: 3387568893929456121}
   - component: {fileID: 7573494241826641263}
   - component: {fileID: 4557870614572288756}
+  - component: {fileID: 3213172142720162332}
   m_Layer: 5
   m_Name: finishButton
   m_TagString: Untagged
@@ -22021,7 +22430,7 @@ RectTransform:
   - {fileID: 4489098532597562244}
   - {fileID: 6061689927613218331}
   m_Father: {fileID: 7426912080726026531}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -22119,6 +22528,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3213172142720162332}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3213172142720162332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9009295466028668273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: click
+  mode: 0
 --- !u!1 &9107821103278154801
 GameObject:
   m_ObjectHideFlags: 0
@@ -24074,9 +24508,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e075767003f35f448eb55fe17f70fff, type: 3}
---- !u!224 &4009057679762323592 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
+--- !u!1 &5492379215418573244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1824149576190153776, guid: 3e075767003f35f448eb55fe17f70fff,
     type: 3}
   m_PrefabInstance: {fileID: 6154300368797635980}
   m_PrefabAsset: {fileID: 0}
@@ -24104,9 +24538,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e81236fc1383004f984f9ec3ce5259a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5492379215418573244 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1824149576190153776, guid: 3e075767003f35f448eb55fe17f70fff,
+--- !u!224 &4009057679762323592 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7118923463438757124, guid: 3e075767003f35f448eb55fe17f70fff,
     type: 3}
   m_PrefabInstance: {fileID: 6154300368797635980}
   m_PrefabAsset: {fileID: 0}

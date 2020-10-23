@@ -9960,6 +9960,7 @@ MonoBehaviour:
   animator: {fileID: 8213196838890176943}
   takeActive: play
   takeCollect: collect
+  sfxCollect: collect
 --- !u!58 &6678365536378581877
 CircleCollider2D:
   m_ObjectHideFlags: 0

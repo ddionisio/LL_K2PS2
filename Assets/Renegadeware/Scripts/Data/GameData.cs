@@ -82,6 +82,12 @@ namespace Renegadeware.K2PS2 {
         public M8.Signal signalObjectReleased;
         public M8.Signal signalReset;
 
+        [Header("SFX")]
+        [M8.SoundPlaylist]
+        public string sfxItemAdd;
+        [M8.SoundPlaylist]
+        public string sfxMaterialObjectSpawn;
+
         public bool isGameStarted { get; private set; } //true: we got through start normally, false: debug
 
         private DragToGuideWidget mDragGuide;

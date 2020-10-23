@@ -12894,6 +12894,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &353019161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353019163}
+  - component: {fileID: 353019162}
+  m_Layer: 0
+  m_Name: landSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &353019162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353019161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: crash
+  mode: 0
+--- !u!4 &353019163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353019161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &358418660
 GameObject:
   m_ObjectHideFlags: 0
@@ -13131,6 +13176,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358696922}
   m_CullTransparentMesh: 0
+--- !u!1 &362833670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362833672}
+  - component: {fileID: 362833671}
+  m_Layer: 0
+  m_Name: crushSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &362833671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362833670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: bang
+  mode: 0
+--- !u!4 &362833672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362833670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &369613430
 GameObject:
   m_ObjectHideFlags: 0
@@ -13567,6 +13657,7 @@ MonoBehaviour:
     animator: {fileID: 942528424}
     takeEnter: smashHorzEnter
     takeExit: smashHorzExit
+  music: classify
 --- !u!4 &399300940
 Transform:
   m_ObjectHideFlags: 0
@@ -22319,12 +22410,12 @@ MonoBehaviour:
     numLoop: 1
     loopMode: 0
     loopBackToFrame: 0
-    trackCounter: 8
+    trackCounter: 10
     groupCounter: 0
     rootGroup:
       group_name: Group0
       group_id: 0
-      elements: 02000000030000000500000004000000060000000700000008000000
+      elements: 02000000030000000500000004000000060000000700000008000000090000000a000000
       foldout: 1
     groupValues: []
   - name: smashVertExit
@@ -22347,12 +22438,12 @@ MonoBehaviour:
     numLoop: 1
     loopMode: 0
     loopBackToFrame: 0
-    trackCounter: 7
+    trackCounter: 9
     groupCounter: 0
     rootGroup:
       group_name: Group0
       group_id: 0
-      elements: 020000000300000004000000050000000600000007000000
+      elements: 0200000003000000040000000500000006000000070000000800000009000000
       foldout: 1
     groupValues: []
   - name: smashHorzExit
@@ -22406,6 +22497,20 @@ MonoBehaviour:
       obj: {fileID: 854237199}
       componentName: 
     - _version: 1
+      id: 9
+      name: Track8
+      foldout: 1
+      _targetPath: 
+      obj: {fileID: 353019161}
+      componentName: 
+    - _version: 1
+      id: 10
+      name: Track9
+      foldout: 1
+      _targetPath: 
+      obj: {fileID: 362833670}
+      componentName: 
+    - _version: 1
       id: 8
       name: Track7
       foldout: 1
@@ -22432,6 +22537,20 @@ MonoBehaviour:
       foldout: 1
       _targetPath: 
       obj: {fileID: 111079602}
+      componentName: 
+    - _version: 1
+      id: 8
+      name: Track7
+      foldout: 1
+      _targetPath: 
+      obj: {fileID: 353019161}
+      componentName: 
+    - _version: 1
+      id: 9
+      name: Track8
+      foldout: 1
+      _targetPath: 
+      obj: {fileID: 362833670}
       componentName: 
     - _version: 1
       id: 7
@@ -22489,6 +22608,26 @@ MonoBehaviour:
         lsArray: []
       methodName: PlayLoop
       componentType: ParticleController
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
+    - interp: 0
+      frame: 35
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
     - interp: 0
       frame: 1
       easeType: 1
@@ -22555,6 +22694,26 @@ MonoBehaviour:
         lsArray: []
       methodName: PlayLoop
       componentType: ParticleController
+    - interp: 0
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
+    - interp: 0
+      frame: 35
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      useSendMessage: 0
+      parameters: []
+      methodName: Play
+      componentType: SoundPlaylistProxy
     - interp: 0
       frame: 1
       easeType: 1
@@ -22988,6 +23147,12 @@ MonoBehaviour:
     - type: 3
       index: 2
       keyIndices: 03000000
+    - type: 3
+      index: 3
+      keyIndices: 04000000
+    - type: 3
+      index: 4
+      keyIndices: 05000000
     - type: 10
       index: 0
       keyIndices: 0000000001000000
@@ -23001,8 +23166,8 @@ MonoBehaviour:
       index: 1
       keyIndices: 02000000
     - type: 3
-      index: 3
-      keyIndices: 04000000
+      index: 5
+      keyIndices: 06000000
     - type: 10
       index: 3
       keyIndices: 0600000007000000
@@ -23016,14 +23181,20 @@ MonoBehaviour:
       index: 2
       keyIndices: 0300000004000000
     - type: 3
-      index: 4
-      keyIndices: 0500000006000000
-    - type: 3
-      index: 5
-      keyIndices: 07000000
-    - type: 3
       index: 6
-      keyIndices: 08000000
+      keyIndices: 0700000008000000
+    - type: 3
+      index: 7
+      keyIndices: 09000000
+    - type: 3
+      index: 8
+      keyIndices: 0a000000
+    - type: 3
+      index: 9
+      keyIndices: 0b000000
+    - type: 3
+      index: 10
+      keyIndices: 0c000000
     - type: 10
       index: 6
       keyIndices: 0b0000000c000000
@@ -23034,15 +23205,15 @@ MonoBehaviour:
       index: 3
       keyIndices: 05000000
     - type: 3
-      index: 7
-      keyIndices: 09000000
+      index: 11
+      keyIndices: 0d000000
     - type: 10
       index: 8
       keyIndices: 0f000000
     - type: 10
       index: 9
       keyIndices: 1000000011000000
-    _takeTrackCounts: 07000000050000000600000004000000
+    _takeTrackCounts: 09000000050000000800000004000000
 --- !u!4 &942528425
 Transform:
   m_ObjectHideFlags: 0

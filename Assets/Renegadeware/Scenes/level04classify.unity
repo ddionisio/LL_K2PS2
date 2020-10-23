@@ -1023,6 +1023,7 @@ MonoBehaviour:
   spawnPointDefault: {fileID: 1944284428}
   spawnPointsRoot: {fileID: 1163671572}
   spawnAnimations: []
+  music: classify
 --- !u!4 &399300940
 Transform:
   m_ObjectHideFlags: 0

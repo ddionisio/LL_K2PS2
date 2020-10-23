@@ -11,6 +11,10 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "animator")]
         public string takeCollect;
 
+        [Header("SFX")]
+        [M8.SoundPlaylist]
+        public string sfxCollect;
+
         private bool mIsTriggered;
 
         void OnTriggerEnter2D(Collider2D collision) {
@@ -22,6 +26,8 @@ namespace Renegadeware.K2PS2 {
             //check if it's a player
             if(collision.CompareTag(gameDat.playerTag)) {
                 mIsTriggered = true;
+
+                M8.SoundPlaylist.instance.Play(sfxCollect, false);
 
                 gameDat.signalGoal.Invoke();
 

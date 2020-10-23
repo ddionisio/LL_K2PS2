@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using M8;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,12 @@ namespace Renegadeware.K2PS2 {
         public string stopTakeExit;
 
         public GameObject stopGlowGO;
+
+        [Header("SFX")]
+        [M8.SoundPlaylist]
+        public string sfxPaletteEnter;
+        [M8.SoundPlaylist]
+        public string sfxPaletteExit;
 
         public bool isPaletteActive { get; private set; }
 
@@ -186,7 +193,10 @@ namespace Renegadeware.K2PS2 {
             while(IsAnyAnimationPlaying())
                 yield return null;
 
+            SoundPlaylist.instance.Play(sfxPaletteEnter, false);
+
             if(editRootGO) editRootGO.SetActive(true);
+            
 
             if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
                 yield return editAnimator.PlayWait(editTakeEnter);
@@ -198,6 +208,8 @@ namespace Renegadeware.K2PS2 {
             //wait for other animations to end
             while(IsAnyAnimationPlaying())
                 yield return null;
+
+            SoundPlaylist.instance.Play(sfxPaletteExit, false);
 
             if(editRootGO.activeSelf && editAnimator && !string.IsNullOrEmpty(editTakeExit))
                 editAnimator.Play(editTakeExit);
@@ -224,6 +236,8 @@ namespace Renegadeware.K2PS2 {
                 yield return null;
 
             //edit exit animation
+            SoundPlaylist.instance.Play(sfxPaletteExit, false);
+
             if(editAnimator && !string.IsNullOrEmpty(editTakeExit))
                 yield return editAnimator.PlayWait(editTakeExit);
 
@@ -258,6 +272,8 @@ namespace Renegadeware.K2PS2 {
                 stopGlowGO.SetActive(false);
 
             //show edit display
+            SoundPlaylist.instance.Play(sfxPaletteEnter, false);
+
             editRootGO.SetActive(true);
 
             if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
@@ -275,6 +291,8 @@ namespace Renegadeware.K2PS2 {
                 yield return null;
 
             //hide edit
+            SoundPlaylist.instance.Play(sfxPaletteExit, false);
+
             if(editAnimator && !string.IsNullOrEmpty(editTakeExit))
                 yield return editAnimator.PlayWait(editTakeExit);
 
@@ -307,6 +325,8 @@ namespace Renegadeware.K2PS2 {
             if(trashRootGO) trashRootGO.SetActive(false);
 
             //show edit display
+            SoundPlaylist.instance.Play(sfxPaletteEnter, false);
+
             if(editAnimator && !string.IsNullOrEmpty(editTakeEnter))
                 yield return editAnimator.PlayWait(editTakeEnter);
 

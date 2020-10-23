@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fba05c719519b4db251fead2709c54, type: 3}
+  m_Name: soundPlaylist
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: click
+    clip: {fileID: 8300000, guid: 9d18778d72ce9114e9bd29337e518944, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: boop
+    clip: {fileID: 0}
+    clipVariants:
+    - {fileID: 8300000, guid: 3f33f2c107cb5b54faa5cc821ba7f71b, type: 3}
+    - {fileID: 8300000, guid: bd7a3140c005c9048bbebe6519eb7d45, type: 3}
+    - {fileID: 8300000, guid: 358a5089757a692449f3849b054b8e0c, type: 3}
+    - {fileID: 8300000, guid: 0a0e6a27f0058f843a5c6b091f4f2c38, type: 3}
+    spatialBlend: 0
+  - name: correct
+    clip: {fileID: 8300000, guid: 331413503a37d074c817dee0eddf097b, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: death
+    clip: {fileID: 8300000, guid: def3abc69cafdd64bb3fdd2dc5642232, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: paletteClose
+    clip: {fileID: 8300000, guid: 47c256ea65dff75489ada61925c20702, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: paletteOpen
+    clip: {fileID: 8300000, guid: cac0c56c0cb90fc42bc17d3b589ac1ef, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: revive
+    clip: {fileID: 8300000, guid: f92f35e5d5fa6d043bf3d2f5e7d65932, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: success
+    clip: {fileID: 8300000, guid: dcf94dea48fd6874da5272aac56f21f6, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: tap
+    clip: {fileID: 8300000, guid: 28b2df0ab3d233548886ec1e1e4d44ee, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: wrong
+    clip: {fileID: 8300000, guid: 8f004321e74471b41ab8fcc894775900, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: bang
+    clip: {fileID: 8300000, guid: 6150e625d19598048b8dfa3abfa03b7d, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: collect
+    clip: {fileID: 8300000, guid: d55563c8a2f519c4b8ab94857484549a, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  - name: crash
+    clip: {fileID: 8300000, guid: bc2c4c8e846f7c94ca5a6008f2d3254a, type: 3}
+    clipVariants: []
+    spatialBlend: 0
+  max: 32
+  audioMixer: {fileID: 0}
+  muteOnFocusLost: 1

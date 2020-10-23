@@ -28,6 +28,16 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "classifyAnimator")]
         public string classifyTakeExit;
 
+        [Header("SFX")]
+        [M8.SoundPlaylist]
+        public string sfxPaletteEnter;
+        [M8.SoundPlaylist]
+        public string sfxPaletteExit;
+        [M8.SoundPlaylist]
+        public string sfxError;
+        [M8.SoundPlaylist]
+        public string sfxCorrect;
+
         public bool isBusy { get { return mRout != null; } }
 
         public int errorCount { get; private set; }
@@ -80,6 +90,8 @@ namespace Renegadeware.K2PS2 {
         public void ShowPalette() {
             ClearRout();
 
+            M8.SoundPlaylist.instance.Play(sfxPaletteEnter, false);
+
             if(paletteRootGO)
                 paletteRootGO.SetActive(true);
 
@@ -88,6 +100,8 @@ namespace Renegadeware.K2PS2 {
 
         public void HidePalette() {
             ClearRout();
+
+            M8.SoundPlaylist.instance.Play(sfxPaletteExit, false);
 
             mRout = StartCoroutine(DoAnimation(paletteAnimator, paletteTakeExit, paletteRootGO));
         }
@@ -168,6 +182,8 @@ namespace Renegadeware.K2PS2 {
             }
 
             //show error message
+            if(errorCount > 0)
+                M8.SoundPlaylist.instance.Play(sfxError, false);
         }
 
         IEnumerator DoAnimation(M8.Animator.Animate animator, string take, GameObject disableAtEndGO) {

@@ -27,6 +27,16 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "readyAnimator")]
         public string readyTakeExit;
 
+        [Header("Intro")]
+        public M8.Animator.Animate introAnimator;
+        [M8.Animator.TakeSelector(animatorField = "introAnimator")]
+        public string introTakePlay;
+
+        [Header("Music")]
+        [M8.MusicPlaylist]
+        public string music;
+
+
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
 
@@ -48,6 +58,8 @@ namespace Renegadeware.K2PS2 {
 
             //Title/Ready
 
+            M8.MusicPlaylist.instance.Play(music, true, true);
+
             //Setup Title
             if(titleText) titleText.text = M8.Localize.Get(titleRef);
 
@@ -63,6 +75,8 @@ namespace Renegadeware.K2PS2 {
         IEnumerator DoPlay() {
             yield return readyAnimator.PlayWait(readyTakeExit);
 
+            if(readyGO) readyGO.SetActive(false);
+
             if(LoLManager.instance.curProgress > 0)
                 GameData.instance.Begin();
             else
@@ -70,7 +84,7 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoIntro() {
-            yield return null;
+            yield return introAnimator.PlayWait(introTakePlay);
 
             GameData.instance.Begin();
         }

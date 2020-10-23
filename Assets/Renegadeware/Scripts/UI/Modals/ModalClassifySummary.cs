@@ -42,6 +42,10 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "finishAnimator")]
         public string finishTakeExit;
 
+        [Header("SFX")]
+        [M8.SoundPlaylist]
+        public string sfxNewTag;
+
         private const int tagCapacity = 3;
 
         private M8.CacheList<MaterialTagWidget> mTags = new M8.CacheList<MaterialTagWidget>(tagCapacity);
@@ -132,6 +136,8 @@ namespace Renegadeware.K2PS2 {
 
             //show last tag
             if(lastTagIndex != -1) {
+                M8.SoundPlaylist.instance.Play(sfxNewTag, false);
+
                 var tagWidget = AddTag(matObjDat.tags[lastTagIndex]);
 
                 //play tag enter

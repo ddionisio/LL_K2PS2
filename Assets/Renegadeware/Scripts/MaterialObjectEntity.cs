@@ -339,6 +339,8 @@ namespace Renegadeware.K2PS2 {
                 }
 
                 if(palette && !palette.isFull) {
+                    M8.SoundPlaylist.instance.Play(gameDat.sfxItemAdd, false);
+
                     palette.AddItem(data);
                     Release();
                     return;
@@ -385,6 +387,8 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoSpawn() {
+            M8.SoundPlaylist.instance.Play(GameData.instance.sfxMaterialObjectSpawn, false);
+
             if(animator) {
                 //wait for animation to finish
                 while(animator.isPlaying)

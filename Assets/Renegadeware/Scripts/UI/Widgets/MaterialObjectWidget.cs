@@ -195,6 +195,8 @@ namespace Renegadeware.K2PS2 {
 
                         otherMatObjWidget.palette.AddItem(data);
                         palette.AddItem(otherData);
+
+                        M8.SoundPlaylist.instance.Play(gameDat.sfxItemAdd, false);
                     }
                 }
                 //check if it's palette
@@ -204,6 +206,8 @@ namespace Renegadeware.K2PS2 {
                     if(toPalette && !toPalette.isFull) {
                         palette.RemoveItem(data);
                         toPalette.AddItem(data);
+
+                        M8.SoundPlaylist.instance.Play(gameDat.sfxItemAdd, false);
                     }
                 }
             }

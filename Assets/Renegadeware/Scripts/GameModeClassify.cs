@@ -33,6 +33,10 @@ namespace Renegadeware.K2PS2 {
 
         public SpawnAnimation[] spawnAnimations; //use for stagger spawn mode
 
+        [Header("Music")]
+        [M8.MusicPlaylist]
+        public string music;
+
         public HUDClassify HUD { get { return mHUD; } }
 
         private HUDClassify mHUD;
@@ -71,12 +75,16 @@ namespace Renegadeware.K2PS2 {
             mFlow = GetComponent<GameModeFlow>();
 
             gameDat.signalClassify.callback += OnClassify;
+            gameDat.signalDragBegin.callback += OnDragBegin;
+            gameDat.signalDragEnd.callback += OnDragEnd;
         }
 
         protected override void OnInstanceDeinit() {
             var gameDat = GameData.instance;
 
             gameDat.signalClassify.callback -= OnClassify;
+            gameDat.signalDragBegin.callback -= OnDragBegin;
+            gameDat.signalDragEnd.callback -= OnDragEnd;
 
             if(mHUD)
                 mHUD.Deinit();
@@ -88,6 +96,8 @@ namespace Renegadeware.K2PS2 {
 
         protected override IEnumerator Start() {
             yield return base.Start();
+
+            M8.MusicPlaylist.instance.Play(music, true, false);
 
             //dialog, animation
             if(mFlow)
@@ -172,6 +182,8 @@ namespace Renegadeware.K2PS2 {
                 yield return null;
             }
 
+            M8.SoundPlaylist.instance.Play(mHUD.sfxCorrect, false);
+
             mHUD.HideAll(false);
             while(mHUD.isBusy)
                 yield return null;
@@ -184,6 +196,14 @@ namespace Renegadeware.K2PS2 {
             //show summary
             mClassifySummaryParam[ModalClassifySummary.parmLevelData] = data;
             M8.ModalManager.main.Open(GameData.instance.modalClassifySummary, mClassifySummaryParam);
+        }
+
+        void OnDragBegin() {
+            M8.SceneManager.instance.Pause();
+        }
+
+        void OnDragEnd() {
+            M8.SceneManager.instance.Resume();
         }
 
         void OnClassify() {

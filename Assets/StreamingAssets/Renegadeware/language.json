@@ -6,7 +6,7 @@
   },
   "en": {
     "welcome": "Welcome!",
-    "title": "<b>Mighty Chin Chin</b>\n<size=34>What's the Matter</size>",
+    "title": "<b>Mighty Chin-Chin</b>\n<size=34>What's the Matter</size>",
     "test": "Test",
     "test2": "Test 2",
     "play": "PLAY",
@@ -84,6 +84,8 @@
     "level04_conductive_1": "Here we see that an iron block is highly conductive with electricity.",
     "level04_non_conductive_1": "As for a granite rock, not so much.",
     "level04_begin_1": "Now let's go ahead and sort these objects on wether they are electrically conductive or not!",
-    "level04_begin_2": "If enough electricity conducts through an object, the light bulb should shine brightly."
+    "level04_begin_2": "If enough electricity conducts through an object, the light bulb should shine brightly.",
+    "end_title": "CONGRATULATIONS",
+    "end_text": "Thank you for playing!"
   }
 }

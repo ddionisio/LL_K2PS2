@@ -13,6 +13,10 @@ namespace Renegadeware.K2PS2 {
         [Header("Game")]
         public Transform sectionRoot;
 
+        [Header("Music")]
+        [M8.MusicPlaylist]
+        public string music;
+
         [Header("Debug")]
         public int debugStartSectionInd;
 
@@ -103,6 +107,8 @@ namespace Renegadeware.K2PS2 {
 
         protected override IEnumerator Start() {
             yield return base.Start();
+
+            M8.MusicPlaylist.instance.Play(music, true, false);
 
             //spawn player
             GameData.instance.signalPlayerSpawn.Invoke();

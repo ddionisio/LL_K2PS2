@@ -26,6 +26,14 @@ namespace Renegadeware.K2PS2 {
         [M8.Animator.TakeSelector(animatorField = "animator")]
         public string takeVictory;
 
+        [Header("SFX")]
+        [M8.SoundPlaylist]
+        public string sfxJump;
+        [M8.SoundPlaylist]
+        public string sfxSpawn;
+        [M8.SoundPlaylist]
+        public string sfxDeath;
+
         public PlayerEntity player { get; private set; }
 
         private Coroutine mRout;
@@ -45,6 +53,8 @@ namespace Renegadeware.K2PS2 {
 
         public void Kill() {
             ClearRoutine();
+
+            M8.SoundPlaylist.instance.Play(sfxDeath, false);
 
             player.state = PlayerEntity.State.None;
 
@@ -74,8 +84,15 @@ namespace Renegadeware.K2PS2 {
             ClearRoutine();
         }
 
+        void OnDestroy() {
+            if(player)
+                player.jumpStartCallback -= OnJump;
+        }
+
         void Awake() {
             player = GetComponent<PlayerEntity>();
+
+            player.jumpStartCallback += OnJump;
 
             mTakeSpawnInd = animator.GetTakeIndex(takeSpawn);
             mTakeIdleInd = animator.GetTakeIndex(takeIdle);
@@ -125,6 +142,10 @@ namespace Renegadeware.K2PS2 {
             mRout = StartCoroutine(DoMoveTo(pos));
         }
 
+        void OnJump() {
+            M8.SoundPlaylist.instance.Play(sfxJump, false);
+        }
+
         IEnumerator DoNormal() {
             MoveStartAnimation();
 
@@ -137,6 +158,8 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoSpawn() {
+            M8.SoundPlaylist.instance.Play(sfxSpawn, false);
+
             player.state = PlayerEntity.State.None;
             transform.position = player.startPosition;
 

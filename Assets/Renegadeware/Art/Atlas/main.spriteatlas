@@ -49,7 +49,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: d9a2a8bca9999974f9f8f57699bb4bab, type: 3}
     - {fileID: 102900000, guid: fa0cb14f897744d4caea68ecc157cc61, type: 3}
     - {fileID: 102900000, guid: b6dcf34a51e6c8f439d54537ab9e02d9, type: 3}
-    totalSpriteSurfaceArea: 1405860
+    totalSpriteSurfaceArea: 1412630
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -132,7 +132,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8ad55e8808336cc4c87808f742622e4c, type: 3}
   - {fileID: 21300000, guid: 72bbcd98e34c8e5438191a877b6ea814, type: 3}
   - {fileID: 21300000, guid: 5c0f98b80ca61c840a407e2b2052ef79, type: 3}
+  - {fileID: 21300000, guid: 5541d0c881177e04382d94dcdb497125, type: 3}
+  - {fileID: 21300000, guid: b94ba6c8bd424114eb601911c2cf4711, type: 3}
   - {fileID: 21300000, guid: b29836d80c4d7a14fbab62e88c8e8a71, type: 3}
+  - {fileID: 21300000, guid: 435c1fd8039527d44838bc5ac901e318, type: 3}
   - {fileID: 21300010, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
   - {fileID: 21300006, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
   - {fileID: 21300000, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
@@ -200,6 +203,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 49f63cbf9fa458c4cbc656fbdbb5124a, type: 3}
   - {fileID: 21300000, guid: 49d782ef45be5004b9edb429ea0994ce, type: 3}
   - {fileID: 21300000, guid: 9bcf27ef30b332d4d9d3d2c74b02b0ec, type: 3}
+  - {fileID: 21300000, guid: 7384f3ff3e790e04a93eba9324628762, type: 3}
   m_PackedSpriteNamesToIndex:
   - retryButton
   - matObjIconClay_1x2
@@ -280,7 +284,10 @@ SpriteAtlas:
   - illustrate_non_conductive
   - chinchilla_up_3
   - powerOff
+  - starRideGlow
+  - spaceHelmet
   - light-bulb_fill
+  - starRide
   - blank4x4_top
   - blank4x4_bottomLeft
   - blank4x4_bottom
@@ -348,5 +355,6 @@ SpriteAtlas:
   - devicerMouthOpen
   - circle128x128
   - chinchilla_victory_2
+  - spaceHelmet_fill
   m_Tag: main
   m_IsVariant: 0
