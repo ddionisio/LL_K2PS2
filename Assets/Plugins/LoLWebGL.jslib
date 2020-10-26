@@ -17,7 +17,9 @@
         QUESTION_LIST: 'QuestionListReceived',
         LANGUAGE_DEFS: 'LanguageListReceived',
         START_GAME: 'StartGameDataReceived',
-        ANSWER_RESULT: 'AnswerResultDataReceived',
+        PLAYER_ACTIVITY_ID: 'PlayerActivityIdReceived',
+        LOAD_STATE: 'StateDataReceived',
+        SAVE_STATE_RESULT: 'SaveResultDataReceived'
       },
       RECEIVED: {
         PAUSE: 'pause',
@@ -26,8 +28,10 @@
         LANGUAGE: 'language',
         START: 'start',
         INIT: 'init',
-        ANSWER_RESULT: 'answerResult',
-      },
+        PLAYER_ACTIVITY_ID: 'playerActivityId',
+        LOAD_STATE: 'loadState',
+        SAVE_STATE_RESULT: 'saveStateResult'
+      }
     };
 
     // const LANGUAGE_PAYLOAD = {
@@ -93,6 +97,27 @@
             msg.data.payload
           );
           break;
+        case EVENT.RECEIVED.PLAYER_ACTIVITY_ID:
+	        SendMessage(
+            targetGameObject,
+            EVENT.UNITY.PLAYER_ACTIVITY_ID,
+            msg.data.payload
+          );
+	        break;
+        case EVENT.RECEIVED.LOAD_STATE:
+	        SendMessage(
+            targetGameObject,
+            EVENT.UNITY.LOAD_STATE,
+            msg.data.payload || ""
+          );
+	        break;
+        case EVENT.RECEIVED.SAVE_STATE_RESULT:
+	        SendMessage(
+            targetGameObject,
+            EVENT.UNITY.SAVE_STATE_RESULT,
+            msg.data.payload
+          );
+	        break;
         case 'init':
           break;
         default:

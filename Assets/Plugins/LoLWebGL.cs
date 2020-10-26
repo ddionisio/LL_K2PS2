@@ -13,156 +13,199 @@ using SimpleJSON;
 */
 namespace LoLSDK
 {
-	public class WebGL : ILOLSDK
-	{
-		// *************************************
-		// PLUMBING
-		// *************************************
+    public class WebGL : ILOLSDK
+    {
+        // *************************************
+        // PLUMBING
+        // *************************************
 
-		[DllImport("__Internal")]
-		public static extern void _PostWindowMessage (string msgName, string jsonPayload);
-		public void PostWindowMessage (string msgName, string jsonPayload) {
-			Debug.Log("PostWindowMessage " + msgName);
+        [DllImport("__Internal")]
+        public static extern void _PostWindowMessage(string msgName, string jsonPayload);
+        public void PostWindowMessage(string msgName, string jsonPayload)
+        {
+            Debug.Log("PostWindowMessage " + msgName);
 
-			_PostWindowMessage(msgName, jsonPayload);
-		}
+            _PostWindowMessage(msgName, jsonPayload);
+        }
 
-		public void LogMessage (string msg) {
-			JSONNode payload = JSON.Parse("{}");
+        public void LogMessage(string msg)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["msg"] = msg
+            };
 
-			payload["msg"] = msg;
+            PostWindowMessage("logMessage", payload.ToString());
+        }
 
-			PostWindowMessage("logMessage", payload.ToString());
-		}
+        // *************************************
+        // GAME LIFECYCLE
+        // *************************************
 
-		// *************************************
-		// GAME LIFECYCLE
-		// *************************************
+        [DllImport("__Internal")]
+        private static extern string _GameIsReady(string gameName, string callbackGameObject, string aspectRatio, string resolution, string sdkVersion);
+        public void GameIsReady(string gameName, string callbackGameObject, string aspectRatio, string resolution)
+        {
+            _GameIsReady(gameName, callbackGameObject, aspectRatio, resolution, "V4");
+        }
 
-		[DllImport("__Internal")]
-		private static extern string _GameIsReady (string gameName, string callbackGameObject, string aspectRatio, string resolution, string sdkVersion);
-		public void GameIsReady (string gameName, string callbackGameObject, string aspectRatio, string resolution) {
-			_GameIsReady(gameName, callbackGameObject, aspectRatio, resolution, "V2");
-		}
+        public void CompleteGame()
+        {
+            JSONObject payload = new JSONObject();
+            PostWindowMessage("complete", payload.ToString());
+        }
 
-		public void CompleteGame () {
-			JSONNode payload = JSON.Parse("{}");
-			PostWindowMessage("complete", payload.ToString());
-		}
+        // *************************************
+        // ANSWER SUBMISSION
+        // *************************************
 
-		// *************************************
-		// ANSWER SUBMISSION
-		// *************************************
+        public void SubmitProgress(int score, int currentProgress, int maximumProgress = -1)
+        {
+            JSONObject payload = new JSONObject()
+            {
 
-		public void SubmitProgress (int score, int currentProgress, int maximumProgress = -1) {
-			JSONNode payload = JSON.Parse("{}");
+                ["score"] = score,
+                ["currentProgress"] = currentProgress,
+                ["maximumProgress"] = maximumProgress
+            };
 
-			payload["score"].AsInt = score;
-			payload["currentProgress"].AsInt = currentProgress;
-			payload["maximumProgress"].AsInt = maximumProgress;
+            PostWindowMessage("progress", payload.ToString());
+        }
 
-			PostWindowMessage("progress", payload.ToString());
-		}
+        public void SubmitAnswer(int questionId, int alternativeId)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["questionId"] = questionId,
+                ["alternativeId"] = alternativeId
+            };
 
-		public void SubmitAnswer (int questionId, int alternativeId) {
-			JSONNode payload = JSON.Parse("{}");
-
-			payload["questionId"].AsInt = questionId;
-			payload["alternativeId"].AsInt = alternativeId;
-
-			PostWindowMessage("answer", payload.ToString());
-		}
+            PostWindowMessage("answer", payload.ToString());
+        }
 
 
-		// *************************************
-		// SPEECH
-		// *************************************
+        // *************************************
+        // SPEECH
+        // *************************************
 
-		public void SpeakText (string key) {
-			JSONNode  payload = JSON.Parse("{}");
+        public void SpeakText(string key)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["key"] = key
+            };
 
-			payload["key"] = key;
+            PostWindowMessage("speakText", payload.ToString());
+        }
 
-			PostWindowMessage("speakText", payload.ToString());
-		}
+        public void SpeakQuestion(int questionId)
+        {
+            Debug.Log("SpeakQuestion");
 
-		public void SpeakQuestion (int questionId) {
-			Debug.Log("SpeakQuestion");
+            JSONObject payload = new JSONObject()
+            {
+                ["questionId"] = questionId
+            };
 
-			JSONNode payload = JSON.Parse("{}");
+            PostWindowMessage("speakQuestion", payload.ToString());
+        }
 
-			payload["questionId"].AsInt = questionId;
+        public void SpeakAlternative(int alternativeId)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["alternativeId"] = alternativeId
+            };
 
-			PostWindowMessage("speakQuestion", payload.ToString());
-		}
+            PostWindowMessage("speakAlternative", payload.ToString());
+        }
 
-		public void SpeakAlternative (int alternativeId) {
-			JSONNode payload = JSON.Parse("{}");
+        public void SpeakQuestionAndAlternatives(int questionId)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["questionId"] = questionId
+            };
 
-			payload["alternativeId"].AsInt = alternativeId;
+            PostWindowMessage("speakQuestionAndAlternatives", payload.ToString());
+        }
 
-			PostWindowMessage("speakAlternative", payload.ToString());
-		}
+        public void Error(string msg)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["msg"] = msg
+            };
 
-		public void SpeakQuestionAndAlternatives (int questionId) {
-			JSONNode payload = JSON.Parse("{}");
+            PostWindowMessage("error", payload.ToString());
+        }
 
-			payload["questionId"].AsInt = questionId;
+        public void ShowQuestion()
+        {
+            Debug.Log("ShowQuestion");
 
-			PostWindowMessage("speakQuestionAndAlternatives", payload.ToString());
-		}
+            PostWindowMessage("showQuestion", "{}");
+        }
 
-		public void Error (string msg) {
-			JSONNode payload = JSON.Parse("{}");
+        // *************************************
+        // PLAY, STOP, and CONFIGURE SOUNDS
+        // *************************************
 
-			payload["msg"] = msg;
+        public void PlaySound(string file, bool background = false, bool loop = false)
+        {
+            JSONObject payload = new JSONObject()
+            {
 
-			PostWindowMessage("error", payload.ToString());
-		}
-			
-		public void ShowQuestion () {
-			Debug.Log ("ShowQuestion");
+                ["file"] = file,
+                ["background"] = background,
+                ["loop"] = loop
+            };
 
-			PostWindowMessage("showQuestion", "{}");
-		}
+            PostWindowMessage("playSound", payload.ToString());
+        }
 
-		// *************************************
-		// PLAY, STOP, and CONFIGURE SOUNDS
-		// *************************************
+        public void ConfigureSound(float foreground, float background, float fade)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["foreground"] = foreground,
+                ["background"] = background,
+                ["fade"] = fade
+            };
 
-		public void PlaySound (string file, bool background = false, bool loop = false) {
-			JSONNode payload = JSON.Parse("{}");
+            PostWindowMessage("configureSound", payload.ToString());
+        }
 
-			payload["file"] = file;
-			payload["background"] = background;
-			payload["loop"] = loop;
+        public void StopSound(string file)
+        {
+            JSONObject payload = new JSONObject()
+            {
+                ["file"] = file
+            };
 
-			PostWindowMessage("playSound", payload.ToString());
-		}
+            PostWindowMessage("stopSound", payload.ToString());
+        }
 
-		public void ConfigureSound (float foreground, float background, float fade) {
-			JSONNode payload = JSON.Parse("{}");
+        public void SaveState(string data)
+        {
+            PostWindowMessage("saveState", data);
+        }
 
-			payload["foreground"].AsFloat = foreground;
-			payload["background"].AsFloat = background;
-			payload["fade"].AsFloat = fade;
+        public void LoadState()
+        {
+            PostWindowMessage("loadState", "{}");
+        }
 
-			PostWindowMessage("configureSound", payload.ToString());
-		}
+        public void GetPlayerActivityId()
+        {
+            PostWindowMessage("getPlayerActivityId", "{}");
+        }
+    }
 
-		public void StopSound (string file) {
-			JSONNode payload = JSON.Parse("{}");
+    public class MockWebGL : ILOLSDK
+    {
 
-			payload["file"] = file;
-
-			PostWindowMessage("stopSound", payload.ToString());
-		}
-	}
-
-	public class MockWebGL : ILOLSDK
-	{
-
-		/* *********************************************
+        /* *********************************************
  		 * MOCK Messages for Local Development
 		 * *********************************************
 
@@ -170,91 +213,119 @@ namespace LoLSDK
  		 * PLUMBING
 		 ********************************************** */
 
-		public void PostWindowMessage (string msgName, string jsonPayload) {
-			Debug.Log ("PostWindowMessage: " + msgName);
-			Debug.Log ("JSON: " + jsonPayload);
-		}
+        public void PostWindowMessage(string msgName, string jsonPayload)
+        {
+            Debug.Log("PostWindowMessage: " + msgName);
+            Debug.Log("JSON: " + jsonPayload);
+        }
 
-		public void LogMessage (string msg) {
-			Debug.Log ("LogMessage");
-		}
-		/* *********************************************
+        public void LogMessage(string msg)
+        {
+            Debug.Log("LogMessage");
+        }
+        /* *********************************************
  		 * ERROR
 		 ********************************************** */
 
-		public void sError (string msg) {
-			Debug.Log ("Error");
-		}
+        public void sError(string msg)
+        {
+            Debug.Log("Error");
+        }
 
-		/* *********************************************
+        /* *********************************************
  		 * GAME LIFECYCLE
 		 ********************************************** */
 
-		public void CompleteGame () {
-			Debug.Log ("CompleteGame");
-		}
+        public void CompleteGame()
+        {
+            Debug.Log("CompleteGame");
+        }
 
-		public void GameIsReady (string gameName, string callbackGameObject, string aspectRatio, string resolution)
-		{
-			Debug.Log ("GameIsReady Editor");
-			Debug.Log ("GameIsReady gameName" + gameName);
-			Debug.Log ("GameIsReady callbackGameObject" + callbackGameObject);
-		}
+        public void GameIsReady(string gameName, string callbackGameObject, string aspectRatio, string resolution)
+        {
+            Debug.Log("GameIsReady Editor");
+            Debug.Log("GameIsReady gameName" + gameName);
+            Debug.Log("GameIsReady callbackGameObject" + callbackGameObject);
+        }
 
-		/* *********************************************
+        /* *********************************************
  		 * SUBMIT PROGRESS AND ANSWERS
 		 ********************************************** */
 
-		public void SubmitProgress (int score, int currentProgress, int maximumProgress = -1) {
-			Debug.Log ("SubmitProgress");
-		}
+        public void SubmitProgress(int score, int currentProgress, int maximumProgress = -1)
+        {
+            Debug.Log("SubmitProgress");
+        }
 
-		public void SubmitAnswer (int questionId, int alternativeId) {
-			Debug.Log ("SubmitAnswer");
-		}
+        public void SubmitAnswer(int questionId, int alternativeId)
+        {
+            Debug.Log("SubmitAnswer");
+        }
 
 
-		/* *********************************************
+        /* *********************************************
  		 * QUESTIONS
 		 ********************************************** */
 
-		public void ShowQuestion () {
-			Debug.Log ("ShowQuestion");
-		}
-		/* *********************************************
+        public void ShowQuestion()
+        {
+            Debug.Log("ShowQuestion");
+        }
+        /* *********************************************
  		 * SPEECH
 		 ********************************************** */
 
-		public void SpeakText (string key) {
-			Debug.Log ("SpeakText");
-		}
+        public void SpeakText(string key)
+        {
+            Debug.Log("SpeakText");
+        }
 
-		public void SpeakQuestion (int questionId) {
-			Debug.Log ("SpeakQuestion");
-		}
+        public void SpeakQuestion(int questionId)
+        {
+            Debug.Log("SpeakQuestion");
+        }
 
-		public void SpeakQuestionAndAlternatives (int questionId) {
-			Debug.Log ("SpeakQuestionAndAlternatives");
-		}
+        public void SpeakQuestionAndAlternatives(int questionId)
+        {
+            Debug.Log("SpeakQuestionAndAlternatives");
+        }
 
-		public void SpeakAlternative (int alternativeId) {
-			Debug.Log ("SpeakAlternative");
-		}
+        public void SpeakAlternative(int alternativeId)
+        {
+            Debug.Log("SpeakAlternative");
+        }
 
-		/* *********************************************
+        /* *********************************************
  		 * SOUND
 		 ********************************************** */
-		public void ConfigureSound (float a, float b, float c) {
-			Debug.Log ("ConfigureSound");
-		}
+        public void ConfigureSound(float a, float b, float c)
+        {
+            Debug.Log("ConfigureSound");
+        }
 
-		public void PlaySound (string path, bool background, bool loop) {
-			Debug.Log ("PlaySound");
-		}
+        public void PlaySound(string path, bool background, bool loop)
+        {
+            Debug.Log("PlaySound");
+        }
 
-		public void StopSound (string path) {
-			Debug.Log ("StopSound");
-		}
+        public void StopSound(string path)
+        {
+            Debug.Log("StopSound");
+        }
 
-	}
+        public void SaveState(string data)
+        {
+            Debug.Log("SaveData");
+        }
+
+        public void LoadState()
+        {
+            Debug.Log("LoadData");
+        }
+
+        public void GetPlayerActivityId()
+        {
+            Debug.Log("GetPlayerActivityId");
+        }
+    }
 }

@@ -59,7 +59,7 @@ namespace LoLExt {
         [SerializeField]
         int _progressMax;
         [SerializeField]
-        M8.UserData userSettings = null;
+        LoLSaveData _userData = null;
         [SerializeField]
         float _speakQueueStartDelay = 0.3f;
 
@@ -110,6 +110,8 @@ namespace LoLExt {
                 return mQuestionsList.questions.Length;
             }
         }
+
+        public LoLSaveData userData { get { return _userData; } }
 
         public virtual bool isAutoSpeechEnabled { get { return true; } }
 
@@ -315,6 +317,8 @@ namespace LoLExt {
 
             curScore = score;
 
+            _userData.Save();
+
             ProgressCallback();
         }
 
@@ -322,8 +326,8 @@ namespace LoLExt {
             if(mIsSpeechMute != isMute) {
                 mIsSpeechMute = isMute;
 
-                if(userSettings)
-                    userSettings.SetInt(settingsSpeechMuteKey, mIsSpeechMute ? 1 : 0);
+                if(_userData)
+                    _userData.SetInt(settingsSpeechMuteKey, mIsSpeechMute ? 1 : 0);
             }
         }
 
@@ -398,6 +402,16 @@ namespace LoLExt {
                 mLanguageJson = null;
             }
 
+            //load user data
+            if(userData) {
+                userData.Load();
+                while(!userData.isLoaded)
+                    yield return null;
+
+                mCurScore = userData.score;
+                mCurProgress = userData.currentProgress;
+            }
+
             yield return null;
 
             ApplySettings();
@@ -434,8 +448,12 @@ namespace LoLExt {
         }
 
         protected void ApplySettings() {
-            if(userSettings) {
-                mIsSpeechMute = userSettings.GetInt(settingsSpeechMuteKey) != 0;
+            if(_userData) {
+                mIsSpeechMute = _userData.GetInt(settingsSpeechMuteKey) != 0;
+
+                var audioSettings = GetComponent<M8.UserSettingAudio>();
+                if(audioSettings)
+                    audioSettings.Load();
             }
         }
 

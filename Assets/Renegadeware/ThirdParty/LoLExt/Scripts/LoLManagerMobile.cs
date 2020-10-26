@@ -6,28 +6,15 @@ using MiniJSON;
 
 namespace LoLExt {
     public class LoLManagerMobile : LoLManager {
-        [Header("Data")]
-        public TextAsset localizeText;
+        //[Header("Data")]
+        //public TextAsset localizeText;
 
-        public override bool isAutoSpeechEnabled { get { return false; } }
-
-        protected override void _SpeakText(string key) {
-
-        }
-
-        public override void ApplyProgress(int progress, int score) {
-
-            mCurProgress = Mathf.Clamp(progress, 0, progressMax);
-
-            ProgressCallback();
-        }
-
-        public override void Complete() {
-            LoL.State.LoadReturnScene();
-        }
+        //public override bool isAutoSpeechEnabled { get { return false; } }
 
         protected override IEnumerator Start() {
-            mLangCode = "en";
+            Screen.orientation = ScreenOrientation.Landscape;
+
+            /*mLangCode = "en";
             mCurProgress = 0;
 
             ApplySettings();
@@ -41,9 +28,9 @@ namespace LoLExt {
 
             //ParseGameStart("");
 
-            mIsReady = true;
+            mIsReady = true;*/
 
-            yield return null;
+            yield return base.Start();
         }
     }
 }

@@ -18,7 +18,8 @@ namespace Renegadeware.K2PS2 {
         public TMP_Text titleText;
 
         [Header("Play")]
-        public Button playButton;
+        public Button newButton;
+        public Button continueButton;
 
         [Header("Ready")]
         public M8.Animator.Animate readyAnimator;
@@ -42,9 +43,12 @@ namespace Renegadeware.K2PS2 {
 
             if(loadingGO) loadingGO.SetActive(true);
             if(readyGO) readyGO.SetActive(false);
-                        
+
             //Setup Play
-            if(playButton) playButton.onClick.AddListener(OnPlayClick);
+            newButton.onClick.AddListener(OnPlayNew);
+            continueButton.onClick.AddListener(OnPlayContinue);
+
+            continueButton.gameObject.SetActive(LoLManager.instance.curProgress > 0);
         }
 
         protected override IEnumerator Start() {
@@ -68,7 +72,14 @@ namespace Renegadeware.K2PS2 {
             yield return readyAnimator.PlayWait(readyTakeEnter);
         }
 
-        void OnPlayClick() {
+        void OnPlayNew() {
+            if(LoLManager.instance.curProgress > 0) //reset progress
+                LoLManager.instance.ApplyProgress(0);
+
+            StartCoroutine(DoPlay());
+        }
+
+        void OnPlayContinue() {
             StartCoroutine(DoPlay());
         }
 
