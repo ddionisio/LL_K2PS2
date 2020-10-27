@@ -43,6 +43,8 @@ namespace Renegadeware.K2PS2 {
 
         public float goalDelay = 1f;
 
+        public float hintShowDelay = 600f;
+
         [Header("UI Settings")]
         public LayerMask uiLayerMask;
         public Color objectDragInvalidColor = Color.red;
@@ -81,6 +83,7 @@ namespace Renegadeware.K2PS2 {
         public M8.Signal signalObjectDespawn;
         public M8.Signal signalObjectReleased;
         public M8.Signal signalReset;
+        public M8.Signal signalHint;
 
         [Header("SFX")]
         [M8.SoundPlaylist]

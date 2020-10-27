@@ -49,7 +49,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: d9a2a8bca9999974f9f8f57699bb4bab, type: 3}
     - {fileID: 102900000, guid: fa0cb14f897744d4caea68ecc157cc61, type: 3}
     - {fileID: 102900000, guid: b6dcf34a51e6c8f439d54537ab9e02d9, type: 3}
-    totalSpriteSurfaceArea: 1412630
+    totalSpriteSurfaceArea: 1414470
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -185,6 +185,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9e197b9d6b43d294d9126b13f5dd6cea, type: 3}
   - {fileID: 21300000, guid: d8d7bdbdfa98fb24d98e8cd9b1759a66, type: 3}
   - {fileID: 21300000, guid: b53d15dd45e7ea1439908e0a97798f3a, type: 3}
+  - {fileID: 21300000, guid: d58ea5dd7b2cd834bab80f9a60a12cd6, type: 3}
   - {fileID: 21300000, guid: ac2181ed360eaab40bfd4dc0a2f43d38, type: 3}
   - {fileID: 21300000, guid: ddcc0bed27e73d5458d2e851af61bf59, type: 3}
   - {fileID: 21300000, guid: 56c8d25ec9b8c9e4eaea697303a62a8e, type: 3}
@@ -337,6 +338,7 @@ SpriteAtlas:
   - illustrate_conductive
   - roundRectFill_8
   - pillar
+  - hintButton
   - spike
   - chinchilla_move_7
   - fan

@@ -55,6 +55,7 @@ MonoBehaviour:
   cameraMoveDelay: 0.5
   cameraMoveTween: 7
   goalDelay: 3
+  hintShowDelay: 500
   uiLayerMask:
     serializedVersion: 2
     m_Bits: 32
@@ -89,5 +90,6 @@ MonoBehaviour:
   signalObjectReleased: {fileID: 11400000, guid: 502499f2a5e24824188d1caef793ef21,
     type: 2}
   signalReset: {fileID: 11400000, guid: a8ec373d2cc5a9442888a9a60a18fdfb, type: 2}
+  signalHint: {fileID: 11400000, guid: 45510e0973d0a5a468595a540a1f2851, type: 2}
   sfxItemAdd: tap
   sfxMaterialObjectSpawn: boop

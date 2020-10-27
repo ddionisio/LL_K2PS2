@@ -32,6 +32,8 @@ namespace Renegadeware.K2PS2 {
 
         private GameModeFlow mFlow;
 
+        private Coroutine mHintShowRout;
+
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
 
@@ -52,6 +54,7 @@ namespace Renegadeware.K2PS2 {
             for(int i = 0; i < mSections.Length; i++) {
                 mSections[i] = sectionRoot.GetChild(i).GetComponent<GamePlaySection>();
                 mSections[i].gameObject.SetActive(false);
+                mSections[i].SetHintVisible(false);
             }
 
             int startSectionInd = 0;
@@ -85,6 +88,8 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalDragEnd.callback += OnDragEnd;
             gameDat.signalReset.callback += OnReset;
             gameDat.signalPlayerDeath.callback += OnPlayerDeath;
+            gameDat.signalGamePlay.callback += OnGamePlay;
+            gameDat.signalHint.callback += OnHintShow;
         }
 
         protected override void OnInstanceDeinit() {
@@ -95,12 +100,16 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalDragEnd.callback -= OnDragEnd;
             gameDat.signalReset.callback -= OnReset;
             gameDat.signalPlayerDeath.callback -= OnPlayerDeath;
+            gameDat.signalGamePlay.callback -= OnGamePlay;
+            gameDat.signalHint.callback -= OnHintShow;
 
             if(mHUD)
                 mHUD.Deinit();
 
             //clean up Data
             data.DeinitItemPools();
+
+            HintClearRout();
 
             base.OnInstanceDeinit();
         }
@@ -141,25 +150,39 @@ namespace Renegadeware.K2PS2 {
                 mHUD.stopGlowGO.SetActive(true);
         }
 
+        void OnGamePlay() {
+            mSections[mCurSectionInd].SetHintVisible(false);
+        }
+
+        void OnHintShow() {
+            mSections[mCurSectionInd].SetHintVisible(true);
+        }
+
         IEnumerator DoGamePlay() {
             var gameDat = GameData.instance;
 
             //show HUD
-            if(mHUD)
-                mHUD.Show();
+            mHUD.Show();
 
             if(mFlow)
                 yield return mFlow.SectionBegin(mCurSectionInd);
+
+            //hint button delay
+            HintShowButtonDelay();
 
             //wait for goal
             while(mCurSectionInd == mNextSectionInd)
                 yield return null;
 
+            //hide hints
+            mSections[mCurSectionInd].SetHintVisible(false);
+            mHUD.hintVisible = false;
+            HintClearRout();
+
             if(mFlow)
                 yield return mFlow.SectionEnd(mCurSectionInd);
-
-            if(mHUD)
-                mHUD.Hide();
+            
+            mHUD.Hide();
 
             //victory?
             if(mNextSectionInd >= mSections.Length) {
@@ -217,6 +240,29 @@ namespace Renegadeware.K2PS2 {
                 mHUD.RefreshCurrentPalette();
 
                 StartCoroutine(DoGamePlay());
+            }
+        }
+
+        IEnumerator DoHintButtonShow() {
+            var delay = GameData.instance.hintShowDelay;
+            float lastTime = Time.realtimeSinceStartup;
+            while(Time.realtimeSinceStartup - lastTime < delay)
+                yield return null;
+
+            mHUD.hintVisible = true;
+
+            mHintShowRout = null;
+        }
+
+        private void HintShowButtonDelay() {
+            HintClearRout();
+            mHintShowRout = StartCoroutine(DoHintButtonShow());
+        }
+
+        private void HintClearRout() {
+            if(mHintShowRout != null) {
+                StopCoroutine(mHintShowRout);
+                mHintShowRout = null;
             }
         }
     }

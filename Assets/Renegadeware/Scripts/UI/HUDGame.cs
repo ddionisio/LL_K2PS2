@@ -45,6 +45,9 @@ namespace Renegadeware.K2PS2 {
 
         public GameObject stopGlowGO;
 
+        [Header("Hint")]
+        public GameObject hintGO;
+
         [Header("SFX")]
         [M8.SoundPlaylist]
         public string sfxPaletteEnter;
@@ -56,6 +59,11 @@ namespace Renegadeware.K2PS2 {
         public int paletteActiveIndex { get { return mCurPaletteInd; } }
 
         public bool isBusy { get { return mRout != null; } }
+
+        public bool hintVisible {
+            get { return hintGO.activeSelf; }
+            set { hintGO.SetActive(value); }
+        }
 
         private int mCurPaletteInd;
 
@@ -102,6 +110,8 @@ namespace Renegadeware.K2PS2 {
                 paletteWidgets[i].gameObject.SetActive(false);
 
             mCurPaletteInd = 0;
+
+            hintGO.SetActive(false);
 
             //setup signals
             var gameDat = GameData.instance;

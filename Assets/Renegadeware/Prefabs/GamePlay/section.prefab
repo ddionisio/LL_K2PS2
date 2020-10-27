@@ -225,6 +225,36 @@ MonoBehaviour:
   radius: 0.625
   solid: 1
   useCollider: 0
+--- !u!1 &4554928102044873197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8800971922204553488}
+  m_Layer: 0
+  m_Name: hints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8800971922204553488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4554928102044873197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2175557419276827125}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4947548118231407492
 GameObject:
   m_ObjectHideFlags: 0
@@ -11265,6 +11295,7 @@ Transform:
   - {fileID: 7141813771135700559}
   - {fileID: 6678365536378581875}
   - {fileID: 5080710837240343154}
+  - {fileID: 8800971922204553488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11283,3 +11314,5 @@ MonoBehaviour:
   goalGO: {fileID: 6678365536378581876}
   playerStart: {fileID: 8596317350708270929}
   cameraPoint: {fileID: 7141813771135700559}
+  hintGOs:
+  - {fileID: 4554928102044873197}
