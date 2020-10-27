@@ -11174,7 +11174,7 @@ GameObject:
   - component: {fileID: 4636795555198537336}
   - component: {fileID: 4636608853988851086}
   - component: {fileID: 4636386035092667862}
-  - component: {fileID: 4637005639435674432}
+  - component: {fileID: 262649158835388625}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -11240,7 +11240,7 @@ MonoBehaviour:
   modalManager:
     mode: 1
     managerRef: {fileID: 4636608853988851086}
---- !u!114 &4637005639435674432
+--- !u!114 &262649158835388625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11249,10 +11249,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4740800096240073658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f63974507b4c7e4cbb09bcc3f217469, type: 3}
+  m_Script: {fileID: 11500000, guid: aa00d53a9165446128f5a63f11ec4ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
 --- !u!1 &4740892306726395270
 GameObject:
   m_ObjectHideFlags: 0

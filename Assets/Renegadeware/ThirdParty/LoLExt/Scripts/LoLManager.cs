@@ -63,6 +63,10 @@ namespace LoLExt {
         [SerializeField]
         float _speakQueueStartDelay = 0.3f;
 
+        [Header("Audio")]
+        public GameObject musicPlaylistRootGO;
+        public GameObject soundPlaylistRootGO;
+
         [Header("Signals")]
         public M8.Signal signalProgressUpdate;
 
@@ -411,6 +415,10 @@ namespace LoLExt {
                 mCurScore = userData.score;
                 mCurProgress = userData.currentProgress;
             }
+
+            //initialize audio
+            M8.MusicPlaylist.instance.SetupSourceProxy(musicPlaylistRootGO);
+            M8.SoundPlaylist.instance.SetupSourceRoot(soundPlaylistRootGO);
 
             yield return null;
 
