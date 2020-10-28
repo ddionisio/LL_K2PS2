@@ -7,9 +7,10 @@
   "en": {
     "welcome": "Welcome!",
     "title": "<b>Mighty Chin-Chin</b>\n<size=34>What's the Matter</size>",
+    "credits": "Written by: David Dionisio",
     "test": "Test",
     "test2": "Test 2",
-    "play": "PLAY",
+    "new_game": "NEW GAME",
     "options": "OPTIONS",
     "music": "MUSIC",
     "sound": "SOUND",

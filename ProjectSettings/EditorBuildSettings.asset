@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Renegadeware/Scenes/_InitWebGL.unity
     guid: 620212779d957e64b85981559e886a9c
+  - enabled: 0
+    path: Assets/Renegadeware/Scenes/_InitMobile.unity
+    guid: 9533b0404057bf64f94fae64d2e01c90
   - enabled: 1
     path: Assets/Renegadeware/Scenes/start.unity
     guid: c93a5bfbc135d9a409ea6feab7afa82e

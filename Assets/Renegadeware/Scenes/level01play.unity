@@ -656,7 +656,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 7916ded25b378cd4ba8637dbac0e8d49, type: 2}
   sectionRoot: {fileID: 748817357}
   music: level
-  debugStartSectionInd: 2
+  debugStartSectionInd: 0
 --- !u!4 &399300940
 Transform:
   m_ObjectHideFlags: 0
@@ -689,7 +689,7 @@ MonoBehaviour:
   dragDropWorldPoint: {fileID: 1058134334}
   dragDropMatObj: {fileID: 11400000, guid: c54411df2caa2d4499d895abe51abcf8, type: 2}
   paletteSwitchInstructionAnimate: {fileID: 1689866694}
-  paletteSwitchIndex: 0
+  paletteSwitchIndex: 1
 --- !u!1 &483028794
 GameObject:
   m_ObjectHideFlags: 0
