@@ -11,9 +11,8 @@ namespace Renegadeware.K2PS2 {
         public float fadeDelay = 0.3f;
 
         [Header("Display")]
-        public SpriteRenderer gridSprite;
-
-        private Color mDefaultColor;
+        public GameObject gridSpriteRootGO;
+        public M8.SpriteColorAlphaGroup gridAlpha;        
 
         private DG.Tweening.EaseFunction mFadeInEaseFunc;
         private DG.Tweening.EaseFunction mFadeOutEaseFunc;
@@ -21,11 +20,8 @@ namespace Renegadeware.K2PS2 {
         void OnEnable() {
             if(Application.isPlaying) {
                 //default hidden
-                gridSprite.gameObject.SetActive(false);
-                gridSprite.color = new Color(mDefaultColor.r, mDefaultColor.g, mDefaultColor.b, 0f);
-
-                mFadeInEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeInEase);
-                mFadeOutEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeOutEase);
+                gridAlpha.alpha = 0f;
+                gridSpriteRootGO.SetActive(false);
 
                 var gameDat = GameData.instance;
 
@@ -45,16 +41,21 @@ namespace Renegadeware.K2PS2 {
 
         void Awake() {
             if(Application.isPlaying) {
-                mDefaultColor = gridSprite.color;
+                mFadeInEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeInEase);
+                mFadeOutEaseFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(fadeOutEase);
             }
         }
 
 #if UNITY_EDITOR
         void Update() {
-            if(!Application.isPlaying && gridSprite) {
+            if(!Application.isPlaying && gridSpriteRootGO) {
                 var boxColl = GetComponent<BoxCollider2D>();
-                gridSprite.transform.localPosition = boxColl.offset;
-                gridSprite.size = boxColl.size;
+                var gridSprites = gridSpriteRootGO.GetComponentsInChildren<SpriteRenderer>();
+                for(int i = 0; i < gridSprites.Length; i++) {
+                    var gridSprite = gridSprites[i];
+                    gridSprite.transform.localPosition = boxColl.offset;
+                    gridSprite.size = boxColl.size;
+                }
             }
         }
 #endif
@@ -70,10 +71,10 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoFadeIn() {
-            gridSprite.gameObject.SetActive(true);
+            gridSpriteRootGO.SetActive(true);
 
-            var startAlpha = gridSprite.color.a;
-            var endAlpha = mDefaultColor.a;
+            var startAlpha = gridAlpha.alpha;
+            var endAlpha = 1f;
 
             var lastTime = Time.realtimeSinceStartup;
 
@@ -85,12 +86,12 @@ namespace Renegadeware.K2PS2 {
 
                 var t = mFadeInEaseFunc(curTime, fadeDelay, 0f, 0f);
 
-                gridSprite.color = new Color(mDefaultColor.r, mDefaultColor.g, mDefaultColor.b, Mathf.Lerp(startAlpha, endAlpha, t));
+                gridAlpha.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
             }
         }
 
         IEnumerator DoFadeOut() {
-            var startAlpha = mDefaultColor.a;
+            var startAlpha = gridAlpha.alpha;
             var endAlpha = 0f;
 
             var lastTime = Time.realtimeSinceStartup;
@@ -103,10 +104,10 @@ namespace Renegadeware.K2PS2 {
 
                 var t = mFadeOutEaseFunc(curTime, fadeDelay, 0f, 0f);
 
-                gridSprite.color = new Color(mDefaultColor.r, mDefaultColor.g, mDefaultColor.b, Mathf.Lerp(startAlpha, endAlpha, t));
+                gridAlpha.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
             }
 
-            gridSprite.gameObject.SetActive(false);
+            gridSpriteRootGO.SetActive(false);
         }
     }
 }

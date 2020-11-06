@@ -13,6 +13,7 @@ namespace Renegadeware.K2PS2 {
 
         [Header("Complete")]
         public GameObject completeGO;
+        public M8.TextMeshPro.TextMeshProCounter scoreCounter;
 
         [Header("Music")]
         [M8.MusicPlaylist]
@@ -24,6 +25,9 @@ namespace Renegadeware.K2PS2 {
             endAnimator.ResetTake(endTakePlay);
 
             completeGO.SetActive(false);
+
+            scoreCounter.SetCountImmediate(0);
+            scoreCounter.count = LoLManager.instance.curScore;
         }
 
         protected override IEnumerator Start() {

@@ -74,7 +74,7 @@ namespace Renegadeware.K2PS2 {
 
         void OnPlayNew() {
             if(LoLManager.instance.curProgress > 0) //reset progress
-                LoLManager.instance.ApplyProgress(0);
+                LoLManager.instance.ApplyProgress(0, 0);
 
             StartCoroutine(DoPlay());
         }

@@ -33,6 +33,11 @@ namespace Renegadeware.K2PS2 {
         private GameModeFlow mFlow;
 
         private Coroutine mHintShowRout;
+        private Coroutine mResetActiveRout;
+
+        private int mHintCounter;
+        private int mStopCounter;
+        private int mStopTotalCounter;
 
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
@@ -82,13 +87,16 @@ namespace Renegadeware.K2PS2 {
 
             mFlow = GetComponent<GameModeFlow>();
 
+            mHintCounter = 0;
+            mStopTotalCounter = 0;
+
             //setup signals
             gameDat.signalGoal.callback += OnGoal;
             gameDat.signalDragBegin.callback += OnDragBegin;
             gameDat.signalDragEnd.callback += OnDragEnd;
             gameDat.signalReset.callback += OnReset;
-            gameDat.signalPlayerDeath.callback += OnPlayerDeath;
             gameDat.signalGamePlay.callback += OnGamePlay;
+            gameDat.signalGameStop.callback += OnGameStop;
             gameDat.signalHint.callback += OnHintShow;
         }
 
@@ -99,8 +107,8 @@ namespace Renegadeware.K2PS2 {
             gameDat.signalDragBegin.callback -= OnDragBegin;
             gameDat.signalDragEnd.callback -= OnDragEnd;
             gameDat.signalReset.callback -= OnReset;
-            gameDat.signalPlayerDeath.callback -= OnPlayerDeath;
             gameDat.signalGamePlay.callback -= OnGamePlay;
+            gameDat.signalGameStop.callback -= OnGameStop;
             gameDat.signalHint.callback -= OnHintShow;
 
             if(mHUD)
@@ -110,6 +118,7 @@ namespace Renegadeware.K2PS2 {
             data.DeinitItemPools();
 
             HintClearRout();
+            ResetActiveClearRout();
 
             base.OnInstanceDeinit();
         }
@@ -129,22 +138,6 @@ namespace Renegadeware.K2PS2 {
             StartCoroutine(DoGamePlay());
         }
 
-        void Update() {
-            //update hud
-            if(mHUD) {
-                //update reset active
-                bool isResetActive = false;
-
-                if(mHUD.isPaletteActive && !mHUD.isBusy) {
-                    //check if there is any spawned objects
-                    if(data.placedCount > 0)
-                        isResetActive = true;
-                }
-
-                mHUD.resetButton.interactable = isResetActive;
-            }
-        }
-
         void OnGoal() {
             mNextSectionInd++;
         }
@@ -161,21 +154,25 @@ namespace Renegadeware.K2PS2 {
             data.DespawnAll();
         }
 
-        void OnPlayerDeath() {
-            if(mHUD.stopGlowGO)
-                mHUD.stopGlowGO.SetActive(true);
-        }
-
         void OnGamePlay() {
             mSections[mCurSectionInd].SetHintVisible(false);
         }
 
+        void OnGameStop() {
+            mStopCounter++;
+        }
+
         void OnHintShow() {
             mSections[mCurSectionInd].SetHintVisible(true);
+
+            mHintCounter++;
         }
 
         IEnumerator DoGamePlay() {
             var gameDat = GameData.instance;
+
+            //reset counters
+            mStopCounter = 0;
 
             //show HUD
             mHUD.Show();
@@ -184,7 +181,10 @@ namespace Renegadeware.K2PS2 {
                 yield return mFlow.SectionBegin(mCurSectionInd);
 
             //hint button delay
-            HintShowButtonDelay();
+            if(mCurSectionInd >= gameDat.hintShowSectionInd)
+                HintShowButtonDelay();
+
+            ResetActive();
 
             //wait for goal
             while(mCurSectionInd == mNextSectionInd)
@@ -195,17 +195,25 @@ namespace Renegadeware.K2PS2 {
             mHUD.hintVisible = false;
             HintClearRout();
 
+            ResetActiveClearRout();
+
             if(mFlow)
                 yield return mFlow.SectionEnd(mCurSectionInd);
             
             mHUD.Hide();
+
+            mStopTotalCounter += mStopCounter;
 
             //victory?
             if(mNextSectionInd >= mSections.Length) {
                 if(mFlow)
                     yield return mFlow.Outro();
 
-                M8.ModalManager.main.Open(gameDat.modalVictory);
+                var parms = new M8.GenericParams();
+                parms[ModalVictory.parmRetryCount] = mStopTotalCounter;
+                parms[ModalVictory.parmHintCount] = mHintCounter;
+
+                M8.ModalManager.main.Open(gameDat.modalVictory, parms);
             }
             else {
                 yield return new WaitForSeconds(gameDat.goalDelay);
@@ -260,14 +268,44 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoHintButtonShow() {
-            var delay = GameData.instance.hintShowDelay;
+            var gameDat = GameData.instance;
+
+            var delay = gameDat.hintShowDelay;
             float lastTime = Time.realtimeSinceStartup;
-            while(Time.realtimeSinceStartup - lastTime < delay)
+
+            while(true) {
+                //time's up?
+                if(Time.realtimeSinceStartup - lastTime >= delay)
+                    break;
+
+                //stop counter reached?
+                if(mStopCounter >= gameDat.hintShowEditCount)
+                    break;
+
                 yield return null;
+            }
 
             mHUD.hintVisible = true;
 
             mHintShowRout = null;
+        }
+
+        IEnumerator DoResetActive() {
+            //update hud
+            while(true) {
+                //update reset active
+                bool isResetActive = false;
+
+                if(mHUD.isPaletteActive && !mHUD.isBusy) {
+                    //check if there is any spawned objects
+                    if(data.placedCount > 0)
+                        isResetActive = true;
+                }
+
+                mHUD.resetButton.interactable = isResetActive;
+
+                yield return null;
+            }
         }
 
         private void HintShowButtonDelay() {
@@ -279,6 +317,21 @@ namespace Renegadeware.K2PS2 {
             if(mHintShowRout != null) {
                 StopCoroutine(mHintShowRout);
                 mHintShowRout = null;
+            }
+        }
+
+        private void ResetActive() {
+            ResetActiveClearRout();
+            mResetActiveRout = StartCoroutine(DoResetActive());
+        }
+
+        private void ResetActiveClearRout() {
+            if(mHUD && mHUD.resetButton)
+                mHUD.resetButton.interactable = false;
+
+            if(mResetActiveRout != null) {
+                StopCoroutine(mResetActiveRout);
+                mResetActiveRout = null;
             }
         }
     }

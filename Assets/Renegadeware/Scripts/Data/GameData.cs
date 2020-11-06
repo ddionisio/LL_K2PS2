@@ -44,6 +44,8 @@ namespace Renegadeware.K2PS2 {
         public float goalDelay = 1f;
 
         public float hintShowDelay = 600f;
+        public int hintShowEditCount = 3; //how many edit mode count before hint is shown
+        public int hintShowSectionInd = 2; //which section to start showing hint
 
         [Header("UI Settings")]
         public LayerMask uiLayerMask;
@@ -62,6 +64,12 @@ namespace Renegadeware.K2PS2 {
         [M8.TagSelector]
         public string[] conductiveTags;
         public float conductiveRefreshDelay = 0.3f;
+
+        [Header("Score Settings")]
+        public int scoreLevelComplete = 1000;
+        public int scoreEditCountPenalty = 50;
+        public int scoreEditCountPenaltyLimit = 500;
+        public int scoreHintPenalty = 250;
 
         [Header("Scenes")]
         public M8.SceneAssetPath endScene;

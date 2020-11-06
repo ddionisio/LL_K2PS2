@@ -54,8 +54,10 @@ MonoBehaviour:
   materialObjectTag: MaterialObject
   cameraMoveDelay: 0.5
   cameraMoveTween: 7
-  goalDelay: 3
-  hintShowDelay: 500
+  goalDelay: 2.5
+  hintShowDelay: 250
+  hintShowEditCount: 3
+  hintShowSectionInd: 2
   uiLayerMask:
     serializedVersion: 2
     m_Bits: 32
@@ -71,6 +73,10 @@ MonoBehaviour:
   - MaterialObject
   - Electricity
   conductiveRefreshDelay: 0.3
+  scoreLevelComplete: 1000
+  scoreEditCountPenalty: 50
+  scoreEditCountPenaltyLimit: 500
+  scoreHintPenalty: 250
   endScene:
     name: end
     path: Assets/Renegadeware/Scenes/end.unity
