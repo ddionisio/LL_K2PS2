@@ -387,6 +387,8 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoSpawn() {
+            yield return null;
+
             M8.SoundPlaylist.instance.Play(GameData.instance.sfxMaterialObjectSpawn, false);
 
             if(animator) {
@@ -405,6 +407,8 @@ namespace Renegadeware.K2PS2 {
         }
 
         IEnumerator DoDespawn() {
+            yield return null;
+
             if(animator) {
                 //wait for animation to finish
                 while(animator.isPlaying)

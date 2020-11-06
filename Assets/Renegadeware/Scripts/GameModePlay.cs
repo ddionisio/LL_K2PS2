@@ -129,6 +129,22 @@ namespace Renegadeware.K2PS2 {
             StartCoroutine(DoGamePlay());
         }
 
+        void Update() {
+            //update hud
+            if(mHUD) {
+                //update reset active
+                bool isResetActive = false;
+
+                if(mHUD.isPaletteActive && !mHUD.isBusy) {
+                    //check if there is any spawned objects
+                    if(data.placedCount > 0)
+                        isResetActive = true;
+                }
+
+                mHUD.resetButton.interactable = isResetActive;
+            }
+        }
+
         void OnGoal() {
             mNextSectionInd++;
         }

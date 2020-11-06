@@ -18,6 +18,8 @@ namespace Renegadeware.K2PS2 {
         public Button playButton;
         public GameObject playInstructionGO;
 
+        public Button resetButton;
+
         [Header("Palette")]
         public MaterialObjectPaletteWidget[] paletteWidgets;
         public GameObject paletteBlockerGO;

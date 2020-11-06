@@ -53,13 +53,7 @@ namespace Renegadeware.K2PS2 {
 
         public void Kill() {
             ClearRoutine();
-
-            M8.SoundPlaylist.instance.Play(sfxDeath, false);
-
-            player.state = PlayerEntity.State.None;
-
-            //play death animation
-            animator.Play(mTakeDeathInd);
+            mRout = StartCoroutine(DoDeath());
         }
 
         void OnEnable() {
@@ -146,6 +140,19 @@ namespace Renegadeware.K2PS2 {
             M8.SoundPlaylist.instance.Play(sfxJump, false);
         }
 
+        IEnumerator DoDeath() {
+            M8.SoundPlaylist.instance.Play(sfxDeath, false);
+
+            player.state = PlayerEntity.State.None;
+
+            //play death animation
+            yield return animator.PlayWait(mTakeDeathInd);
+
+            mRout = null;
+
+            GameData.instance.signalGameStop.Invoke();
+        }
+
         IEnumerator DoNormal() {
             MoveStartAnimation();
 
@@ -181,7 +188,8 @@ namespace Renegadeware.K2PS2 {
             player.state = PlayerEntity.State.None;
 
             //play despawn
-            yield return animator.PlayWait(mTakeDespawnInd);
+            if(animator.currentPlayingTakeIndex != mTakeDeathInd && animator.lastPlayingTakeIndex != mTakeDeathInd)
+                yield return animator.PlayWait(mTakeDespawnInd);
 
             //respawn
             mRout = StartCoroutine(DoSpawn());

@@ -25,6 +25,17 @@ namespace Renegadeware.K2PS2 {
             }
         }
 
+        public int placedCount {
+            get {
+                int c = 0;
+
+                for(int i = 0; i < items.Length; i++)
+                    c += items[i].materialObject.placedCount;
+
+                return c;
+            }
+        }
+
         public void InitItemPools() {
             for(int i = 0; i < items.Length; i++) {
                 var itm = items[i];
