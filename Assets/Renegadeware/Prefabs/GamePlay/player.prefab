@@ -707,7 +707,7 @@ MonoBehaviour:
   speedCap: 0
   moveForce: 30
   moveAirForce: 30
-  moveMaxSpeed: 2.5
+  moveMaxSpeed: 2.85
   slopSlideForce: 20
   airMaxSpeed: 2
   airDrag: 0.015
