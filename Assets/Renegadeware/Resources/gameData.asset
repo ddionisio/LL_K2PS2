@@ -55,7 +55,7 @@ MonoBehaviour:
   cameraMoveDelay: 0.5
   cameraMoveTween: 7
   goalDelay: 2.5
-  hintShowDelay: 250
+  hintShowDelay: 200
   hintShowEditCount: 3
   hintShowSectionInd: 2
   uiLayerMask:
