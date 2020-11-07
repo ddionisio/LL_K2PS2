@@ -49,6 +49,16 @@ namespace Renegadeware.K2PS2 {
 
         private M8.GenericParams mClassifySummaryParam = new M8.GenericParams();
 
+        public Transform GetSpawnPoint(MaterialObjectData dat) {
+            for(int i = 0; i < mSpawnPoints.Length; i++) {
+                var spawnPt = mSpawnPoints[i];
+                if(spawnPt.name == dat.name)
+                    return spawnPt;
+            }
+
+            return spawnPointDefault;
+        }
+
         protected override void OnInstanceInit() {
             base.OnInstanceInit();
 
@@ -208,16 +218,6 @@ namespace Renegadeware.K2PS2 {
 
         void OnClassify() {
             mIsClassifyPressed = true;
-        }
-
-        private Transform GetSpawnPoint(MaterialObjectData dat) {
-            for(int i = 0; i < mSpawnPoints.Length; i++) {
-                var spawnPt = mSpawnPoints[i];
-                if(spawnPt.name == dat.name)
-                    return spawnPt;
-            }
-
-            return spawnPointDefault;
         }
 
         private SpawnAnimation GetSpawnAnimation(MaterialObjectData dat) {

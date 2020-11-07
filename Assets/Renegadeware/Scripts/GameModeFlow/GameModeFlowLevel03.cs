@@ -6,22 +6,59 @@ using LoLExt;
 
 namespace Renegadeware.K2PS2 {
     public class GameModeFlowLevel03 : GameModeFlow {
+        [Header("Flow")]
         public ModalDialogController introDialog;
 
-        public AnimatorEnterExit buoyancyIllustrate;
+        public AnimatorEnterExit buoyancyTitle;
         public ModalDialogController buoyancyDialog;
 
         public ModalDialogController beginDialog;
 
+        [Header("Material Objects")]
+        public MaterialObjectData floatObject;
+        public Transform floatSpawnPt;
+
+        public MaterialObjectData sinkObject;
+        public Transform sinkSpawnPt;
+
+        [Header("Tags")]
+        public M8.UI.Transforms.AttachTo tagFloat;
+        public M8.UI.Transforms.AttachTo tagSink;
+
         public override IEnumerator Intro() {
             yield return introDialog.PlayWait();
 
-            buoyancyIllustrate.gameObject.SetActive(true);
-            yield return buoyancyIllustrate.PlayEnterWait();
+            buoyancyTitle.gameObject.SetActive(true);
+            yield return buoyancyTitle.PlayEnterWait();
+
+            //spawn objects
+            var floatEnt = floatObject.Spawn(floatSpawnPt.position, MaterialObjectEntity.State.Spawning, null);
+            var sinkEnt = sinkObject.Spawn(sinkSpawnPt.position, MaterialObjectEntity.State.Spawning, null);
+
+            while(floatEnt.state == MaterialObjectEntity.State.Spawning || sinkEnt.state == MaterialObjectEntity.State.Spawning)
+                yield return null;
+
+            yield return new WaitForSeconds(1f);
+
+            tagFloat.target = floatEnt.transform;
+            tagFloat.gameObject.SetActive(true);
+
+            tagSink.target = sinkEnt.transform;
+            tagSink.gameObject.SetActive(true);
 
             yield return buoyancyDialog.PlayWait();
 
-            yield return buoyancyIllustrate.PlayExitWait();
+            tagFloat.gameObject.SetActive(false);
+            tagSink.gameObject.SetActive(false);
+
+            floatEnt.state = MaterialObjectEntity.State.Despawning;
+            sinkEnt.state = MaterialObjectEntity.State.Despawning;
+
+            while(floatEnt.state == MaterialObjectEntity.State.Despawning || sinkEnt.state == MaterialObjectEntity.State.Despawning)
+                yield return null;
+
+            yield return buoyancyTitle.PlayExitWait();
+            buoyancyTitle.gameObject.SetActive(false);
 
             yield return beginDialog.PlayWait();
         }
@@ -39,7 +76,10 @@ namespace Renegadeware.K2PS2 {
         }
 
         void Awake() {
-            buoyancyIllustrate.gameObject.SetActive(false);
+            buoyancyTitle.gameObject.SetActive(false);
+
+            tagFloat.gameObject.SetActive(false);
+            tagSink.gameObject.SetActive(false);
         }
     }
 }

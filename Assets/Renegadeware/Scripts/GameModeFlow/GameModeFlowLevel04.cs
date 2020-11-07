@@ -6,32 +6,73 @@ using LoLExt;
 
 namespace Renegadeware.K2PS2 {
     public class GameModeFlowLevel04 : GameModeFlow {
+        [Header("Flow")]
         public ModalDialogController introDialog;
 
-        public AnimatorEnterExit conductIllustrate;
+        public AnimatorEnterExit conductTitle;
         public ModalDialogController conductDialog;
 
-        public AnimatorEnterExit nonConductIllustrate;
+        public AnimatorEnterExit nonConductTitle;
         public ModalDialogController nonConductDialog;
 
         public ModalDialogController beginDialog;
 
+        [Header("Material Object")]
+        public MaterialObjectData conductiveObject;
+        public MaterialObjectData nonConductiveObject;
+
         public override IEnumerator Intro() {
             yield return introDialog.PlayWait();
 
-            conductIllustrate.gameObject.SetActive(true);
-            yield return conductIllustrate.PlayEnterWait();
+            var gameMode = GameModeClassify.instance;
+
+            Transform spawnPt;
+
+            //spawn conductive
+            spawnPt = gameMode.GetSpawnPoint(conductiveObject);
+            var conductiveEnt = conductiveObject.Spawn(spawnPt.position, MaterialObjectEntity.State.Spawning, null);
+
+            while(conductiveEnt.state == MaterialObjectEntity.State.Spawning)
+                yield return null;
+
+            yield return new WaitForSeconds(1f);
+
+            conductTitle.gameObject.SetActive(true);
+            yield return conductTitle.PlayEnterWait();
 
             yield return conductDialog.PlayWait();
 
-            yield return conductIllustrate.PlayExitWait();
+            //despawn conductive
+            conductiveEnt.state = MaterialObjectEntity.State.Despawning;
 
-            nonConductIllustrate.gameObject.SetActive(true);
-            yield return nonConductIllustrate.PlayEnterWait();
+            while(conductiveEnt.state == MaterialObjectEntity.State.Despawning)
+                yield return null;
+
+            yield return conductTitle.PlayExitWait();
+            conductTitle.gameObject.SetActive(false);
+
+            //spawn non-conductive
+            spawnPt = gameMode.GetSpawnPoint(nonConductiveObject);
+            var nonConductiveEnt = nonConductiveObject.Spawn(spawnPt.position, MaterialObjectEntity.State.Spawning, null);
+
+            while(nonConductiveEnt.state == MaterialObjectEntity.State.Spawning)
+                yield return null;
+
+            yield return new WaitForSeconds(1f);
+
+            nonConductTitle.gameObject.SetActive(true);
+            yield return nonConductTitle.PlayEnterWait();
 
             yield return nonConductDialog.PlayWait();
 
-            yield return nonConductIllustrate.PlayExitWait();
+            //despawn non-conductive
+            nonConductiveEnt.state = MaterialObjectEntity.State.Despawning;
+
+            while(nonConductiveEnt.state == MaterialObjectEntity.State.Despawning)
+                yield return null;
+
+            yield return nonConductTitle.PlayExitWait();
+            nonConductTitle.gameObject.SetActive(false);
 
             yield return beginDialog.PlayWait();
         }
@@ -49,8 +90,8 @@ namespace Renegadeware.K2PS2 {
         }
 
         void Awake() {
-            conductIllustrate.gameObject.SetActive(false);
-            nonConductIllustrate.gameObject.SetActive(false);
+            conductTitle.gameObject.SetActive(false);
+            nonConductTitle.gameObject.SetActive(false);
         }
     }
 }
