@@ -995,7 +995,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 25, y: 15, z: 0}
+    - position: {x: 25.5, y: 15, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1004,7 +1004,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 25, y: 0, z: 0}
+    - position: {x: 25.5, y: 0, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1075,8 +1075,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: c9c9ae9cd5022d640a9ae5ef3c7c9c45, type: 3}
   - {fileID: 21300000, guid: c70755a65a627e2469dd164a7da5e020, type: 3}
   m_LocalAABB:
-    m_Center: {x: 12.515625, y: 7.53125, z: -0.0002}
-    m_Extent: {x: 12.515625, y: 7.53125, z: 0.0002}
+    m_Center: {x: 12.765625, y: 7.53125, z: -0.0002}
+    m_Extent: {x: 12.765625, y: 7.53125, z: 0.0002}
 --- !u!1001 &137874752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2670,10 +2670,10 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 17, y: 0}
       - {x: 17, y: 15}
-      - {x: 25, y: 15}
-      - {x: 25, y: 0}
-      - {x: 22.925924, y: 0}
-      - {x: 19.074074, y: 0}
+      - {x: 25.5, y: 15}
+      - {x: 25.5, y: 0}
+      - {x: 23.296293, y: 0}
+      - {x: 19.203705, y: 0}
       - {x: 17, y: 0}
 --- !u!114 &772356785
 MonoBehaviour:
@@ -2708,7 +2708,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 25, y: 15, z: 0}
+    - position: {x: 25.5, y: 15, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -2717,7 +2717,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 25, y: 0, z: 0}
+    - position: {x: 25.5, y: 0, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -2786,8 +2786,8 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: e6d6c2205b129f942868da4535b134ff, type: 3}
   m_Sprites: []
   m_LocalAABB:
-    m_Center: {x: 12.5, y: 7.5, z: 0}
-    m_Extent: {x: 12.5, y: 7.5, z: 0}
+    m_Center: {x: 12.75, y: 7.5, z: 0}
+    m_Extent: {x: 12.75, y: 7.5, z: 0}
 --- !u!114 &772356787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3315,7 +3315,7 @@ PrefabInstance:
     - target: {fileID: 6678365536378581875, guid: e394efb09216fb0468a084357f6a8cb5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.5
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 6678365536378581875, guid: e394efb09216fb0468a084357f6a8cb5,
         type: 3}
@@ -3519,7 +3519,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 7.5, y: 5, z: 0}
+    - position: {x: 7, y: 5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -3528,7 +3528,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 7.5, y: 13, z: 0}
+    - position: {x: 7, y: 13, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -6531,8 +6531,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -25
-    m_UpperAngle: 25
+    m_LowerAngle: -30
+    m_UpperAngle: 30
 --- !u!114 &1728789306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6771,13 +6771,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 7.5, y: 5}
-      - {x: 7.5, y: 13}
+    - - {x: 7, y: 5}
+      - {x: 7, y: 13}
       - {x: 11.5, y: 13}
       - {x: 11.5, y: 5}
-      - {x: 10.46296, y: 4.999999}
-      - {x: 8.537036, y: 5}
-      - {x: 7.5, y: 5}
+      - {x: 10.333331, y: 4.999999}
+      - {x: 8.166666, y: 5}
+      - {x: 7, y: 5}
 --- !u!114 &1863286394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6793,7 +6793,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 7.5, y: 5, z: 0}
+    - position: {x: 7, y: 5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -6802,7 +6802,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 7.5, y: 13, z: 0}
+    - position: {x: 7, y: 13, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0

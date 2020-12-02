@@ -13,16 +13,25 @@ namespace Renegadeware.K2PS2 {
 
         private M8.GenericParams mParms = new M8.GenericParams();
 
-        public void Invoke() {
-            mParms[ModalConfirm.parmDescTextRef] = descRef;
-            mParms[ModalConfirm.parmCallback] = (System.Action<bool>)OnAccept;
+        private bool mIsConfirmed;
 
-            M8.ModalManager.main.Open(modal, mParms);
+        public void Invoke() {
+            if(mIsConfirmed)
+                GameData.instance.signalReset.Invoke();
+            else {
+                mParms[ModalConfirm.parmDescTextRef] = descRef;
+                mParms[ModalConfirm.parmCallback] = (System.Action<bool>)OnAccept;
+
+                M8.ModalManager.main.Open(modal, mParms);
+            }
         }
 
         void OnAccept(bool confirm) {
-            if(confirm)
+            if(confirm) {
                 GameData.instance.signalReset.Invoke();
+
+                mIsConfirmed = true; //only ask once
+            }
         }
     }
 }

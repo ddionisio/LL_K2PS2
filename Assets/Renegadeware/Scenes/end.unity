@@ -192,7 +192,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9bcf27ef30b332d4d9d3d2c74b02b0ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 27e624bc015f01d4b9e8b42b91728f76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -311,6 +311,8 @@ MonoBehaviour:
   endAnimator: {fileID: 1963695604}
   endTakePlay: play
   completeGO: {fileID: 1695011467}
+  completeAnimator: {fileID: 1695011469}
+  completeTakePlay: play
   scoreCounter: {fileID: 1238101590}
   music: end
 --- !u!4 &43976005
@@ -5209,7 +5211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 146}
+  m_AnchoredPosition: {x: 0, y: 64}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.4999999, y: 0.49999994}
 --- !u!1001 &199264359
@@ -5690,7 +5692,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7384f3ff3e790e04a93eba9324628762, type: 3}
-  m_Color: {r: 0.9333334, g: 0.8745099, b: 0.8431373, a: 0.36078432}
+  m_Color: {r: 0.9333334, g: 0.8745099, b: 0.8431373, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10930,7 +10932,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 435c1fd8039527d44838bc5ac901e318, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3647059, g: 0.14509805, b: 0.10980393, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10960,7 +10962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1158146240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11498,7 +11500,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b94ba6c8bd424114eb601911c2cf4711, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17006,14 +17008,14 @@ MonoBehaviour:
     rootGroup:
       group_name: Group0
       group_id: 0
-      elements: 0300000004000000050000000700000008000000
+      elements: 03000000040000000700000008000000
       foldout: 1
     groupValues: []
-  _defaultTakeName: play
+  _defaultTakeName: 
   _meta: {fileID: 0}
   sequenceLoadAll: 1
   sequenceKillWhenDone: 0
-  playOnEnable: 1
+  playOnEnable: 0
   isGlobal: 0
   onDisableAction: 3
   updateType: 0
@@ -17061,14 +17063,6 @@ MonoBehaviour:
       _obj: {fileID: 1200838309}
       pixelSnap: 0
       pixelPerUnit: 100
-    - _version: 3
-      id: 5
-      name: Track3
-      foldout: 1
-      _targetPath: 
-      _obj: {fileID: 1158146240}
-      pixelSnap: 0
-      pixelPerUnit: 100
     _translationKeys:
     - interp: 0
       frame: 1
@@ -17092,30 +17086,6 @@ MonoBehaviour:
       isConstSpeed: 0
       _paths: []
       position: {x: 0, y: 232, z: 0}
-      orientMode: 0
-      orientLockAxis: 0
-    - interp: 0
-      frame: 30
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: 40
-      isConstSpeed: 0
-      _paths: []
-      position: {x: 0, y: -342.4, z: 0}
-      orientMode: 0
-      orientLockAxis: 0
-    - interp: 0
-      frame: 40
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      endFrame: -1
-      isConstSpeed: 0
-      _paths: []
-      position: {x: 0, y: -220.5, z: 0}
       orientMode: 0
       orientLockAxis: 0
     _unityAnimationTracks: []
@@ -17281,10 +17251,7 @@ MonoBehaviour:
     - type: 10
       index: 0
       keyIndices: 0000000001000000
-    - type: 10
-      index: 1
-      keyIndices: 0200000003000000
-    _takeTrackCounts: 05000000
+    _takeTrackCounts: 04000000
 --- !u!1 &1727326928
 GameObject:
   m_ObjectHideFlags: 0

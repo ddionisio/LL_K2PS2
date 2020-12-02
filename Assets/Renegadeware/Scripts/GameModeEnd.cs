@@ -13,6 +13,10 @@ namespace Renegadeware.K2PS2 {
 
         [Header("Complete")]
         public GameObject completeGO;
+        public M8.Animator.Animate completeAnimator;
+        [M8.Animator.TakeSelector(animatorField = "completeAnimator")]
+        public string completeTakePlay;
+
         public M8.TextMeshPro.TextMeshProCounter scoreCounter;
 
         [Header("Music")]
@@ -38,6 +42,10 @@ namespace Renegadeware.K2PS2 {
             yield return endAnimator.PlayWait(endTakePlay);
 
             completeGO.SetActive(true);
+
+            yield return completeAnimator.PlayWait(completeTakePlay);
+
+            LoLManager.instance.Complete();
         }
     }
 }
