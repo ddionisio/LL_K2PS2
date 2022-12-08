@@ -8,6 +8,8 @@
   ) {
     const targetGameObject = Pointer_stringify(callbackObject);
     console.log('GameIsReady() from JS');
+    console.log('Game Name: ' + Pointer_stringify(gameName));
+    console.log('LoL UNITY SDK version: ' + Pointer_stringify(sdkVersion));
     console.log('Sending data to GameObject' + targetGameObject);
 
     const EVENT = {
@@ -19,7 +21,8 @@
         START_GAME: 'StartGameDataReceived',
         PLAYER_ACTIVITY_ID: 'PlayerActivityIdReceived',
         LOAD_STATE: 'StateDataReceived',
-        SAVE_STATE_RESULT: 'SaveResultDataReceived'
+        SAVE_STATE_RESULT: 'SaveResultDataReceived',
+        ANSWER_RESULT: 'AnswerResultDataReceived'
       },
       RECEIVED: {
         PAUSE: 'pause',
@@ -30,7 +33,8 @@
         INIT: 'init',
         PLAYER_ACTIVITY_ID: 'playerActivityId',
         LOAD_STATE: 'loadState',
-        SAVE_STATE_RESULT: 'saveStateResult'
+        SAVE_STATE_RESULT: 'saveStateResult',
+		    ANSWER_RESULT: "answerResult"
       }
     };
 
@@ -132,7 +136,7 @@
         payload: JSON.stringify({
           aspectRatio: aspectRatio,
           resolution: resolution,
-          sdkVersion: sdkVersion,
+          sdkVersion: Pointer_stringify(sdkVersion),
         }),
       },
       '*'

@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userData: {fileID: 11400000, guid: f046408e22ed041489b05881e4821f14, type: 2}
   autoSaveOnSceneChange: 1
-  autoSaveOnApplicationExit: 1
+  autoSaveOnApplicationExit: 0
   localStateCache: 0
   globalStartData: []
   startData: []
@@ -106,6 +106,7 @@ MonoBehaviour:
   _gameID: com.renegadeware.K2PS2
   _progressMax: 8
   _userData: {fileID: 11400000, guid: d1570a9011293b94a9b3d84278169e34, type: 2}
+  _settingsData: {fileID: 11400000, guid: 9d49958e44f75d147a748c1b9fa7ee0e, type: 2}
   _speakQueueStartDelay: 0.3
   musicPlaylistRootGO: {fileID: 4311311471745235334}
   soundPlaylistRootGO: {fileID: 5661075796942694709}
@@ -123,10 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fea65cecb960d4395a4abcbbeb8691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _userData: {fileID: 11400000, guid: d1570a9011293b94a9b3d84278169e34, type: 2}
-  _loadOnInstance: 0
+  _userData: {fileID: 11400000, guid: 9d49958e44f75d147a748c1b9fa7ee0e, type: 2}
+  _loadOnInstance: 1
   _masterVolumeDefault: 1
-  _soundVolumeDefault: 0.5
+  _soundVolumeDefault: 0.4
   _musicVolumeDefault: 0.3
 --- !u!81 &8882470183626691822
 AudioListener:
@@ -157,10 +158,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9166639407435313590}
-  - component: {fileID: 6514167817106969257}
-  - component: {fileID: 7236623024864026169}
   m_Layer: 0
-  m_Name: musicPlaylistSource
+  m_Name: musicPlaylist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,118 +179,6 @@ Transform:
   m_Father: {fileID: 2359915957975685648}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &6514167817106969257
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4311311471745235334}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &7236623024864026169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4311311471745235334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972715748ca350242b815544c5651e70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsSource: 0
-  volumeScale: 1
-  audioSource: {fileID: 6514167817106969257}
-  muteOnFocusLost: 0
 --- !u!1 &5334285465391250388
 GameObject:
   m_ObjectHideFlags: 0

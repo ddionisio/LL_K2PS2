@@ -8,16 +8,32 @@ using System.Collections;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using SimpleJSON;
+using UnityEngine.Networking;
 /**
-	Version 2.0.0 RC-10
+Version 2.0.0 RC-10
 */
 namespace LoLSDK
 {
-    public class WebGL : ILOLSDK
+#if UNITY_EDITOR
+    public interface ILOLSDK_EDITOR : ILOLSDK_EXTENSION
+    {
+        void SpeakText (string text, Action<AudioClip> onDownloaded, MonoBehaviour owner, string currentLang = "en", string currentTTSLangKey = "en-US");
+    }
+#endif
+
+    // Needed because original source for V5 dll is missing... 
+    public interface ILOLSDK_EXTENSION : ILOLSDK
+    {
+        void CancelSpeakText();
+    }
+
+    public class WebGL : ILOLSDK_EXTENSION
     {
         // *************************************
         // PLUMBING
         // *************************************
+
+        public const string SDK_VERSION = "5.2";
 
         [DllImport("__Internal")]
         public static extern void _PostWindowMessage(string msgName, string jsonPayload);
@@ -46,7 +62,7 @@ namespace LoLSDK
         private static extern string _GameIsReady(string gameName, string callbackGameObject, string aspectRatio, string resolution, string sdkVersion);
         public void GameIsReady(string gameName, string callbackGameObject, string aspectRatio, string resolution)
         {
-            _GameIsReady(gameName, callbackGameObject, aspectRatio, resolution, "V4");
+            _GameIsReady(gameName, callbackGameObject, aspectRatio, resolution, SDK_VERSION);
         }
 
         public void CompleteGame()
@@ -96,6 +112,16 @@ namespace LoLSDK
             };
 
             PostWindowMessage("speakText", payload.ToString());
+        }
+
+        /// <summary>
+        /// Will force tts cancel.
+        /// SpeakText will auto cancel but this is useful if you are changing scenes / panels
+        /// and the player may have tts running from a previous text entry.
+        /// </summary>
+        public void CancelSpeakText()
+        {
+            PostWindowMessage("speakTextCancel", "{}");
         }
 
         public void SpeakQuestion(int questionId)
@@ -202,7 +228,8 @@ namespace LoLSDK
         }
     }
 
-    public class MockWebGL : ILOLSDK
+#if UNITY_EDITOR
+    public class MockWebGL : ILOLSDK_EDITOR
     {
 
         /* *********************************************
@@ -241,11 +268,11 @@ namespace LoLSDK
             Debug.Log("CompleteGame");
         }
 
+        string _gameName;
         public void GameIsReady(string gameName, string callbackGameObject, string aspectRatio, string resolution)
         {
-            Debug.Log("GameIsReady Editor");
-            Debug.Log("GameIsReady gameName" + gameName);
-            Debug.Log("GameIsReady callbackGameObject" + callbackGameObject);
+            _gameName = gameName;
+            Debug.Log($"GameIsReady Editor - name: {gameName}, callbackGameObject: {callbackGameObject}");
         }
 
         /* *********************************************
@@ -278,6 +305,93 @@ namespace LoLSDK
         public void SpeakText(string key)
         {
             Debug.Log("SpeakText");
+        }
+
+        public void CancelSpeakText()
+        {
+            Debug.Log("Cancel SpeakText. NOTE: Will not cancel editor testing SpeakText.");
+        }
+
+        Coroutine pollyTTSRequest;
+        public void SpeakText (string text, Action<AudioClip> onDownloaded, MonoBehaviour owner, string currentLang = "en", string currentTTSLangKey = "en-US")
+        {
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            var regex = new System.Text.RegularExpressions.Regex("<[^>]+>");
+            string cleanString = regex.Replace(text, "");
+
+            if (pollyTTSRequest != null)
+            {
+                owner.StopCoroutine(pollyTTSRequest);
+            }
+
+            pollyTTSRequest = owner.StartCoroutine(_PollyTTS(cleanString, currentLang, currentTTSLangKey, onDownloaded));
+        }
+
+        IEnumerator _PollyTTS (string text, string currentLang, string currentTTSLangKey, Action<AudioClip> onDownloaded)
+        {
+            string clipUrl = null;
+            var postData = new JSONObject
+            {
+                ["text"] = text,
+                ["lang"] = currentLang,
+                ["lang_code"] = currentTTSLangKey,
+                ["company_in_editor"] = Application.companyName,
+                ["product_in_editor"] = Application.productName,
+                ["game_name_in_editor"] = _gameName,
+            };
+
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(postData.ToString());
+            using (var dataRequest = UnityWebRequest.Put("https://app.legendsoflearning.com/developers/tts", bytes))
+            {
+                dataRequest.SetRequestHeader("Content-Type", "application/json");
+                dataRequest.method = UnityWebRequest.kHttpVerbPOST;
+                yield return dataRequest.SendWebRequest();
+
+                if (!string.IsNullOrEmpty(dataRequest.error))
+                {
+                    Debug.LogError($"Error: {dataRequest.error}\nGetting polly file: {text} : {currentLang}");
+                    yield break;
+                }
+
+                var json = JSON.Parse(dataRequest.downloadHandler.text);
+                if (!json["success"].AsBool)
+                {
+                    Debug.LogError("Error: Success FALSE\nGetting polly file: " + text + " : " + currentLang);
+                    yield break;
+                }
+
+                clipUrl = json["file"];
+            }
+
+            if (string.IsNullOrEmpty(clipUrl))
+            {
+                Debug.LogError("Error: CLIP URL NULL\nGetting polly file: " + text + " : " + currentLang);
+                yield break;
+            }
+
+            var clipType = clipUrl.EndsWith(".mp3") ? AudioType.MPEG
+                : clipUrl.EndsWith(".ogg") ? AudioType.OGGVORBIS
+                : clipUrl.EndsWith(".wav") ? AudioType.WAV
+                : AudioType.UNKNOWN;
+
+            using (var clipRequest = UnityWebRequestMultimedia.GetAudioClip(clipUrl, clipType))
+            {
+                yield return clipRequest.SendWebRequest();
+
+                if (!string.IsNullOrEmpty(clipRequest.error))
+                {
+                    Debug.LogError($"Error: {clipRequest.error} \nGetting polly audio clip: {text} : {currentLang}");
+                    yield break;
+                }
+
+                onDownloaded?.Invoke(((DownloadHandlerAudioClip)clipRequest.downloadHandler).audioClip);
+
+                Debug.Log("Playing polly tts: " + text);
+
+                pollyTTSRequest = null;
+            }
         }
 
         public void SpeakQuestion(int questionId)
@@ -328,4 +442,5 @@ namespace LoLSDK
             Debug.Log("GetPlayerActivityId");
         }
     }
+#endif
 }
